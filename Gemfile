@@ -18,3 +18,7 @@ gem 'redcarpet', '~> 3.3', '>= 3.3.3'
 gem "builder", "~> 3.0"
 
 gem "middleman-livereload"
+
+gem 'bitters'
+gem 'bourbon'
+gem 'neat'

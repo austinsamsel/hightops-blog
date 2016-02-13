@@ -7,14 +7,18 @@
 
     <title>Blog Title<%= ' - ' + current_article.title unless current_article.nil? %></title>
     <%= feed_tag :atom, "#{blog.options.prefix.to_s}/feed.xml", title: "Atom Feed" %>
+    <%= stylesheet_link_tag "all" %>
+    <link href='//fonts.googleapis.com/css?family=Archivo+Black|Archivo+Narrow:400,700,400italic|Enriqueta:400,700' rel='stylesheet' type='text/css'>
   </head>
   <body>
 
     <div id="main" role="main">
+      <%= partial "partials/nav" %>
       <%= yield %>
+      <%= partial "partials/footer" %>
     </div>
 
-    <aside>
+    <!-- <aside>
       <h2>Recent Articles</h2>
       <ol>
         <% blog.articles[0...10].each do |article| %>
@@ -35,6 +39,6 @@
           <li><%= link_to "#{year} (#{articles.size})", blog_year_path(year) %></li>
         <% end %>
       </ol>
-    </aside>
+    </aside> -->
   </body>
 </html>
