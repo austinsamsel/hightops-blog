@@ -18,9 +18,14 @@ gem 'redcarpet', '~> 3.3', '>= 3.3.3'
 # For feed.xml.builder
 gem "builder", "~> 3.0"
 
-gem "middleman-livereload"
-
 # css
 gem 'bitters'
 gem 'bourbon'
 gem 'neat'
+
+group :development do
+  gem 'rake', '~> 10.4'
+  gem 'rspec', '~> 3.4'
+  gem 'capybara', '~> 2.5'
+  gem "middleman-livereload"
+end
