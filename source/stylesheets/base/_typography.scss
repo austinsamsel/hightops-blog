@@ -63,24 +63,49 @@ a{
 }
 
 
-// knife
+// sassy-gridlover
 
-html { @include khtml(); }
-body { @include kbody(); }
-
-h1 { @include ktype(5, 1, 1); }
-h2 { @include ktype(4, 1, 1); }
-h3 { @include ktype(3, 1, 1); }
-h4 { @include ktype(2, 1, 1); }
-h5 { @include ktype(1, 1, 0); }
-h6 {
-@include ktype(0, 1, 0);
-    font-weight: normal;
-    // text-transform: capitalize;
+//To use in the `<body>`.
+//
+//Outputs `font-size` and `line-height`.
+//
+//@param {number} $font-size [$sgl-base-font-size] - Base font size
+//@param {string} $unit [$sgl-base-unit] - Unit to output
+//
+//@example scss
+body {
+  @include sassy-gridlover-body($sgl-base-font-size, "pxrem");
 }
-p, ul, ol {@include ktype(0,0,1);}
-small { @include ktype(-1,0,1); }
 
-p{
-  // @include pxMargin(0,1rem)
+h1 {
+  @include sassy-gridlover-heading(3, "em");
+}
+
+h2 {
+  @include sassy-gridlover-heading(2, "px");
+}
+
+h3 {
+  @include sassy-gridlover-heading(1, "pxrem");
+}
+
+h4 {
+  @include sassy-gridlover-heading(0);
+}
+
+p, ul, ol, pre, table, blockquote {
+  @include sassy-gridlover-margins();
+}
+
+pre {
+  padding:1rem;
+  white-space: pre;
+  overflow-x: auto;
+  word-break: inherit;
+  word-wrap: inherit;
+}
+.highlight .err {
+  color: inherit;
+  background-color: transparent;
+  font-weight: bold;
 }

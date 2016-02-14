@@ -18,81 +18,85 @@ By now I've run the [official Meteor React tutorial](https://www.meteor.com/tuto
 
 In my user.jsx file, my code was looking like this. This is probably how I would have written my apps in Meteor before. I'd use a lot of variables and make it kind of human readable by naming them well. It always worked! But there's probably a better way…
 
-<pre><code class="language-javascript">// components/User.jsx
-render(){
-  var currentUserId = Meteor.userId();
-  var followedUserId = this.props.user._id;
-  var notCurrentUser = this.props.user._id != currentUserId;
-  var notFollowedByCurrentUser = Relationships.findOne({$and : [{owner : currentUserId}, {saveContact : followedUserId}] }) == null;
-  var followUserButton = notCurrentUser && notFollowedByCurrentUser;
+  ```javascript
+  // components/User.jsx
+  render(){
+    var currentUserId = Meteor.userId();
+    var followedUserId = this.props.user._id;
+    var notCurrentUser = this.props.user._id != currentUserId;
+    var notFollowedByCurrentUser = Relationships.findOne({$and : [{owner : currentUserId}, {saveContact : followedUserId}] }) == null;
+    var followUserButton = notCurrentUser && notFollowedByCurrentUser;
 
-  var followedByCurrentUser = Relationships.findOne({$and : [{owner : currentUserId}, {saveContact : followedUserId}] }) != null;
+    var followedByCurrentUser = Relationships.findOne({$and : [{owner : currentUserId}, {saveContact : followedUserId}] }) != null;
 
-  var unfollowUserButton = notCurrentUser && followedByCurrentUser;
+    var unfollowUserButton = notCurrentUser && followedByCurrentUser;
 
-return (
-  <li>
-    {this.props.user.username}
-    { followUserButton ? (
-      <button className="save" onClick={this.saveThisContact}>save contact</button>
-      ) : ''}
-
-    { unfollowUserButton ? (
-      <button className="remove" onClick={this.removeThisContact}>remove contact</button>
-    ): ''}
-  </li>
-  )
-}</code></pre>
-
-I searched around for how other people were working with React, especially in terms of Meteor and came across [this article](http://blog.differential.com/react-for-meteor-developers/) which inspired me to rearrange my code like this:
-
-<pre><code class="language-javascript">// components/User.jsx
-render(){
   return (
     <li>
       {this.props.user.username}
-      {this.followButton()}
-      {this.unfollowButton()}
+      { followUserButton ? (
+        <button className="save" onClick={this.saveThisContact}>save contact</button>
+        ) : ''}
+
+      { unfollowUserButton ? (
+        <button className="remove" onClick={this.removeThisContact}>remove contact</button>
+      ): ''}
     </li>
-  )
-},
-//method calls
-saveThisContact() {
-  Meteor.call("saveContact", this.props.user._id);
-},
-removeThisContact(){
-  var currentUserId = Meteor.userId();
-  var followedUserId = this.props.user._id;
-  Meteor.call("removeContact", currentUserId, followedUserId);
-},
-// render conditionals
-followButton(){
-  if ( ! this.isCurrentUser() && ! this.isFollowed() ) {
-    return <button
-      className="save"
-      onClick={this.saveThisContact}>
-      save contact
-    </button>;
+    )
   }
-},
-unfollowButton(){
-  if ( ! this.isCurrentUser() && this.isFollowed() ) {
-    return <button
-      className="remove"
-      onClick={this.removeThisContact}>
-      remove contact
-    </button>;
-  }
-},
-// helper functions
-isCurrentUser(){
-  if (this.props.user._id == Meteor.userId())
-    return true;
-},
-isFollowed(){
-  if (Relationships.findOne({$and: [{owner: Meteor.userId()}, {saveContact: this.props.user._id}] }) != null)
-    return true;
-},</code></pre>
+  ```
+
+I searched around for how other people were working with React, especially in terms of Meteor and came across [this article](http://blog.differential.com/react-for-meteor-developers/) which inspired me to rearrange my code like this:
+
+  ```javascript
+  // components/User.jsx
+  render(){
+    return (
+      <li>
+        {this.props.user.username}
+        {this.followButton()}
+        {this.unfollowButton()}
+      </li>
+    )
+  },
+  //method calls
+  saveThisContact() {
+    Meteor.call("saveContact", this.props.user._id);
+  },
+  removeThisContact(){
+    var currentUserId = Meteor.userId();
+    var followedUserId = this.props.user._id;
+    Meteor.call("removeContact", currentUserId, followedUserId);
+  },
+  // render conditionals
+  followButton(){
+    if ( ! this.isCurrentUser() && ! this.isFollowed() ) {
+      return <button
+        className="save"
+        onClick={this.saveThisContact}>
+        save contact
+      </button>;
+    }
+  },
+  unfollowButton(){
+    if ( ! this.isCurrentUser() && this.isFollowed() ) {
+      return <button
+        className="remove"
+        onClick={this.removeThisContact}>
+        remove contact
+      </button>;
+    }
+  },
+  // helper functions
+  isCurrentUser(){
+    if (this.props.user._id == Meteor.userId())
+      return true;
+  },
+  isFollowed(){
+    if (Relationships.findOne({$and: [{owner: Meteor.userId()}, {saveContact: this.props.user._id}] }) != null)
+      return true;
+  },
+  ```
 
 Here, I moved the render() function towards the top, so if I'm searching through my files, I'll immediately see what's being rendered in the UI, rather than a bunch of functions. I replaced all the variables with functions. I also moved the if/else logic out of the render() function and into helper functions. On the one hand, the first render() function looks a lot more clean, but also a lot more empty. This definitely spreads out the code more, but I think it'd also be faster to trace. And as the app grows, or if more is included in the component, it should be easy to maintain.
 
@@ -104,31 +108,41 @@ However, yes, you can use Atmosphere as your package manager. When I wanted to i
 
 I like to do things step by step, so I first tried to print the timestamp with a prop like:
 
-<pre><code class="language-javascript">{this.props.letter.createdAt}</code></pre>
+  ```javascript
+  {this.props.letter.createdAt}
+  ```
 
 so that I could at least see the object I'd be working with. However this returned a pretty dense error message:
 
-<pre><code>Uncaught Error: Invariant Violation: Objects are not valid as a React child (found: Sun Nov 29 2015 17:31:47 GMT-0500 (EST)). If you meant to render a collection of children, use an array instead or wrap the object using createFragment(object) from the React add-ons. Check the render method of `Letter`.</code></pre>
+  ```plaintext
+  Uncaught Error: Invariant Violation: Objects are not valid as a React child (found: Sun Nov 29 2015 17:31:47 GMT-0500 (EST)). If you meant to render a collection of children, use an array instead or wrap the object using createFragment(object) from the React add-ons. Check the render method of `Letter`.
+  ```
 
 After some googling I caught a hint that the date object needed to be converted to a string first.
 
 So I created a function to do just that
 
-<pre><code class="language-javascript">letterCreatedAt(){
-  var a = this.props.letter.createdAt;
-  return a.toString();
-}</code></pre>
+  ```javascript
+  letterCreatedAt(){
+    var a = this.props.letter.createdAt;
+    return a.toString();
+  }
+  ```
 
 And added in a call from the render() function:
 
-<pre><code class="language-javascript">{this.letterCreatedAt()}</code></pre>
+  ```javascript
+  {this.letterCreatedAt()}
+  ```
 
 Seeing that that worked. I updated my function to covert the timestamp with Moment JS.
 
-<pre><code class="language-javascript">letterCreatedAt(){
-  var a = this.props.letter.createdAt;
-  return moment(a).format('MMMM Do YYYY, h:mm a');
-}</code></pre>
+  ```javascript
+  letterCreatedAt(){
+    var a = this.props.letter.createdAt;
+    return moment(a).format('MMMM Do YYYY, h:mm a');
+  }
+  ```
 
 ## React packages
 

@@ -4,13 +4,7 @@ date: 2015-07-10 07:00 UTC
 tags: business
 ---
 
-<a href="http://www.upstatebiz.com/">Up State is a WordPress website building service</a>. The Up State service generates websites and gets them into the State of Up - online, launched, live.
-
-" *Up State.* "
-
-Get it? Okay, cool.
-
-Not only does Up State get your website launched, but it'll be a **high quality**, **mobile-responsive** website, built in just one week. There's no quotes, no haggling, no weird stuff, just a flat-rate price of $999.
+<a href="http://www.upstatebiz.com/">Up State is a WordPress website building service</a>. The Up State service generates websites and gets them into the State of Up - online, launched, live. Not only does Up State get your website launched, but it'll be a **high quality**, **mobile-responsive** website, built in just one week. There's no quotes, no haggling, no weird stuff, just a flat-rate price of $999.
 
 That's Up State.
 
