@@ -9,7 +9,7 @@ gem 'wdm', '~> 0.1.0', platforms: [:mswin, :mingw]
 gem 'tzinfo-data', platforms: [:mswin, :mingw, :jruby]
 
 # Middleman Gems
-gem "middleman", "~> 4.0.0"
+gem "middleman", "~> 4.0"
 gem "middleman-blog"
 
 gem "middleman-syntax"
@@ -23,9 +23,4 @@ gem 'bitters'
 gem 'bourbon'
 gem 'neat'
 
-group :development do
-  gem 'rake', '~> 10.4'
-  gem 'rspec', '~> 3.4'
-  gem 'capybara', '~> 2.5'
-  gem "middleman-livereload"
-end
+gem "middleman-livereload"

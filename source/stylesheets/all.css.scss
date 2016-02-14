@@ -1,5 +1,7 @@
 @charset "utf-8";
 
+@import 'normalize';
+
 @import "sassy-gridlover/sassy-gridlover";
 
 @import "bourbon";
@@ -8,6 +10,7 @@
 
 @import "partials/layout";
 @import "partials/nav";
+@import "partials/bio";
 @import "partials/footer";
 
 @import "garbage";
