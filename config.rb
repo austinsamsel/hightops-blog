@@ -31,7 +31,7 @@ activate :blog do |blog|
   # blog.taglink = "tags/{tag}.html"
     blog.layout = "article"
   # blog.summary_separator = /(READMORE)/
-  # blog.summary_length = 250
+    blog.summary_length = 195
   # blog.year_link = "{year}.html"
   # blog.month_link = "{year}/{month}.html"
   # blog.day_link = "{year}/{month}/{day}.html"
@@ -66,8 +66,16 @@ activate :syntax
 # Build-specific configuration
 configure :build do
   # Minify CSS on build
+  activate :minify_html
   activate :minify_css
 
   # Minify Javascript on build
   activate :minify_javascript
 end
+
+# activate :autoprefixer do |config|
+#   config.browsers = ['last 2 versions', 'Explorer >= 9']
+#   config.ignore   = ['/stylesheets/all.css']
+# end
+
+activate :autoprefixer

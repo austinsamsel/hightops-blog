@@ -49,5 +49,5 @@ However, I like to keep the conversation about how things work and how users wil
 OK. Not something you really need to say out right, because it'd probably be awkward, because, of course, that's why they're paying us... but it should show up in the way we talk about the projects. Focusing on the outcomes, following up, and being enthusiastic about working together helps people feel welcome and comfortable with sharing their creativity.
 
 #### On Topic Resources:
-* http://blog.invisionapp.com/how-to-give-designers-better-feedback/
-* https://medium.com/@tarngerine/how-to-give-constructive-design-feedback-over-email-be7ebb17deff
+* [How to give designers better feedback](http://blog.invisionapp.com/how-to-give-designers-better-feedback/)
+* [How to give constructive design feedback over email](https://medium.com/@tarngerine/how-to-give-constructive-design-feedback-over-email-be7ebb17deff)

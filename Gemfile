@@ -18,9 +18,12 @@ gem 'redcarpet', '~> 3.3', '>= 3.3.3'
 # For feed.xml.builder
 gem "builder", "~> 3.0"
 
+gem 'middleman-minify-html', '~> 3.4', '>= 3.4.1'
+
 # css
 gem 'bitters'
 gem 'bourbon'
 gem 'neat'
+gem 'middleman-autoprefixer'
 
 gem "middleman-livereload"
