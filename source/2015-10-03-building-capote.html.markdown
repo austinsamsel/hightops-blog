@@ -4,8 +4,6 @@ date: 2015-10-03 21:34 UTC
 tags: meteor, mocha, tdd
 ---
 
-# Building Capote: Meteor & Mocha TDD (Part 1)
-
 You know what's annoying? Testing your app by physically logging in and going through your app to make sure everything works. Also, it takes a lot of time. Also, its scary. If I was doing that while working for a client, I'd really be stressed.
 
 That's why there's TDD. Writing tests as you write your software. It helps your software suck less, gives you a little more peace of mind, and even though it means writing extra code, there's a really good chance it will save you a lot of time overall.

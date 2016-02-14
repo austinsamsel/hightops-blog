@@ -27,37 +27,3 @@ ol {
 .small-column {
   @include span-columns(4 of 12);
 }
-
-// grid
-
-body {
-  @include sassy-gridlover-body($sgl-base-font-size, "rem");
-}
-
-h1 {
-  @include sassy-gridlover-heading(3, "em");
-}
-
-h2 {
-  @include sassy-gridlover-heading(2, "px");
-}
-
-h3 {
-  @include sassy-gridlover-heading(1, "pxrem");
-}
-
-h4 {
-  @include sassy-gridlover-heading(0);
-}
-
-p, ul, ol, pre, table, blockquote {
-  @include sassy-gridlover-margins();
-}
-
-h1, h2, h3, h4{
-  font-family:'enriqueta', serif;
-  letter-spacing:-0.075rem;
-}
-a{
-  transition:0.33s;
-}

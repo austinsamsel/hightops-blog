@@ -4,8 +4,6 @@ date: 2015-10-19 00:16 UTC
 tags: meteor, ux, animations
 ---
 
-# Improving User Experience: Meteor Reactivity and CSS Animations
-
 [Nice Track](https://nicetrack.meteor.com) is one of the first apps I created using Meteor. It allows you to privately create topics which you can then rate on a daily basis in order to track your progress, satisfaction, or feelings. You can also add a few notes to each rating. After you've rated your topics some statistics are provided so you can analyze your ratings.
 
 When I was creating this app, I was mostly interested in improving my skills within the Meteor framework. I didn't put a lot of emphasis on how it looked or felt. As a result, it's basically a prototype and not much more. The looks are mostly derived from [Semantic UI](http://semantic-ui.com/) (my favorite modular, prototyping library). Now I'd love to make this its own thing. I'll be doing it with small improvements. One thing I want to improve on is the animations and to provide better context to users.

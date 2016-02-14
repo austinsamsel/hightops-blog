@@ -4,8 +4,6 @@ date: 2015-08-31 17:09 UTC
 tags: software development
 ---
 
-# Cucumber on Rails
-
 <p>This is a "getting started" with Cucumber and BDD testing in rails. We're literally jumping straight into it. I'm assuming you've already read up on some testing concepts and you've found your way here in order to understand what a workflow with Cucumber might look like and how we think about problems along the way. If you like, you can grab the finished code from <a href="https://github.com/austinsamsel/rails-cuke-todo">GitHub</a>.</p>
 
 <h3>Step 1 - Set up.</h3>

@@ -25,10 +25,11 @@ activate :blog do |blog|
   # blog.prefix = "blog"
 
   # blog.permalink = "{year}/{month}/{day}/{title}.html"
+    blog.permalink = "/{title}.html"
   # Matcher for blog source files
   # blog.sources = "{year}-{month}-{day}-{title}.html"
   # blog.taglink = "tags/{tag}.html"
-  # blog.layout = "layout"
+    blog.layout = "article"
   # blog.summary_separator = /(READMORE)/
   # blog.summary_length = 250
   # blog.year_link = "{year}.html"
@@ -61,8 +62,8 @@ end
 # Build-specific configuration
 configure :build do
   # Minify CSS on build
-  # activate :minify_css
+  activate :minify_css
 
   # Minify Javascript on build
-  # activate :minify_javascript
+  activate :minify_javascript
 end

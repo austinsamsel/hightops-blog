@@ -4,24 +4,6 @@ date: 2015-07-10 07:00 UTC
 tags: business
 ---
 
-<!-- <div class='blog-header' style="background-image:url('/images/blog/trees.jpg');background-color: #A8C8C8;">
-  <div class="blog-header-content">
-    <h1>Up State</h1>
-    <h2 class="post-subtitle">a website building service for awesome high quality results</h2>
-    <div class="author-block">
-      <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/images/austin.jpg" alt="austin, founder of High Tops" class="profile-pic author-pic">
-      <div class="author-name">
-        Austin Samsel
-      </div>
-    </div>
-    <div class="published">
-     Published July 10, 2015
-    </div>
-  </div>
-</div> -->
-
-#Announcing Up State
-
 <a href="http://www.upstatebiz.com/">Up State is a WordPress website building service</a>. The Up State service generates websites and gets them into the State of Up - online, launched, live.
 
 " *Up State.* "
