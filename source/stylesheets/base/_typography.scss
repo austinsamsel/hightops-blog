@@ -62,6 +62,20 @@ a{
   transition:0.33s;
 }
 
+// code blocks
+pre {
+  padding:1rem;
+  white-space: pre;
+  overflow-x: auto;
+  word-break: inherit;
+  word-wrap: inherit;
+}
+.highlight .err {
+  color: inherit;
+  background-color: transparent;
+  font-weight: bold;
+}
+
 
 // sassy-gridlover
 
@@ -95,17 +109,4 @@ h4 {
 
 p, ul, ol, pre, table, blockquote {
   @include sassy-gridlover-margins();
-}
-
-pre {
-  padding:1rem;
-  white-space: pre;
-  overflow-x: auto;
-  word-break: inherit;
-  word-wrap: inherit;
-}
-.highlight .err {
-  color: inherit;
-  background-color: transparent;
-  font-weight: bold;
 }
