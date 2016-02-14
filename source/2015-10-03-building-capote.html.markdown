@@ -1,5 +1,4 @@
 ---
-layout: layout_article
 title: Building Capote Meteor & Mocha TDD (Part1)
 date: 2015-10-03 21:34 UTC
 tags: meteor, mocha, tdd

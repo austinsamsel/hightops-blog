@@ -1,5 +1,4 @@
 ---
-layout: layout_article
 title: Announcing Up State
 date: 2015-07-10 07:00 UTC
 tags: business

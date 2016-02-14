@@ -2,7 +2,6 @@
 title: Working with a React View Layer in Meteor
 date: 2015-12-03 19:04 UTC
 tags: meteor, react, javascript
-layout: layout_article
 ---
 
 # Integrating a React View Layer in Meteor

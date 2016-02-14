@@ -19,6 +19,7 @@ gem "builder", "~> 3.0"
 
 gem "middleman-livereload"
 
+# css
 gem 'bitters'
 gem 'bourbon'
 gem 'neat'

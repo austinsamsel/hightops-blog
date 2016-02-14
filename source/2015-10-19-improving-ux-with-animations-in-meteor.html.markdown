@@ -2,7 +2,6 @@
 title: Improving User Experience Meteor Reactivity and CSS Animations
 date: 2015-10-19 00:16 UTC
 tags: meteor, ux, animations
-layout: layout_article
 ---
 
 # Improving User Experience: Meteor Reactivity and CSS Animations

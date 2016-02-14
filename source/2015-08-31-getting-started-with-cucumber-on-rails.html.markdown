@@ -1,5 +1,4 @@
 ---
-layout: layout_article
 title: Getting Started with Cucumber on Rails
 date: 2015-08-31 17:09 UTC
 tags: software development
