@@ -1,0 +1,576 @@
+<!doctype html> <html> <head> <meta charset=utf-8 /> <meta http-equiv=X-UA-Compatible content='IE=edge;chrome=1'/> <meta name=viewport content="width=device-width, initial-scale=1"> <title>High Tops Blog - Getting Started with Cucumber on Rails</title> <link rel=alternate type="application/atom+xml" title="Atom Feed" href="/feed.xml"/> <link href="/stylesheets/all.css" rel=stylesheet /> <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .cm {
+  color: #999988;
+  font-style: italic;
+}
+.highlight .cp {
+  color: #999999;
+  font-weight: bold;
+}
+.highlight .c1 {
+  color: #999988;
+  font-style: italic;
+}
+.highlight .cs {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic;
+}
+.highlight .c, .highlight .cd {
+  color: #999988;
+  font-style: italic;
+}
+.highlight .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+.highlight .gd {
+  color: #000000;
+  background-color: #ffdddd;
+}
+.highlight .ge {
+  color: #000000;
+  font-style: italic;
+}
+.highlight .gr {
+  color: #aa0000;
+}
+.highlight .gh {
+  color: #999999;
+}
+.highlight .gi {
+  color: #000000;
+  background-color: #ddffdd;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+  font-weight: bold;
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .gt {
+  color: #aa0000;
+}
+.highlight .kc {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .kd {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .kn {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .kp {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .kr {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .kt {
+  color: #445588;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kv {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .mf {
+  color: #009999;
+}
+.highlight .mh {
+  color: #009999;
+}
+.highlight .il {
+  color: #009999;
+}
+.highlight .mi {
+  color: #009999;
+}
+.highlight .mo {
+  color: #009999;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #009999;
+}
+.highlight .sb {
+  color: #d14;
+}
+.highlight .sc {
+  color: #d14;
+}
+.highlight .sd {
+  color: #d14;
+}
+.highlight .s2 {
+  color: #d14;
+}
+.highlight .se {
+  color: #d14;
+}
+.highlight .sh {
+  color: #d14;
+}
+.highlight .si {
+  color: #d14;
+}
+.highlight .sx {
+  color: #d14;
+}
+.highlight .sr {
+  color: #009926;
+}
+.highlight .s1 {
+  color: #d14;
+}
+.highlight .ss {
+  color: #990073;
+}
+.highlight .s {
+  color: #d14;
+}
+.highlight .na {
+  color: #008080;
+}
+.highlight .bp {
+  color: #999999;
+}
+.highlight .nb {
+  color: #0086B3;
+}
+.highlight .nc {
+  color: #445588;
+  font-weight: bold;
+}
+.highlight .no {
+  color: #008080;
+}
+.highlight .nd {
+  color: #3c5d5d;
+  font-weight: bold;
+}
+.highlight .ni {
+  color: #800080;
+}
+.highlight .ne {
+  color: #990000;
+  font-weight: bold;
+}
+.highlight .nf {
+  color: #990000;
+  font-weight: bold;
+}
+.highlight .nl {
+  color: #990000;
+  font-weight: bold;
+}
+.highlight .nn {
+  color: #555555;
+}
+.highlight .nt {
+  color: #000080;
+}
+.highlight .vc {
+  color: #008080;
+}
+.highlight .vg {
+  color: #008080;
+}
+.highlight .vi {
+  color: #008080;
+}
+.highlight .nv {
+  color: #008080;
+}
+.highlight .ow {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .o {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .w {
+  color: #bbbbbb;
+}
+.highlight {
+  background-color: #f8f8f8;
+}
+    </style> <link href='//fonts.googleapis.com/css?family=Archivo+Black|Archivo+Narrow:400,700,400italic|Enriqueta:400,700' rel=stylesheet> </head> <body> <div id=main role=main> <nav> <ul> <li> <a href="/"> <img alt="high tops logo" src="/images/hightops_logo.svg"/> </a> </li> </ul> </nav> <article> <header> <h1> Getting Started with Cucumber on Rails </h1> </header> <section> <p>This is a &ldquo;getting started&rdquo; with Cucumber and BDD testing in rails. We&rsquo;re literally jumping straight into it. I&rsquo;m assuming you&rsquo;ve already read up on some testing concepts and you&rsquo;ve found your way here in order to understand what a workflow with Cucumber might look like and how we think about problems along the way. If you like, you can grab the finished code from <a href="https://github.com/austinsamsel/rails-cuke-todo">GitHub</a>.</p> <h3>Step 1 - Set up.</h3> <p>Create a new app</p> <pre class="highlight ruby"><code><span class="err">$</span> <span class="n">rails</span> <span class="kp">new</span> <span class="n">todos</span><span class="o">-</span><span class="n">tdd</span><span class="o">-</span><span class="n">cucumber</span> <span class="o">--</span><span class="n">skip</span><span class="o">-</span><span class="nb">test</span><span class="o">-</span><span class="n">unit</span>
+</code></pre> <p>Add Cucumber to your Gemfile. We&rsquo;ll include database_cleaner, which comes highly recommended as per <a href="https://github.com/cucumber/cucumber-rails">cucumber docs</a></p> <pre class="highlight ruby"><code><span class="n">group</span> <span class="ss">:test</span> <span class="k">do</span>
+  <span class="n">gem</span> <span class="s1">'cucumber-rails'</span><span class="p">,</span> <span class="ss">require: </span><span class="kp">false</span>
+  <span class="n">gem</span> <span class="s1">'database_cleaner'</span>
+<span class="k">end</span>
+
+<span class="err">$</span> <span class="n">bundle</span> <span class="n">install</span>
+</code></pre> <p>Run cucumber installer.</p> <pre class="highlight ruby"><code><span class="err">$</span> <span class="n">rails</span> <span class="n">generate</span> <span class="n">cucumber</span><span class="ss">:install</span>
+</code></pre> <p>This gives us a new directory called <em>features</em> which is where we&rsquo;ll write tests.</p> <h3>Step 2 - Create first feature: Add a Task.</h3> <p>Create the feature. Using (Gherkin)[https://github.com/cucumber/cucumber/wiki/Gherkin] - an easy to read syntax that works as both documentation and as tests. Your clients can read it and you can write it together. Even if you&rsquo;re not working with a client (or a client that wants to read it), its still worthwhile to use it because it forces you to &ldquo;think like the user&rdquo; as you write your features. Rather than mapping out your database and building your models, you&rsquo;ll develop your features with an &ldquo;outside in&rdquo; approach, starting from the homepage, and working with what you would see in the browser.</p> <pre class="highlight ruby"><code><span class="err">$</span> <span class="n">touch</span> <span class="n">features</span><span class="o">/</span><span class="n">todos</span><span class="p">.</span><span class="nf">feature</span>
+</code></pre> <p>Your feature should express what you&rsquo;d like to build and conclude with the business value behind it.</p> <pre class="highlight ruby"><code><span class="c1">#todos.feature</span>
+
+<span class="no">Feature</span><span class="p">:</span> <span class="no">Todos</span>
+  <span class="no">In</span> <span class="n">order</span> <span class="n">to</span> <span class="n">get</span> <span class="n">things</span> <span class="n">done</span>
+  <span class="no">As</span> <span class="n">a</span> <span class="n">todo</span><span class="o">-</span><span class="n">list</span> <span class="n">freak</span>
+  <span class="no">I</span> <span class="n">want</span> <span class="n">to</span> <span class="n">be</span> <span class="n">able</span> <span class="n">to</span> <span class="n">create</span> <span class="n">a</span> <span class="n">list</span> <span class="n">of</span> <span class="n">tasks</span><span class="o">.</span>
+</code></pre> <p>Great. Let&rsquo;s write our first scenario. Each scenario is composed of steps that begin with keywords like <em>Given</em> <em>And</em> <em>When</em> and finally <em>Then</em>.</p> <pre class="highlight ruby"><code><span class="c1">#todos.feature</span>
+<span class="p">.</span><span class="nf">.</span><span class="o">.</span>
+
+<span class="no">Scenario</span><span class="p">:</span> <span class="no">Create</span> <span class="n">a</span> <span class="n">task</span>
+  <span class="no">Given</span> <span class="no">I</span> <span class="n">am</span> <span class="n">on</span> <span class="n">the</span> <span class="n">home</span> <span class="n">page</span>
+  <span class="no">And</span> <span class="no">I</span> <span class="n">go</span> <span class="n">to</span> <span class="s2">"Add new task"</span>
+  <span class="no">When</span> <span class="no">I</span> <span class="n">fill</span> <span class="k">in</span> <span class="s2">"Task Field"</span> <span class="n">with</span> <span class="s2">"My first todo!"</span>
+  <span class="no">And</span> <span class="no">I</span> <span class="n">press</span> <span class="s2">"Submit"</span>
+  <span class="no">Then</span> <span class="no">I</span> <span class="n">should</span> <span class="n">see</span> <span class="s2">"My first todo!"</span>
+</code></pre> <p>Run cucumber for the first time as a rake task.</p> <pre class="highlight ruby"><code><span class="err">$</span> <span class="n">rake</span> <span class="n">cucumber</span>
+</code></pre> <p>Copy and paste the console output into our step definitions file.</p> <pre class="highlight ruby"><code><span class="err">$</span> <span class="n">touch</span> <span class="n">features</span><span class="o">/</span><span class="n">step_definitions</span><span class="o">/</span><span class="n">todos</span><span class="p">.</span><span class="nf">rb</span>
+</code></pre> <p></p> <pre class="highlight ruby"><code><span class="c1">#features/step_definitions/todos.rb</span>
+
+<span class="no">Given</span><span class="p">(</span><span class="sr">/^I am on the home page$/</span><span class="p">)</span> <span class="k">do</span>
+  <span class="n">pending</span> <span class="c1"># express the regexp above with the code you wish you had</span>
+<span class="k">end</span>
+
+<span class="no">Given</span><span class="p">(</span><span class="sr">/^I go to "(.*?)"$/</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">arg1</span><span class="o">|</span>
+  <span class="n">pending</span> <span class="c1"># express the regexp above with the code you wish you had</span>
+<span class="k">end</span>
+
+<span class="no">When</span><span class="p">(</span><span class="sr">/^I fill in "(.*?)" with "(.*?)"$/</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="o">|</span>
+  <span class="n">pending</span> <span class="c1"># express the regexp above with the code you wish you had</span>
+<span class="k">end</span>
+
+<span class="no">When</span><span class="p">(</span><span class="sr">/^I press "(.*?)"$/</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">arg1</span><span class="o">|</span>
+  <span class="n">pending</span> <span class="c1"># express the regexp above with the code you wish you had</span>
+<span class="k">end</span>
+
+<span class="no">Then</span><span class="p">(</span><span class="sr">/^I should see "(.*?)"$/</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">arg1</span><span class="o">|</span>
+  <span class="n">pending</span> <span class="c1"># express the regexp above with the code you wish you had</span>
+<span class="k">end</span>
+</code></pre> <p>Whenever we want some feedback from cucumber, we&rsquo;ll run <em>$ rake cucumber</em> And we&rsquo;ll see that it tells us our first step is pending.</p> <p>Fill out the first step definition with the following.</p> <pre class="highlight ruby"><code><span class="c1">#features/step_definitions/todos.rb</span>
+
+<span class="no">Given</span><span class="p">(</span><span class="sr">/^I am on the home page$/</span><span class="p">)</span> <span class="k">do</span>
+  <span class="n">visit</span> <span class="s2">"/"</span>
+<span class="k">end</span>
+<span class="p">.</span><span class="nf">.</span><span class="o">.</span>
+</code></pre> <p>This tells Cucumber we expect to be on the home page to start things off.</p> <p>Cucumber tells us</p> <pre class="highlight ruby"><code><span class="no">No</span> <span class="n">route</span> <span class="n">matches</span> <span class="p">[</span><span class="no">GET</span><span class="p">]</span> <span class="s2">"/"</span> <span class="p">(</span><span class="no">ActionController</span><span class="o">::</span><span class="no">RoutingError</span><span class="p">)</span>
+</code></pre> <p>What we need is a route to our homepage. Even if we build a route, we know we&rsquo;ll need a view and a controller (plus an index) to get it started&hellip;</p> <p>Let&rsquo;s add a route.</p> <pre class="highlight ruby"><code><span class="c1"># config/routes.rb</span>
+<span class="p">.</span><span class="nf">.</span><span class="p">.</span>
+<span class="nf">root</span> <span class="s1">'tasks#index'</span>
+<span class="p">.</span><span class="nf">.</span><span class="o">.</span>
+</code></pre> <p>Run cucumber again.</p> <pre class="highlight ruby"><code><span class="n">uninitialized</span> <span class="n">constant</span> <span class="no">TasksController</span> <span class="p">(</span><span class="no">ActionController</span><span class="o">::</span><span class="no">RoutingError</span><span class="p">)</span>
+</code></pre> <p>Cucumber tells us we need a controller for our tasks. This is really TDD. Just taking one step, then another, letting the tests dictate each next step in development.</p> <p>Let&rsquo;s create a controller.</p> <pre class="highlight ruby"><code><span class="err">$</span> <span class="n">rails</span> <span class="n">g</span> <span class="n">controller</span> <span class="no">Tasks</span> <span class="n">home</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">helper</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">assets</span>
+</code></pre> <p>This will also give us the view we need as well at <em>app/views/tasks/home.html.erb</em></p> <p>When we run cucumber again, our first step passes! Now our next step is pending. So let&rsquo;s write the code for that.</p> <p>Now we need to write the code for our next feature. We want to go to a page to add a new task. So we&rsquo;ll need a link users can click. We&rsquo;ll update the argument so its human readable, the_link and reference it in the code.</p> <pre class="highlight ruby"><code><span class="no">Given</span><span class="p">(</span><span class="sr">/^I go to "(.*?)"$/</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">the_link</span><span class="o">|</span>
+  <span class="n">click_link</span> <span class="n">the_link</span>
+<span class="k">end</span>
+</code></pre> <p>Cucumber tells us:</p> <pre class="highlight ruby"><code><span class="no">Unable</span> <span class="n">to</span> <span class="n">find</span> <span class="n">link</span> <span class="s2">"Add new task"</span> <span class="p">(</span><span class="no">Capybara</span><span class="o">::</span><span class="no">ElementNotFound</span><span class="p">)</span>
+</code></pre> <p>Now we have a failing test. It&rsquo;s time to update our application code with a link to add a new task.</p> <pre class="highlight ruby"><code><span class="c1">#app/views/tasks/home.html.erb</span>
+<span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="sx">%= link_to "Add new task", new_task_path %&amp;gt;
+</span></code></pre> <p>Cucumber tells us:</p> <pre class="highlight ruby"><code><span class="n">undefined</span> <span class="n">local</span> <span class="n">variable</span> <span class="n">or</span> <span class="nb">method</span> <span class="sb">`new_task_path' for #&amp;lt;#&amp;lt;Class:0x007fcc04b53060&amp;gt;:0x007fcc04b51dc8&amp;gt; (ActionView::Template::Error)
+</span></code></pre> <p>We don&rsquo;t have a route for new. So let&rsquo;s change our code in our routes to:</p> <pre class="highlight ruby"><code><span class="n">config</span><span class="o">/</span><span class="n">routes</span><span class="p">.</span><span class="nf">rb</span>
+<span class="p">.</span><span class="nf">.</span><span class="p">.</span>
+<span class="nf">root</span> <span class="s1">'tasks#home'</span>
+<span class="n">resources</span> <span class="ss">:tasks</span>
+<span class="p">.</span><span class="nf">.</span><span class="o">.</span>
+</code></pre> <p>Cucumber tells us:</p> <pre class="highlight ruby"><code><span class="no">The</span> <span class="n">action</span> <span class="s1">'new'</span> <span class="n">could</span> <span class="n">not</span> <span class="n">be</span> <span class="n">found</span> <span class="k">for</span> <span class="no">TasksController</span> <span class="p">(</span><span class="no">AbstractController</span><span class="o">::</span><span class="no">ActionNotFound</span><span class="p">)</span>
+</code></pre> <p>So we need to update our controller with a new action.</p> <pre class="highlight ruby"><code><span class="c1">#app/controllers/task_controller.rb</span>
+<span class="k">class</span> <span class="nc">TasksController</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="no">ApplicationController</span>
+  <span class="k">def</span> <span class="nf">new</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre> <p>Cucumber tells us:</p> <pre class="highlight ruby"><code><span class="no">Missing</span> <span class="n">template</span> <span class="n">tasks</span><span class="o">/</span><span class="kp">new</span><span class="p">,</span> <span class="n">application</span><span class="o">/</span><span class="kp">new</span> <span class="n">with</span> <span class="p">{</span><span class="ss">:locale</span><span class="o">=&amp;</span><span class="n">gt</span><span class="p">;[</span><span class="ss">:en</span><span class="p">],</span> <span class="ss">:formats</span><span class="o">=&amp;</span><span class="n">gt</span><span class="p">;[</span><span class="ss">:html</span><span class="p">],</span> <span class="ss">:variants</span><span class="o">=&amp;</span><span class="n">gt</span><span class="p">;[],</span> <span class="ss">:handlers</span><span class="o">=&amp;</span><span class="n">gt</span><span class="p">;[</span><span class="ss">:erb</span><span class="p">,</span> <span class="ss">:builder</span><span class="p">,</span> <span class="ss">:raw</span><span class="p">,</span> <span class="ss">:ruby</span><span class="p">,</span> <span class="ss">:coffee</span><span class="p">,</span> <span class="ss">:jbuilder</span><span class="p">]}</span><span class="o">.</span> <span class="no">Searched</span> <span class="ss">in:
+</span></code></pre> <p>We need a view template for our new action.</p> <pre class="highlight ruby"><code><span class="err">$</span> <span class="n">touch</span> <span class="n">app</span><span class="o">/</span><span class="n">views</span><span class="o">/</span><span class="n">tasks</span><span class="o">/</span><span class="kp">new</span><span class="p">.</span><span class="nf">html</span><span class="p">.</span><span class="nf">erb</span>
+</code></pre> <p>Rake tells us this step passes!</p> <p>Let&rsquo;s write the code for our next step.</p> <pre class="highlight ruby"><code><span class="c1"># features/step_definitions/todos.rb</span>
+<span class="p">.</span><span class="nf">.</span><span class="o">.</span>
+<span class="no">When</span><span class="p">(</span><span class="sr">/^I fill in "(.*?)" with "(.*?)"$/</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">input</span><span class="p">,</span> <span class="n">value</span><span class="o">|</span>
+  <span class="n">fill_in</span> <span class="n">input</span><span class="p">,</span> <span class="ss">with: </span><span class="n">value</span>
+<span class="k">end</span>
+<span class="p">.</span><span class="nf">.</span><span class="o">.</span>
+</code></pre> <p>We updated the argument variables from <em>arg1, arg2</em> to <em>input, value</em> to be more readable.</p> <p>When we run cucumber, we get:</p> <pre class="highlight ruby"><code><span class="no">Unable</span> <span class="n">to</span> <span class="n">find</span> <span class="n">field</span> <span class="s2">"Task Field"</span> <span class="p">(</span><span class="no">Capybara</span><span class="o">::</span><span class="no">ElementNotFound</span><span class="p">)</span>
+</code></pre> <p>Cucumber is looking for the form to add a new task. Let&rsquo;s create the form. First let&rsquo;s add Simple Form to our gemfile.</p> <pre class="highlight ruby"><code><span class="c1">#Gemfile</span>
+<span class="p">.</span><span class="nf">.</span><span class="p">.</span>
+<span class="nf">gem</span> <span class="s1">'simple_form'</span>
+<span class="p">.</span><span class="nf">.</span><span class="o">.</span>
+
+<span class="err">$</span> <span class="n">bundle</span> <span class="n">install</span>
+
+<span class="err">$</span> <span class="n">rails</span> <span class="n">g</span> <span class="n">simple_form</span><span class="ss">:install</span>
+</code></pre> <pre class="highlight ruby"><code><span class="c1">#app/views/tasks/home.html.erb</span>
+<span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="sx">%= simple_form_for(@task) do |f| %&amp;gt;
+  &amp;lt;%=</span> <span class="n">f</span><span class="p">.</span><span class="nf">input</span> <span class="ss">:name</span> <span class="o">%&amp;</span><span class="n">gt</span><span class="p">;</span>
+  <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="sx">%= f.button :submit, "Submit" %&amp;gt;
+&amp;lt;% end %&amp;gt;
+</span></code></pre> <p>Run Cucumber and we get:</p> <pre class="highlight ruby"><code><span class="n">undefined</span> <span class="nb">method</span> <span class="sb">`model_name' for nil:NilClass (ActionView::Template::Error)
+</span></code></pre> <p>We need to update our controller action that will allow us to create a new task.</p> <pre class="highlight ruby"><code><span class="c1">#app/controllers/tasks_controller.rb</span>
+<span class="p">.</span><span class="nf">.</span><span class="p">.</span>
+<span class="nf">def</span> <span class="kp">new</span>
+  <span class="vi">@task</span> <span class="o">=</span> <span class="no">Task</span><span class="p">.</span><span class="nf">new</span><span class="p">()</span>
+<span class="k">end</span>
+<span class="p">.</span><span class="nf">.</span><span class="o">.</span>
+</code></pre> <p>We need to create a model.</p> <pre class="highlight ruby"><code><span class="err">$</span> <span class="n">rails</span> <span class="n">g</span> <span class="n">model</span> <span class="no">Task</span> <span class="nb">name</span><span class="ss">:string</span>
+<span class="err">$</span> <span class="n">rake</span> <span class="n">db</span><span class="ss">:migrate</span>
+</code></pre> <p>Then we get&hellip;</p> <pre class="highlight ruby"><code><span class="no">Unable</span> <span class="n">to</span> <span class="n">find</span> <span class="n">field</span> <span class="s2">"Task Field"</span> <span class="p">(</span><span class="no">Capybara</span><span class="o">::</span><span class="no">ElementNotFound</span><span class="p">)</span>
+</code></pre> <p>Capybara is having trouble finding the field for which we&rsquo;d like to add in the name of our task. It&rsquo;s time to take a second look at our original step definition and enter a revision. If you run your rails server and inspect the source code, our rails form field looks like this: <code class=language-ruby>&lt;input class="string optional" type="text" name="task[name]" id="task_name" /&gt;</code> Cucumber is able to find the field by name or ID. So let&rsquo;s update our feature with the id as the form field identifier:</p> <p>Our step definition passes.</p> <p>Let&rsquo;s write the code for our third step definition.</p> <pre class="highlight ruby"><code><span class="c1">#features/step_definitions/todos.rb</span>
+<span class="p">.</span><span class="nf">.</span><span class="o">.</span>
+<span class="no">When</span><span class="p">(</span><span class="sr">/^I press "(.*?)"$/</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">the_button</span><span class="o">|</span>
+  <span class="n">click_button</span> <span class="n">the_button</span>
+<span class="k">end</span>
+<span class="p">.</span><span class="nf">.</span><span class="o">.</span>
+</code></pre> <p>Run cucumber and we get:</p> <pre class="highlight ruby"><code><span class="no">The</span> <span class="n">action</span> <span class="s1">'create'</span> <span class="n">could</span> <span class="n">not</span> <span class="n">be</span> <span class="n">found</span> <span class="k">for</span> <span class="no">TasksController</span> <span class="p">(</span><span class="no">AbstractController</span><span class="o">::</span><span class="no">ActionNotFound</span><span class="p">)</span>
+
+<span class="no">We</span> <span class="n">need</span> <span class="n">a</span> <span class="n">create</span> <span class="n">action</span> <span class="k">in</span> <span class="n">our</span> <span class="n">controller</span><span class="o">.</span>
+
+<span class="c1">#app/controllers/task_controller.erb</span>
+<span class="p">.</span><span class="nf">.</span><span class="p">.</span>
+<span class="nf">def</span> <span class="n">create</span>
+  <span class="vi">@task</span> <span class="o">=</span> <span class="no">Task</span><span class="p">.</span><span class="nf">new</span>
+<span class="k">end</span>
+<span class="p">.</span><span class="nf">.</span><span class="o">.</span>
+</code></pre> <p>Run Cucumber.</p> <pre class="highlight ruby"><code><span class="no">Missing</span> <span class="n">template</span> <span class="n">tasks</span><span class="o">/</span><span class="n">create</span><span class="p">,</span> <span class="n">application</span><span class="o">/</span><span class="n">create</span> <span class="n">with</span> <span class="p">{</span><span class="ss">:locale</span><span class="o">=&amp;</span><span class="n">gt</span><span class="p">;[</span><span class="ss">:en</span><span class="p">],</span> <span class="ss">:formats</span><span class="o">=&amp;</span><span class="n">gt</span><span class="p">;[</span><span class="ss">:html</span><span class="p">],</span> <span class="ss">:variants</span><span class="o">=&amp;</span><span class="n">gt</span><span class="p">;[],</span> <span class="ss">:handlers</span><span class="o">=&amp;</span><span class="n">gt</span><span class="p">;[</span><span class="ss">:erb</span><span class="p">,</span> <span class="ss">:builder</span><span class="p">,</span> <span class="ss">:raw</span><span class="p">,</span> <span class="ss">:ruby</span><span class="p">,</span> <span class="ss">:coffee</span><span class="p">,</span> <span class="ss">:jbuilder</span><span class="p">]}</span><span class="o">.</span> <span class="no">Searched</span> <span class="ss">in:
+</span></code></pre> <p>By default Rails is trying to take us to a new page&hellip; Since this is just a one page app, let&rsquo;s keep everything on the home page. And so our app is secure, I&rsquo;m including in params at this time.</p> <pre class="highlight ruby"><code><span class="c1">#app/controllers/task_controller.erb</span>
+<span class="p">.</span><span class="nf">.</span><span class="p">.</span>
+<span class="nf">def</span> <span class="n">create</span>
+  <span class="vi">@task</span> <span class="o">=</span> <span class="no">Task</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">task_params</span><span class="p">)</span>
+  <span class="k">if</span> <span class="vi">@task</span><span class="p">.</span><span class="nf">save</span>
+    <span class="n">redirect_to</span> <span class="n">root_url</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="kp">private</span>
+  <span class="k">def</span> <span class="nf">task_params</span>
+    <span class="n">params</span><span class="p">.</span><span class="nf">require</span><span class="p">(</span><span class="ss">:task</span><span class="p">).</span><span class="nf">permit</span><span class="p">(</span><span class="ss">:name</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="p">.</span><span class="nf">.</span><span class="o">.</span>
+</code></pre> <p>Our step passes. Now we should verify that we can see our new task. Let&rsquo;s finish out the code for the fourth step. Where we test to make sure we can actually see the new task posted.</p> <pre class="highlight ruby"><code><span class="c1">#features/step_definitions/todos.rb</span>
+<span class="p">.</span><span class="nf">.</span><span class="o">.</span>
+<span class="no">Then</span><span class="p">(</span><span class="sr">/^I should see "(.*?)"$/</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">task</span><span class="o">|</span>
+  <span class="n">assert</span> <span class="n">page</span><span class="p">.</span><span class="nf">has_content?</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+<span class="k">end</span>
+<span class="p">.</span><span class="nf">.</span><span class="o">.</span>
+</code></pre> <p>Run Cucumber:</p> <pre class="highlight ruby"><code><span class="no">Failed</span> <span class="n">assertion</span><span class="p">,</span> <span class="n">no</span> <span class="n">message</span> <span class="n">given</span><span class="o">.</span> <span class="p">(</span><span class="no">Minitest</span><span class="o">::</span><span class="no">Assertion</span><span class="p">)</span>
+</code></pre> <p>This isn&rsquo;t that informative. But considering we haven&rsquo;t done anything to actually list tasks, let&rsquo;s start with the view.</p> <pre class="highlight ruby"><code><span class="c1">#app/views/tasks/home.html.erb</span>
+<span class="p">.</span><span class="nf">.</span><span class="p">.</span>
+<span class="nf">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="sx">% for </span><span class="n">task</span> <span class="k">in</span> <span class="vi">@tasks</span> <span class="o">%&amp;</span><span class="n">gt</span><span class="p">;</span>
+  <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">li</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="sx">%= task.name %&amp;gt;&amp;lt;/li&amp;gt;
+&amp;lt;% end %&amp;gt;
+</span></code></pre> <p>Run Cucumber:</p> <pre class="highlight ruby"><code><span class="n">undefined</span> <span class="nb">method</span> <span class="sb">`each' for nil:NilClass (ActionView::Template::Error)
+</span></code></pre> <p>We don&rsquo;t have anything in the controller to feed the view any data. So let&rsquo;s update that.</p> <pre class="highlight ruby"><code><span class="c1">#app/controllers/task_controller.rb</span>
+<span class="p">.</span><span class="nf">.</span><span class="p">.</span>
+<span class="nf">def</span> <span class="n">home</span>
+  <span class="vi">@tasks</span><span class="o">=</span> <span class="no">Task</span><span class="p">.</span><span class="nf">all</span>
+<span class="k">end</span>
+<span class="p">.</span><span class="nf">.</span><span class="o">.</span>
+</code></pre> <p>Then all our tests pass.</p> <h3>Step 3: Create a failing test</h3> <p>What happens when the user does something weird? Do we want users to create empty tasks? No. So let&rsquo;s test to make sure that invalid tasks are not posted.</p> <p>Let&rsquo;s write a feature:</p> <pre class="highlight ruby"><code><span class="c1">#features/todos.feature</span>
+<span class="p">.</span><span class="nf">.</span><span class="o">.</span>
+<span class="no">Scenario</span><span class="p">:</span> <span class="no">Create</span> <span class="n">an</span> <span class="n">invalid</span> <span class="n">task</span>
+  <span class="no">Given</span> <span class="no">I</span> <span class="n">am</span> <span class="n">on</span> <span class="n">the</span> <span class="n">home</span> <span class="n">page</span>
+  <span class="no">And</span> <span class="no">I</span> <span class="n">go</span> <span class="n">to</span> <span class="s2">"Add new task"</span>
+  <span class="no">When</span> <span class="no">I</span> <span class="n">fill</span> <span class="k">in</span> <span class="s2">"task_name"</span> <span class="n">with</span> <span class="s2">""</span>
+  <span class="no">And</span> <span class="no">I</span> <span class="n">press</span> <span class="s2">"Submit"</span>
+  <span class="no">Then</span> <span class="no">I</span> <span class="n">should</span> <span class="n">be</span> <span class="n">told</span> <span class="s2">"Can't be blank"</span>
+  <span class="no">And</span> <span class="no">I</span> <span class="n">fill</span> <span class="k">in</span> <span class="s2">"Name"</span> <span class="n">with</span> <span class="s2">"My first todo!"</span>
+  <span class="no">And</span> <span class="no">I</span> <span class="n">press</span> <span class="s2">"Submit"</span>
+  <span class="no">Then</span> <span class="no">I</span> <span class="n">should</span> <span class="n">see</span> <span class="s2">"My first todo!"</span>
+</code></pre> <p>There&rsquo;s some repetition here in the steps. We&rsquo;re only going to have to write one new step definition. The rest is repeat. The new step definition is <code class=language-ruby>Then I should be told "Can't be blank"</code></p> <p>When we run Cucumber, it gives us our new step definition to implement. We&rsquo;ll copy and paste it into our todos.rb</p> <pre class="highlight ruby"><code><span class="c1">#features/step_definitions/todos.rb</span>
+<span class="p">.</span><span class="nf">.</span><span class="o">.</span>
+<span class="c1"># invalid post</span>
+<span class="no">Then</span><span class="p">(</span><span class="sr">/^I should be told "(.*?)"$/</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">arg1</span><span class="o">|</span>
+  <span class="n">pending</span> <span class="c1"># express the regexp above with the code you wish you had</span>
+<span class="k">end</span>
+</code></pre> <p>And let&rsquo;s update this step definition with our test code.</p> <pre class="highlight ruby"><code><span class="c1">#features/step_definitions/todos.rb</span>
+<span class="p">.</span><span class="nf">.</span><span class="o">.</span>
+<span class="c1"># invalid post</span>
+<span class="no">Then</span><span class="p">(</span><span class="sr">/^I should be told "(.*?)"$/</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">error_message</span><span class="o">|</span>
+  <span class="n">assert</span> <span class="n">page</span><span class="p">.</span><span class="nf">has_content?</span><span class="p">(</span><span class="n">error_message</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre> <p>Cucumber tells us:</p> <pre class="highlight ruby"><code><span class="no">Failed</span> <span class="n">assertion</span><span class="p">,</span> <span class="n">no</span> <span class="n">message</span> <span class="n">given</span><span class="o">.</span> <span class="p">(</span><span class="no">Minitest</span><span class="o">::</span><span class="no">Assertion</span><span class="p">)</span>
+</code></pre> <p>Not that informative. But we know we don&rsquo;t have any validations on our task model. So let&rsquo;s update that.</p> <pre class="highlight ruby"><code><span class="c1">#app/models/task.rb</span>
+<span class="k">class</span> <span class="nc">Task</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+  <span class="n">validates</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">presence: </span><span class="kp">true</span>
+<span class="k">end</span>
+</code></pre> <p>Cucumber tells us:</p> <pre class="highlight ruby"><code><span class="no">Missing</span> <span class="n">template</span> <span class="n">tasks</span><span class="o">/</span><span class="n">create</span><span class="p">,</span> <span class="n">application</span><span class="o">/</span><span class="n">create</span> <span class="n">with</span> <span class="p">{</span><span class="ss">:locale</span><span class="o">=&amp;</span><span class="n">gt</span><span class="p">;[</span><span class="ss">:en</span><span class="p">],</span> <span class="ss">:formats</span><span class="o">=&amp;</span><span class="n">gt</span><span class="p">;[</span><span class="ss">:html</span><span class="p">],</span> <span class="ss">:variants</span><span class="o">=&amp;</span><span class="n">gt</span><span class="p">;[],</span> <span class="ss">:handlers</span><span class="o">=&amp;</span><span class="n">gt</span><span class="p">;[</span><span class="ss">:erb</span><span class="p">,</span> <span class="ss">:builder</span><span class="p">,</span> <span class="ss">:raw</span><span class="p">,</span> <span class="ss">:ruby</span><span class="p">,</span> <span class="ss">:coffee</span><span class="p">,</span> <span class="ss">:jbuilder</span><span class="p">]}</span><span class="o">.</span> <span class="no">Searched</span> <span class="ss">in:
+</span></code></pre> <p>It looks like Rails is trying to reroute us. We want to stay on the same page and see the error. Let&rsquo;s update the controller action with a scenario detailing what happens when a task is not saved.</p> <pre class="highlight ruby"><code><span class="c1">#app/controllers/tasks_controller.rb</span>
+<span class="p">.</span><span class="nf">.</span><span class="p">.</span>
+<span class="nf">def</span> <span class="n">create</span>
+  <span class="vi">@task</span> <span class="o">=</span> <span class="no">Task</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">task_params</span><span class="p">)</span>
+  <span class="k">if</span> <span class="vi">@task</span><span class="p">.</span><span class="nf">save</span>
+    <span class="n">redirect_to</span> <span class="n">root_url</span>
+  <span class="k">else</span>
+    <span class="n">render</span> <span class="ss">:new</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+<span class="p">.</span><span class="nf">.</span><span class="o">.</span>
+</code></pre> <p>Cucumber tells us:</p> <pre class="highlight ruby"><code><span class="no">Failed</span> <span class="n">assertion</span><span class="p">,</span> <span class="n">no</span> <span class="n">message</span> <span class="n">given</span><span class="o">.</span> <span class="p">(</span><span class="no">Minitest</span><span class="o">::</span><span class="no">Assertion</span><span class="p">)</span>
+</code></pre> <p>We still aren&rsquo;t being told of the failure. If we run <em>rails s</em> to start the server and see what&rsquo;s going on when we submit a blank task, we&rsquo;re told &ldquo;can&rsquo;t be blank&rdquo;. It is working! Cross referencing with our feature, we previously wrote, &ldquo;Can&rsquo;t be blank&rdquo;. So we need to update our feature with the proper capitalization.</p> <pre class="highlight ruby"><code><span class="c1">#features/todos.feature</span>
+<span class="p">.</span><span class="nf">.</span><span class="o">.</span>
+<span class="c1"># old</span>
+<span class="c1"># Then I should be told "Can't be blank"</span>
+<span class="no">Then</span> <span class="no">I</span> <span class="n">should</span> <span class="n">be</span> <span class="n">told</span> <span class="s2">"can't be blank"</span>
+<span class="p">.</span><span class="nf">.</span><span class="o">.</span>
+</code></pre> <p>Now all our tests pass.</p> <h3>Step 4: Completing Tasks</h3> <p>Let&rsquo;s write the scenario for marking a task as complete.</p> <pre class="highlight ruby"><code><span class="no">Scenario</span><span class="p">:</span> <span class="no">Mark</span> <span class="n">a</span> <span class="n">task</span> <span class="n">as</span> <span class="n">completed</span>
+  <span class="no">Given</span> <span class="no">I</span> <span class="n">have</span> <span class="n">the</span> <span class="n">following</span> <span class="ss">tasks:
+    </span><span class="o">|</span> <span class="nb">name</span>          <span class="o">|</span> <span class="n">completed</span> <span class="o">|</span>
+    <span class="o">|</span> <span class="no">My</span> <span class="no">First</span> <span class="no">Todo</span> <span class="o">|</span> <span class="kp">false</span>     <span class="o">|</span>
+    <span class="o">|</span> <span class="no">My</span> <span class="mi">2</span><span class="n">nd</span> <span class="no">Todo</span>   <span class="o">|</span> <span class="kp">false</span>     <span class="o">|</span>
+  <span class="no">When</span> <span class="no">I</span> <span class="n">am</span> <span class="n">on</span> <span class="n">the</span> <span class="n">home</span> <span class="n">page</span>
+  <span class="no">And</span> <span class="no">I</span> <span class="n">follow</span> <span class="s2">"Edit"</span> <span class="n">associated</span> <span class="n">with</span> <span class="s2">"My 1st Todo"</span>
+  <span class="no">And</span> <span class="no">I</span> <span class="n">check</span> <span class="n">the</span> <span class="s2">"Done"</span> <span class="n">checkbox</span>
+  <span class="no">And</span> <span class="no">I</span> <span class="n">press</span> <span class="s2">"Submit"</span>
+  <span class="no">Then</span> <span class="no">I</span> <span class="n">should</span> <span class="n">see</span> <span class="s2">"My 1st Todo"</span> <span class="n">as</span> <span class="n">completed</span><span class="o">.</span>
+</code></pre> <p>You&rsquo;ll notice a new format here. We created some sample data within Cucumber that can run. It&rsquo;s a simple and fast way to start writing more complex tests.</p> <p>We&rsquo;ll run cucumber and grab the output and paste it in our <em>step_definitons/todos.rb</em> file.</p> <p>In order to work with the data in the fixtures, we&rsquo;ll modify our first step definition:</p> <pre class="highlight ruby"><code><span class="no">Given</span><span class="p">(</span><span class="sr">/^I have the following tasks:$/</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">table</span><span class="o">|</span>
+  <span class="k">for</span> <span class="nb">hash</span> <span class="k">in</span> <span class="n">table</span><span class="p">.</span><span class="nf">hashes</span>
+    <span class="no">Task</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="nb">hash</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre> <p>Then we&rsquo;re told:</p> <pre class="highlight ruby"><code><span class="n">unknown</span> <span class="n">attribute</span> <span class="s1">'completed'</span> <span class="k">for</span> <span class="no">Task</span><span class="o">.</span> <span class="p">(</span><span class="no">ActiveRecord</span><span class="o">::</span><span class="no">UnknownAttributeError</span><span class="p">)</span>
+</code></pre> <p>We never created the a field for &ldquo;completed&rdquo; so let&rsquo;s add that now.</p> <pre class="highlight ruby"><code><span class="err">$</span> <span class="n">rails</span> <span class="n">g</span> <span class="n">migration</span> <span class="no">AddCompletedToTasks</span> <span class="n">completed</span><span class="ss">:boolean</span>
+<span class="err">$</span> <span class="n">rake</span> <span class="n">db</span><span class="ss">:migrate</span>
+</code></pre> <p>Our second step passes. Now we need to write another step definition:</p> <pre class="highlight ruby"><code><span class="no">When</span><span class="p">(</span><span class="sr">/^I follow "(.*?)" associated with "(.*?)"$/</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="o">|</span>
+  <span class="n">first</span><span class="p">(</span><span class="s1">'li'</span><span class="p">).</span><span class="nf">click_link</span><span class="p">(</span><span class="s1">'Edit'</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre> <p>This will find the first &ldquo;Edit&rdquo; link on the page, which will be associated with our first todo. Capybara will tell us it can&rsquo;t find it:</p> <pre class="highlight ruby"><code><span class="no">Unable</span> <span class="n">to</span> <span class="n">find</span> <span class="n">link</span> <span class="s2">"Edit"</span> <span class="p">(</span><span class="no">Capybara</span><span class="o">::</span><span class="no">ElementNotFound</span><span class="p">)</span>
+</code></pre> <p>We&rsquo;ll add an edit link into our view.</p> <pre class="highlight ruby"><code><span class="c1">#app/views/tasks/home.html.erb</span>
+<span class="p">.</span><span class="nf">.</span><span class="p">.</span>
+<span class="nf">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="sx">% for </span><span class="n">task</span> <span class="k">in</span> <span class="vi">@tasks</span> <span class="o">%&amp;</span><span class="n">gt</span><span class="p">;</span>
+  <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">li</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="sx">%= task.name %&amp;gt; • &amp;lt;%=</span> <span class="n">link_to</span> <span class="s1">'Edit'</span><span class="p">,</span> <span class="n">edit_task_path</span><span class="p">(</span><span class="n">task</span><span class="p">)</span> <span class="o">%&amp;</span><span class="n">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="sr">/li&amp;gt;
+&amp;lt;% end %&amp;gt;
+</span></code></pre> <p>Then Cucumber tells us we don&rsquo;t have a controller action:</p> <pre class="highlight ruby"><code><span class="no">The</span> <span class="n">action</span> <span class="s1">'edit'</span> <span class="n">could</span> <span class="n">not</span> <span class="n">be</span> <span class="n">found</span> <span class="k">for</span> <span class="no">TasksController</span> <span class="p">(</span><span class="no">AbstractController</span><span class="o">::</span><span class="no">ActionNotFound</span><span class="p">)</span>
+</code></pre> <p>We&rsquo;ll add the action to our tasks controller:</p> <pre class="highlight ruby"><code><span class="c1">#app/controllers/tasks_controller.rb</span>
+
+<span class="k">def</span> <span class="nf">edit</span>
+<span class="k">end</span>
+</code></pre> <p>Now we&rsquo;re missing our view</p> <pre class="highlight ruby"><code><span class="no">Missing</span> <span class="n">template</span> <span class="n">tasks</span><span class="o">/</span><span class="n">edit</span><span class="p">,</span> <span class="n">application</span><span class="o">/</span><span class="n">edit</span> <span class="n">with</span> <span class="p">{</span><span class="ss">:locale</span><span class="o">=&amp;</span><span class="n">gt</span><span class="p">;[</span><span class="ss">:en</span><span class="p">],</span> <span class="ss">:formats</span><span class="o">=&amp;</span><span class="n">gt</span><span class="p">;[</span><span class="ss">:html</span><span class="p">],</span> <span class="ss">:variants</span><span class="o">=&amp;</span><span class="n">gt</span><span class="p">;[],</span> <span class="ss">:handlers</span><span class="o">=&amp;</span><span class="n">gt</span><span class="p">;[</span><span class="ss">:erb</span><span class="p">,</span> <span class="ss">:builder</span><span class="p">,</span> <span class="ss">:raw</span><span class="p">,</span> <span class="ss">:ruby</span><span class="p">,</span> <span class="ss">:coffee</span><span class="p">,</span> <span class="ss">:jbuilder</span><span class="p">]}</span><span class="o">.</span> <span class="no">Searched</span> <span class="ss">in:
+</span></code></pre> <p>We&rsquo;ll add it in. Again just doing the bare minimum at each step.</p> <pre class="highlight ruby"><code><span class="err">$</span> <span class="n">touch</span> <span class="n">app</span><span class="o">/</span><span class="n">views</span><span class="o">/</span><span class="n">tasks</span><span class="o">/</span><span class="n">edit</span><span class="p">.</span><span class="nf">html</span><span class="p">.</span><span class="nf">erb</span>
+</code></pre> <p>Our step passes. We now need to write the code for the next step definition to test completing a task.</p> <pre class="highlight ruby"><code><span class="no">When</span><span class="p">(</span><span class="sr">/^I check the "(.*?)" checkbox$/</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">arg1</span><span class="o">|</span>
+  <span class="n">page</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="s1">'input[type=checkbox]'</span><span class="p">).</span><span class="nf">set</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre> <p>Cucumber:</p> <pre class="highlight ruby"><code><span class="no">Unable</span> <span class="n">to</span> <span class="n">find</span> <span class="n">css</span> <span class="s2">"input[type=checkbox]"</span> <span class="p">(</span><span class="no">Capybara</span><span class="o">::</span><span class="no">ElementNotFound</span><span class="p">)</span>
+</code></pre> <p>All we have is a blank page. Its time to add in a form to edit the task on our edit page. It&rsquo;s the same form as on the new view, except with a new field to mark todos as completed.</p> <pre class="highlight ruby"><code><span class="c1">#app/views/tasks/edit.html.erb</span>
+
+<span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="sx">%= simple_form_for(@task) do |f| %&amp;gt;
+  &amp;lt;%=</span> <span class="n">f</span><span class="p">.</span><span class="nf">input</span> <span class="ss">:name</span> <span class="o">%&amp;</span><span class="n">gt</span><span class="p">;</span>
+  <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="sx">%= f.input :completed, as: :boolean, checked_value: true, unchecked_value: false %&amp;gt;
+  &amp;lt;%=</span> <span class="n">f</span><span class="p">.</span><span class="nf">button</span> <span class="ss">:submit</span><span class="p">,</span> <span class="s2">"Submit"</span> <span class="o">%&amp;</span><span class="n">gt</span><span class="p">;</span>
+<span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="sx">% end </span><span class="o">%&amp;</span><span class="n">gt</span><span class="p">;</span>
+</code></pre> <p>We get:</p> <pre class="highlight ruby"><code><span class="n">undefined</span> <span class="nb">method</span> <span class="sb">`model_name' for nil:NilClass (ActionView::Template::Error)
+</span></code></pre> <p>There&rsquo;s nothing in the controller to help rails find the task. So let&rsquo;s update the edit method:</p> <pre class="highlight ruby"><code><span class="c1">#app/controllers/task_controller.rb</span>
+<span class="k">def</span> <span class="nf">edit</span>
+  <span class="vi">@task</span> <span class="o">=</span> <span class="no">Task</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:id</span><span class="p">])</span>
+<span class="k">end</span>
+</code></pre> <p>Cucumber tells us:</p> <pre class="highlight ruby"><code><span class="no">The</span> <span class="n">action</span> <span class="s1">'update'</span> <span class="n">could</span> <span class="n">not</span> <span class="n">be</span> <span class="n">found</span> <span class="k">for</span> <span class="no">TasksController</span> <span class="p">(</span><span class="no">AbstractController</span><span class="o">::</span><span class="no">ActionNotFound</span><span class="p">)</span>
+</code></pre> <p>Let&rsquo;s add an update action to our tasks controller.</p> <pre class="highlight ruby"><code><span class="c1">#app/controllers/task_controller.rb</span>
+
+<span class="k">def</span> <span class="nf">update</span>
+<span class="k">end</span>
+</code></pre> <p>Cucumber says:</p> <pre class="highlight ruby"><code><span class="no">Missing</span> <span class="n">template</span> <span class="n">tasks</span><span class="o">/</span><span class="n">update</span><span class="p">,</span> <span class="n">application</span><span class="o">/</span><span class="n">update</span> <span class="n">with</span> <span class="p">{</span><span class="ss">:locale</span><span class="o">=&amp;</span><span class="n">gt</span><span class="p">;[</span><span class="ss">:en</span><span class="p">],</span> <span class="ss">:formats</span><span class="o">=&amp;</span><span class="n">gt</span><span class="p">;[</span><span class="ss">:html</span><span class="p">],</span> <span class="ss">:variants</span><span class="o">=&amp;</span><span class="n">gt</span><span class="p">;[],</span> <span class="ss">:handlers</span><span class="o">=&amp;</span><span class="n">gt</span><span class="p">;[</span><span class="ss">:erb</span><span class="p">,</span> <span class="ss">:builder</span><span class="p">,</span> <span class="ss">:raw</span><span class="p">,</span> <span class="ss">:ruby</span><span class="p">,</span> <span class="ss">:coffee</span><span class="p">,</span> <span class="ss">:jbuilder</span><span class="p">]}</span><span class="o">.</span> <span class="no">Searched</span> <span class="ss">in:
+</span></code></pre> <p>We don&rsquo;t want to create a view for update&hellip; so let&rsquo;s try updating the action to include some rerouting&hellip; After a successful update we want to go to the home page and if there&rsquo;s been an error, we want to stay on the edit page.</p> <pre class="highlight ruby"><code><span class="c1">#app/controllers/task_controller.rb</span>
+
+<span class="k">def</span> <span class="nf">update</span>
+  <span class="k">if</span> <span class="vi">@task</span><span class="p">.</span><span class="nf">update</span>
+    <span class="n">redirect_to</span> <span class="n">root_url</span>
+  <span class="k">else</span>
+    <span class="n">render</span> <span class="ss">:edit</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre> <p>One more problem, rails can&rsquo;t find the task we&rsquo;re trying to update&hellip; so let&rsquo;s copy over the same find code from the edit action&hellip;</p> <pre class="highlight ruby"><code><span class="c1">#app/controllers/task_controller.rb</span>
+
+<span class="k">def</span> <span class="nf">update</span>
+  <span class="vi">@task</span> <span class="o">=</span> <span class="no">Task</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:id</span><span class="p">])</span>
+  <span class="k">if</span> <span class="vi">@task</span><span class="p">.</span><span class="nf">update</span>
+    <span class="n">redirect_to</span> <span class="n">root_url</span>
+  <span class="k">else</span>
+    <span class="n">render</span> <span class="ss">:edit</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre> <p>And now&hellip;</p> <pre class="highlight ruby"><code><span class="n">wrong</span> <span class="n">number</span> <span class="n">of</span> <span class="n">arguments</span> <span class="p">(</span><span class="mi">0</span> <span class="k">for</span> <span class="mi">1</span><span class="p">)</span> <span class="p">(</span><span class="no">ArgumentError</span><span class="p">)</span>
+</code></pre> <p>We need to fix our strong parameters in our private task_params method.</p> <pre class="highlight ruby"><code><span class="c1">#app/controllers/task_controller.rb</span>
+
+<span class="k">def</span> <span class="nf">task_params</span>
+  <span class="n">params</span><span class="p">.</span><span class="nf">require</span><span class="p">(</span><span class="ss">:task</span><span class="p">).</span><span class="nf">permit</span><span class="p">(</span><span class="ss">:name</span><span class="p">,</span> <span class="ss">:completed</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre> <p>We also need to pass our params into the update method.</p> <pre class="highlight ruby"><code><span class="c1">#app/controllers/task_controller.rb</span>
+
+<span class="k">def</span> <span class="nf">update</span>
+  <span class="vi">@task</span> <span class="o">=</span> <span class="no">Task</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:id</span><span class="p">])</span>
+  <span class="k">if</span> <span class="vi">@task</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="n">task_params</span><span class="p">)</span>
+    <span class="n">redirect_to</span> <span class="n">root_url</span>
+  <span class="k">else</span>
+    <span class="n">render</span> <span class="ss">:edit</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre> <p>The step passes. Before we go on, let&rsquo;s refactor the code so we aren&rsquo;t repeating the same line of code in the edit and update methods in the controller. Remove the following line from the edit and update actions.</p> <pre class="highlight ruby"><code><span class="vi">@task</span> <span class="o">=</span> <span class="no">Task</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:id</span><span class="p">])</span>
+</code></pre> <p>Then create a new private method:</p> <pre class="highlight ruby"><code><span class="c1">#app/controllers/task_controller.rb</span>
+
+<span class="k">def</span> <span class="nf">find_task</span>
+  <span class="vi">@task</span> <span class="o">=</span> <span class="no">Task</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:id</span><span class="p">])</span>
+<span class="k">end</span>
+</code></pre> <p>And at the top of our controller we&rsquo;ll call our new method with a before_action hook:</p> <pre class="highlight ruby"><code><span class="c1">#app/controllers/task_controller.rb</span>
+
+<span class="n">before_action</span> <span class="ss">:find_task</span><span class="p">,</span> <span class="ss">only: </span><span class="p">[</span><span class="ss">:edit</span><span class="p">,</span> <span class="ss">:update</span><span class="p">]</span>
+</code></pre> <p>If we run cucumber again and see it still working, we were just able to &ldquo;fearlessly&rdquo; refactor.</p> <p>Finally, let&rsquo;s finish this last step. We need to communicate to the user that the task is completed.</p> <pre class="highlight ruby"><code><span class="no">Then</span><span class="p">(</span><span class="sr">/^I should see "(.*?)" as completed\.$/</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">task</span><span class="o">|</span>
+  <span class="n">assert</span> <span class="n">first</span><span class="p">(</span><span class="s1">'li'</span><span class="p">).</span><span class="nf">parent</span><span class="p">.</span><span class="nf">has_css?</span><span class="p">(</span><span class="s1">'.completed'</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre> <p>This code checks if our list item has the css class <em>.completed</em>. The argument has_css? looks within the list item to its children, when we wanted to check the list item itself. So we used <em>.parent</em> to return the search to the list item element itself.</p> <p>Let&rsquo;s update the home page view with some logic that determines if the task is marked as completed, and if it is, to add the class, &ldquo;completed&rdquo;</p> <pre class="highlight ruby"><code><span class="c1">#app/views/tasks/home.html.erb</span>
+
+<span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">li</span> <span class="k">class</span><span class="o">=</span><span class="s2">"&amp;lt;%= task.completed == true ? "</span><span class="n">completed</span><span class="s2">" : "" %&amp;gt;"</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="sx">%= task.name %&amp;gt; • &amp;lt;%=</span> <span class="n">link_to</span> <span class="s1">'Edit'</span><span class="p">,</span> <span class="n">edit_task_path</span><span class="p">(</span><span class="n">task</span><span class="p">)</span> <span class="o">%&amp;</span><span class="n">gt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="sr">/li&amp;gt;
+</span></code></pre> <p>You may want to move this logic out into a helper method, but for now, this will adequately accomplish what we want.</p> <p>Then let&rsquo;s add a new CSS file:</p> <pre class="highlight plaintext"><code>$ touch app/assets/stylesheets/tasks.css
+</code></pre> <p>And add the code:</p> <pre class="highlight plaintext"><code>#app/assets/stylesheets/tasks.css
+
+li.completed{
+  text-decoration: line-through;
+}
+</code></pre> <p>Then we can run cucumber and verify that all our tests are passing. It kind of sucks that we have a line running through even the edit and delete actions, but oh well - this isn&rsquo;t about being pretty, but just showing how this can all work.</p> <h3>Step 5: Removing Tasks</h3> <p>When a user has completed a bunch of tasks, after a time, it makes sense to that our user may no longer want to view the tasks. So we need a way to delete tasks.</p> <p>So let&rsquo;s write the following scenario:</p> <pre class="highlight ruby"><code><span class="no">Scenario</span><span class="p">:</span> <span class="no">Delete</span> <span class="n">a</span> <span class="n">task</span>
+  <span class="no">Given</span> <span class="no">I</span> <span class="n">have</span> <span class="n">the</span> <span class="n">following</span> <span class="ss">tasks:
+    </span><span class="o">|</span> <span class="nb">name</span>          <span class="o">|</span> <span class="n">completed</span> <span class="o">|</span>
+    <span class="o">|</span> <span class="no">My</span> <span class="no">First</span> <span class="no">Todo</span> <span class="o">|</span> <span class="kp">false</span>     <span class="o">|</span>
+    <span class="o">|</span> <span class="no">My</span> <span class="mi">2</span><span class="n">nd</span> <span class="no">Todo</span>   <span class="o">|</span> <span class="kp">false</span>     <span class="o">|</span>
+  <span class="no">When</span> <span class="no">I</span> <span class="n">am</span> <span class="n">on</span> <span class="n">the</span> <span class="n">home</span> <span class="n">page</span>
+  <span class="no">And</span> <span class="no">I</span> <span class="n">press</span> <span class="s2">"Delete"</span> <span class="n">associated</span> <span class="n">with</span> <span class="s2">"My First Todo"</span>
+  <span class="no">Then</span> <span class="no">I</span> <span class="n">should</span> <span class="n">no</span> <span class="n">longer</span> <span class="n">see</span> <span class="s2">"My First Todo"</span>
+</code></pre> <p>Let&rsquo;s write our first step. We want to tell Cucumber to click the delete link:</p> <pre class="highlight ruby"><code><span class="no">When</span><span class="p">(</span><span class="sr">/^I click on the "(.*?)" next to "(.*?)"$/</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="o">|</span>
+  <span class="n">first</span><span class="p">(</span><span class="s1">'li'</span><span class="p">).</span><span class="nf">click_link</span><span class="p">(</span><span class="s1">'Delete'</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre> <p>Cucumber tells us:</p> <pre class="highlight ruby"><code><span class="no">Unable</span> <span class="n">to</span> <span class="n">find</span> <span class="n">link</span> <span class="s2">"Delete"</span> <span class="p">(</span><span class="no">Capybara</span><span class="o">::</span><span class="no">ElementNotFound</span><span class="p">)</span>
+</code></pre> <p>Let&rsquo;s add a delete link to the Home page view.</p> <pre class="highlight ruby"><code><span class="c1">#app/views/tasks/new.html.erb</span>
+
+<span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="sx">% for </span><span class="n">task</span> <span class="k">in</span> <span class="vi">@tasks</span> <span class="o">%&amp;</span><span class="n">gt</span><span class="p">;</span>
+  <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">li</span> <span class="k">class</span><span class="o">=</span><span class="s2">"&amp;lt;%# task.completed == true ? "</span><span class="n">completed</span><span class="s2">" : "" %&amp;gt;"</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span>
+    <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="sx">%= task.name %&amp;gt;
+    • &amp;lt;%=</span> <span class="n">link_to</span> <span class="s1">'Edit'</span><span class="p">,</span> <span class="n">edit_task_path</span><span class="p">(</span><span class="n">task</span><span class="p">)</span> <span class="o">%&amp;</span><span class="n">gt</span><span class="p">;</span>
+    <span class="err">•</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="sx">%= link_to 'Delete', task, method: :delete, data: { confirm: 'Are you sure?' } %&amp;gt;
+  &amp;lt;/li&amp;gt;
+&amp;lt;% end %&amp;gt;
+</span></code></pre> <p>Cucumber tells us:</p> <pre class="highlight ruby"><code><span class="no">The</span> <span class="n">action</span> <span class="s1">'destroy'</span> <span class="n">could</span> <span class="n">not</span> <span class="n">be</span> <span class="n">found</span> <span class="k">for</span> <span class="no">TasksController</span> <span class="p">(</span><span class="no">AbstractController</span><span class="o">::</span><span class="no">ActionNotFound</span><span class="p">)</span>
+</code></pre> <p>Let&rsquo;s add the necessary controller action:</p> <pre class="highlight ruby"><code><span class="c1">#app/controllers/task_controller.rb</span>
+
+<span class="k">def</span> <span class="nf">destroy</span>
+<span class="k">end</span>
+</code></pre> <p>Cucumber tells us:</p> <pre class="highlight ruby"><code><span class="no">Missing</span> <span class="n">template</span> <span class="n">tasks</span><span class="o">/</span><span class="n">destroy</span><span class="p">,</span> <span class="n">application</span><span class="o">/</span><span class="n">destroy</span> <span class="n">with</span> <span class="p">{</span><span class="ss">:locale</span><span class="o">=&amp;</span><span class="n">gt</span><span class="p">;[</span><span class="ss">:en</span><span class="p">],</span> <span class="ss">:formats</span><span class="o">=&amp;</span><span class="n">gt</span><span class="p">;[</span><span class="ss">:html</span><span class="p">],</span> <span class="ss">:variants</span><span class="o">=&amp;</span><span class="n">gt</span><span class="p">;[],</span> <span class="ss">:handlers</span><span class="o">=&amp;</span><span class="n">gt</span><span class="p">;[</span><span class="ss">:erb</span><span class="p">,</span> <span class="ss">:builder</span><span class="p">,</span> <span class="ss">:raw</span><span class="p">,</span> <span class="ss">:ruby</span><span class="p">,</span> <span class="ss">:coffee</span><span class="p">,</span> <span class="ss">:jbuilder</span><span class="p">]}</span><span class="o">.</span> <span class="no">Searched</span> <span class="ss">in:
+</span></code></pre> <p>Let&rsquo;s fill out the action with:</p> <pre class="highlight ruby"><code><span class="c1">#app/controllers/task_controller.rb</span>
+
+<span class="k">def</span> <span class="nf">destroy</span>
+  <span class="vi">@task</span><span class="p">.</span><span class="nf">destroy</span>
+<span class="k">end</span>
+</code></pre> <p>And also include the destroy action in the before_action hook:</p> <pre class="highlight ruby"><code><span class="c1">#app/controllers/task_controller.rb</span>
+
+<span class="n">before_action</span> <span class="ss">:find_task</span><span class="p">,</span> <span class="ss">only: </span><span class="p">[</span><span class="ss">:edit</span><span class="p">,</span> <span class="ss">:update</span><span class="p">,</span> <span class="ss">:destroy</span><span class="p">]</span>
+</code></pre> <p>We keep getting the same message:</p> <pre class="highlight ruby"><code> <span class="no">Missing</span> <span class="n">template</span> <span class="n">tasks</span><span class="o">/</span><span class="n">destroy</span><span class="p">,</span> <span class="n">application</span><span class="o">/</span><span class="n">destroy</span> <span class="n">with</span> <span class="p">{</span><span class="ss">:locale</span><span class="o">=&amp;</span><span class="n">gt</span><span class="p">;[</span><span class="ss">:en</span><span class="p">],</span> <span class="ss">:formats</span><span class="o">=&amp;</span><span class="n">gt</span><span class="p">;[</span><span class="ss">:html</span><span class="p">],</span> <span class="ss">:variants</span><span class="o">=&amp;</span><span class="n">gt</span><span class="p">;[],</span> <span class="ss">:handlers</span><span class="o">=&amp;</span><span class="n">gt</span><span class="p">;[</span><span class="ss">:erb</span><span class="p">,</span> <span class="ss">:builder</span><span class="p">,</span> <span class="ss">:raw</span><span class="p">,</span> <span class="ss">:ruby</span><span class="p">,</span> <span class="ss">:coffee</span><span class="p">,</span> <span class="ss">:jbuilder</span><span class="p">]}</span><span class="o">.</span> <span class="no">Searched</span> <span class="ss">in:
+</span></code></pre> <p>So let&rsquo;s add a redirect</p> <pre class="highlight ruby"><code><span class="c1">#app/controllers/task_controller.rb</span>
+
+<span class="k">def</span> <span class="nf">destroy</span>
+  <span class="vi">@task</span><span class="p">.</span><span class="nf">destroy</span>
+  <span class="n">redirect_to</span> <span class="n">root_url</span>
+<span class="k">end</span>
+</code></pre> <p>Our step passes.</p> <p>Let&rsquo;s write the last step here.</p> <pre class="highlight ruby"><code><span class="no">Then</span><span class="p">(</span><span class="sr">/^I should no longer see "(.*?)"$/</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">task</span><span class="o">|</span>
+  <span class="o">!</span><span class="n">assert</span> <span class="n">page</span><span class="p">.</span><span class="nf">has_content?</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre> <p>This is similar to when we were first checking to see if the task would appear on the page when we created a new task. Here we want to test that it doesn&rsquo;t show. So I slightly modified the code with a bang, to assert the opposite.</p> <p>Cucumber tells us:</p> <pre class="highlight ruby"><code><span class="no">And</span> <span class="no">I</span> <span class="n">press</span> <span class="s2">"Delete"</span> <span class="n">associated</span> <span class="n">with</span> <span class="s2">"My First Todo"</span>
+</code></pre> <p>Nice! We created a Todo app using Cucumber that allows us to create tasks, validates against invalid tasks, mark tasks as complete, and delete tasks. This this type of functionality is pretty common and can be applied in a lot of scenarios.</p> <p>If you have any questions, or notice anything that can be improved, please let me know!</p> </section> <article> <footer> <ul class=large-column> <li><h5 class=heading>Recent Articles</h5></li> <li> <ol> <li> <a href="/giving-and-receiving-design-feedback.html">Design Feedback That Works</a> <span>Jan 17</span> </li> <li> <a href="/working-with-react-in-meteor.html">Working with a React View Layer in Meteor</a> <span>Dec 3</span> </li> <li> <a href="/improving-ui-with-animations-in-meteor.html">Improving The Nice Track UI</a> <span>Oct 19</span> </li> <li> <a href="/building-capote.html">Building Capote Meteor & Mocha TDD</a> <span>Oct 3</span> </li> <li> <a href="/getting-started-with-cucumber-on-rails.html">Getting Started with Cucumber on Rails</a> <span>Aug 31</span> </li> <li> <a href="/up-state.html">Announcing Up State</a> <span>Jul 10</span> </li> </ol> </li> </ul> <ul class=small-column> <li><h5 class=heading>Tags</h5></li> <li> <ol> <li><a href="/tags/business.html">business (1)</a></li> <li><a href="/tags/software-development.html">software development (1)</a></li> <li><a href="/tags/meteor.html">meteor (4)</a></li> <li><a href="/tags/mocha.html">mocha (1)</a></li> <li><a href="/tags/tdd.html">tdd (1)</a></li> <li><a href="/tags/ux.html">ux (1)</a></li> <li><a href="/tags/animations.html">animations (1)</a></li> <li><a href="/tags/react.html">react (2)</a></li> <li><a href="/tags/javascript.html">javascript (2)</a></li> </ol> </li> <ul> </footer> </div> </body> </html>

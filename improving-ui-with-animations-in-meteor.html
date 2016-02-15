@@ -1,0 +1,310 @@
+<!doctype html> <html> <head> <meta charset=utf-8 /> <meta http-equiv=X-UA-Compatible content='IE=edge;chrome=1'/> <meta name=viewport content="width=device-width, initial-scale=1"> <title>High Tops Blog - Improving The Nice Track UI</title> <link rel=alternate type="application/atom+xml" title="Atom Feed" href="/feed.xml"/> <link href="/stylesheets/all.css" rel=stylesheet /> <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .cm {
+  color: #999988;
+  font-style: italic;
+}
+.highlight .cp {
+  color: #999999;
+  font-weight: bold;
+}
+.highlight .c1 {
+  color: #999988;
+  font-style: italic;
+}
+.highlight .cs {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic;
+}
+.highlight .c, .highlight .cd {
+  color: #999988;
+  font-style: italic;
+}
+.highlight .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+.highlight .gd {
+  color: #000000;
+  background-color: #ffdddd;
+}
+.highlight .ge {
+  color: #000000;
+  font-style: italic;
+}
+.highlight .gr {
+  color: #aa0000;
+}
+.highlight .gh {
+  color: #999999;
+}
+.highlight .gi {
+  color: #000000;
+  background-color: #ddffdd;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+  font-weight: bold;
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .gt {
+  color: #aa0000;
+}
+.highlight .kc {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .kd {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .kn {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .kp {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .kr {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .kt {
+  color: #445588;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kv {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .mf {
+  color: #009999;
+}
+.highlight .mh {
+  color: #009999;
+}
+.highlight .il {
+  color: #009999;
+}
+.highlight .mi {
+  color: #009999;
+}
+.highlight .mo {
+  color: #009999;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #009999;
+}
+.highlight .sb {
+  color: #d14;
+}
+.highlight .sc {
+  color: #d14;
+}
+.highlight .sd {
+  color: #d14;
+}
+.highlight .s2 {
+  color: #d14;
+}
+.highlight .se {
+  color: #d14;
+}
+.highlight .sh {
+  color: #d14;
+}
+.highlight .si {
+  color: #d14;
+}
+.highlight .sx {
+  color: #d14;
+}
+.highlight .sr {
+  color: #009926;
+}
+.highlight .s1 {
+  color: #d14;
+}
+.highlight .ss {
+  color: #990073;
+}
+.highlight .s {
+  color: #d14;
+}
+.highlight .na {
+  color: #008080;
+}
+.highlight .bp {
+  color: #999999;
+}
+.highlight .nb {
+  color: #0086B3;
+}
+.highlight .nc {
+  color: #445588;
+  font-weight: bold;
+}
+.highlight .no {
+  color: #008080;
+}
+.highlight .nd {
+  color: #3c5d5d;
+  font-weight: bold;
+}
+.highlight .ni {
+  color: #800080;
+}
+.highlight .ne {
+  color: #990000;
+  font-weight: bold;
+}
+.highlight .nf {
+  color: #990000;
+  font-weight: bold;
+}
+.highlight .nl {
+  color: #990000;
+  font-weight: bold;
+}
+.highlight .nn {
+  color: #555555;
+}
+.highlight .nt {
+  color: #000080;
+}
+.highlight .vc {
+  color: #008080;
+}
+.highlight .vg {
+  color: #008080;
+}
+.highlight .vi {
+  color: #008080;
+}
+.highlight .nv {
+  color: #008080;
+}
+.highlight .ow {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .o {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .w {
+  color: #bbbbbb;
+}
+.highlight {
+  background-color: #f8f8f8;
+}
+    </style> <link href='//fonts.googleapis.com/css?family=Archivo+Black|Archivo+Narrow:400,700,400italic|Enriqueta:400,700' rel=stylesheet> </head> <body> <div id=main role=main> <nav> <ul> <li> <a href="/"> <img alt="high tops logo" src="/images/hightops_logo.svg"/> </a> </li> </ul> </nav> <article> <header> <h1> Improving The Nice Track UI </h1> </header> <section> <p><a href="https://nicetrack.meteor.com">Nice Track</a> is one of the first apps I created using Meteor. It allows you to privately create topics which you can then rate on a daily basis in order to track your progress, satisfaction, or feelings. You can also add a few notes to each rating. After you&rsquo;ve rated your topics some statistics are provided so you can analyze your ratings.</p> <p>When I was creating this app, I was mostly interested in improving my skills within the Meteor framework. I didn&rsquo;t put a lot of emphasis on how it looked or felt. As a result, it&rsquo;s basically a prototype and not much more. The looks are mostly derived from <a href="http://semantic-ui.com/">Semantic UI</a> (my favorite modular, prototyping library). Now I&rsquo;d love to make this its own thing. I&rsquo;ll be doing it with small improvements. One thing I want to improve on is the animations and to provide better context to users.</p> <p>If you want to checkout the before and after you can:</p> <p><strong>Before:</strong> <a href="https://nicetrack-anims-before.meteor.com">Live version</a> / <a href="https://github.com/austinsamsel/endless-race/tree/css-animations-before">GitHub</a></p> <p><strong>After:</strong> <a href="https://nicetrack-anims-after.meteor.com">Live version</a> / <a href="https://github.com/austinsamsel/endless-race/tree/css-animations-after">GitHub</a></p> <p>Currently, when a user rates a topic, here&rsquo;s the code I used to slide up the item and fade it out of view. It fires once a rating is successfully submitted. It works and looks fine, however when a user goes to another page and comes back, all the animations are undone and the DOM resets itself showing posts that were just recently rated. This was fine for prototyping and executing an effect, but as I improve the app, this is one thing I want to take care of. I&rsquo;d like to encourage users to rate their topics once a day.</p> <pre class="highlight javascript"><code>  <span class="c1">// client/templates/ratings/rating_submit.js</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">).</span><span class="nx">closest</span><span class="p">(</span><span class="s1">'.topicItem'</span><span class="p">).</span><span class="nx">fadeTo</span><span class="p">(</span><span class="s1">'fast'</span><span class="p">,</span> <span class="mf">0.00</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">slideUp</span><span class="p">(</span><span class="s2">"fast"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">remove</span><span class="p">();</span>
+      <span class="c1">//$(this).addClass('hideIt');</span>
+
+      <span class="nx">Meteor</span><span class="p">.</span><span class="nx">setInterval</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+        <span class="nx">Session</span><span class="p">.</span><span class="nx">clear</span><span class="p">(</span><span class="s1">'hideIt'</span><span class="p">)</span>
+      <span class="p">},</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">*</span> <span class="mi">6</span><span class="p">);</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+</code></pre> <p>This code resulted in an effect like this:</p> <pre class="highlight plaintext"><code>  &lt;img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/images/blog/animation-before.gif" alt="ui before"&gt;
+</code></pre> <p>In order to bring the animation in line to the data&hellip; I&rsquo;m using this logic. If a topic has been rated within the last 6 hours, its form should be hidden. So I created a helper that looks like this: <code>javascript // client/templates/topics/topic_item.js Template.topicItemRate.helpers({ hideRecent: function(parentContext){ var timeRange = moment().subtract(12, &#39;hours&#39;)._d; if (this.lastRating &gt; timeRange) { return &quot;hideThis&quot;; } } }); </code></p> <p>I make use of <a href="http://momentjs.com/">Moment JS</a> to create a variable for the time set at 6 hours ago. Then I use that timeframe to check if the last rating happened within the last 6 hours. If it did, then I&rsquo;ll fade out that topic&rsquo;s rating form and remove it from the UI.</p> <p>The template looks like this:</p> <pre class="highlight javascript"><code>  <span class="c1">// client/templates/topics/topic_item.js</span>
+
+  <span class="o">&lt;</span><span class="nx">template</span> <span class="nx">name</span><span class="o">=</span><span class="s2">"topicItemRate"</span><span class="o">&gt;</span>
+    <span class="p">{{</span><span class="err">#</span><span class="k">if</span> <span class="nx">recentlyRated</span><span class="p">}}</span>
+    <span class="p">{{</span><span class="k">else</span><span class="p">}}</span>
+      <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"ui segment list topicItem {{hideRecent}}"</span><span class="o">&gt;</span> <span class="c">&lt;!--</span> <span class="nx">added</span> <span class="k">in</span> <span class="nx">the</span> <span class="p">{{</span><span class="nx">minRecent</span><span class="p">}}</span> <span class="nx">helper</span> <span class="nx">here</span> <span class="o">--&gt;</span>
+        <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"item"</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"header"</span><span class="o">&gt;&lt;</span><span class="nx">h3</span><span class="o">&gt;</span><span class="p">{{</span><span class="nx">title</span><span class="p">}}</span> <span class="o">&lt;</span><span class="sr">/h3&gt;&lt;/</span><span class="nx">div</span><span class="o">&gt;</span>
+          <span class="p">{{</span><span class="o">&gt;</span> <span class="nx">ratingSubmit</span><span class="p">}}</span>
+        <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>    <span class="p">{{</span><span class="sr">/if}</span><span class="err">}
+</span>  <span class="o">&lt;</span><span class="sr">/template</span><span class="err">&gt;
+</span></code></pre> <p>When the {{minRecent}} helper is active, it adds the class, &ldquo;hideThis&rdquo; which includes this CSS:</p> <pre class="highlight css"><code>  <span class="o">//</span> <span class="nt">client</span><span class="o">/</span><span class="nt">stylesheets</span><span class="o">/</span><span class="nt">style</span><span class="nc">.scss</span>
+
+  <span class="k">@keyframes</span> <span class="n">fadeOut</span> <span class="p">{</span>
+    <span class="nt">0</span><span class="o">%</span> <span class="p">{</span>
+      <span class="nl">max-height</span><span class="p">:</span> <span class="m">500px</span><span class="p">;</span>
+      <span class="nl">opacity</span><span class="p">:</span> <span class="m">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nt">39</span><span class="o">%</span> <span class="p">{</span>
+      <span class="nl">max-height</span><span class="p">:</span> <span class="m">300px</span><span class="p">;</span>
+      <span class="nl">opacity</span><span class="p">:</span> <span class="m">.80</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nt">78</span><span class="nc">.75</span><span class="o">%</span> <span class="p">{</span>
+      <span class="nl">max-height</span><span class="p">:</span> <span class="m">50px</span><span class="p">;</span>
+      <span class="nl">opacity</span><span class="p">:</span> <span class="m">.3</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nt">99</span><span class="nc">.999999</span><span class="o">%</span> <span class="p">{</span>
+      <span class="nl">max-height</span><span class="p">:</span> <span class="m">0px</span><span class="p">;</span>
+      <span class="nl">opacity</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+      <span class="nl">position</span><span class="p">:</span><span class="nb">relative</span><span class="p">;</span>
+      <span class="nl">z-index</span><span class="p">:</span><span class="m">1</span><span class="p">;</span>
+      <span class="nl">padding</span><span class="p">:</span> <span class="m">0</span> <span class="m">1em</span><span class="p">;</span> <span class="c">/* makes animation smoother */</span>
+    <span class="p">}</span>
+    <span class="nt">100</span><span class="o">%</span><span class="p">{</span>
+      <span class="nl">position</span><span class="p">:</span><span class="nb">absolute</span><span class="p">;</span>
+      <span class="nl">top</span><span class="p">:</span><span class="m">-9999999px</span><span class="p">;</span>
+      <span class="nl">left</span><span class="p">:</span><span class="m">-9999999px</span><span class="p">;</span>
+      <span class="nl">z-index</span><span class="p">:</span><span class="m">-999999999</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="nc">.topicItem</span> <span class="p">{</span>
+    <span class="nl">opacity</span><span class="p">:</span><span class="m">1.0</span><span class="p">;</span>
+    <span class="nl">max-height</span><span class="p">:</span><span class="m">10000px</span><span class="p">;</span>
+    <span class="nl">overflow</span><span class="p">:</span><span class="nb">hidden</span><span class="p">;</span>
+    <span class="nl">transition</span><span class="p">:</span><span class="n">translateY</span> <span class="m">0.5s</span> <span class="n">linear</span><span class="p">;</span>
+    <span class="nl">z-index</span><span class="p">:</span><span class="m">1</span><span class="p">;</span>
+    <span class="nl">position</span><span class="p">:</span><span class="nb">relative</span><span class="p">;</span>
+    <span class="nl">transform</span><span class="p">:</span><span class="n">translateY</span><span class="p">(</span><span class="m">0</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="nc">.topicItem.hideThis</span><span class="p">{</span>
+    <span class="nl">animation</span><span class="p">:</span> <span class="n">fadeOut</span> <span class="m">500ms</span> <span class="n">linear</span> <span class="m">0s</span> <span class="m">1</span> <span class="n">alternate</span> <span class="n">forwards</span><span class="p">;</span>
+  <span class="p">}</span>
+</code></pre> <p>Our new animation looks like this:</p> <pre class="highlight html"><code>  <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="</span> <span class="na">data-src=</span><span class="s">"/images/blog/animation-after.gif"</span> <span class="na">alt=</span><span class="s">"ui afterwards"</span><span class="nt">&gt;</span>
+</code></pre> <p>It&rsquo;s basically the same look, except that even if a user refreshes the page or navigates away and comes back, topics that have already been rated within the past 12 hours will not be hidden.</p> <p>In the same way many apps use notifications, I&rsquo;ll implement a counter for how many items are ready to be rated. I want to compel people to check out the Ratings page since the activity on there drives the app. Also, the number of topics that need ratings may change from time to time, so it&rsquo;d be good to give the user an idea of what remains unrated even while elsewhere in the app.</p> <p>I created a todoCount helper which counts how many topics have not been rated within the past 6 hours.</p> <pre class="highlight javascript"><code>  <span class="c1">// client/templates/includes/header.js</span>
+
+  <span class="nl">todoCount</span><span class="p">:</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="kd">var</span> <span class="nx">timeRange</span> <span class="o">=</span> <span class="nx">moment</span><span class="p">().</span><span class="nx">subtract</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="s1">'hours'</span><span class="p">).</span><span class="nx">_d</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">topicsCount</span> <span class="o">=</span> <span class="nx">Topics</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> <span class="s1">'lastRating'</span> <span class="p">:</span> <span class="p">{</span> <span class="nl">$lte</span><span class="p">:</span> <span class="nx">timeRange</span> <span class="p">}</span> <span class="p">});</span>
+
+    <span class="k">return</span> <span class="nx">topicsCount</span><span class="p">.</span><span class="nx">count</span><span class="p">();</span>
+  <span class="p">}</span>
+</code></pre> <p>Then the corresponding helper in the header template:</p> <pre class="highlight html"><code>  // client/templates/includes/header.html
+  ...
+  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"{{activeRouteClass 'home' 'toRateTopics'}} item"</span> <span class="na">href=</span><span class="s">"{{pathFor 'toRateTopics'}}"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"checkmark icon"</span><span class="nt">&gt;&lt;/i&gt;</span> <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"menu-title"</span><span class="nt">&gt;</span>Rate <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">'todo'</span><span class="nt">&gt;</span>{{todoCount}}<span class="nt">&lt;/span&gt;&lt;/span&gt;</span> <span class="c">&lt;!-- added the {{todoCount}} helper here --&gt;</span>
+  <span class="nt">&lt;/a&gt;</span>
+  ...
+</code></pre> <p>And I&rsquo;ll give it some nice CSS styling so it fits in more as a &ldquo;notification count&rdquo; which will appear in a little pink bubble.</p> <pre class="highlight css"><code>  <span class="o">//</span> <span class="nt">client</span><span class="o">/</span><span class="nt">stylesheets</span><span class="o">/</span><span class="nt">style</span><span class="nc">.scss</span>
+
+  <span class="nt">span</span><span class="nc">.todo</span><span class="p">{</span>
+    <span class="nl">background</span><span class="p">:</span> <span class="no">deeppink</span><span class="p">;</span>
+    <span class="nl">position</span><span class="p">:</span> <span class="nb">relative</span><span class="p">;</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="m">#fff</span><span class="p">;</span>
+    <span class="nl">font-weight</span><span class="p">:</span> <span class="nb">bold</span><span class="p">;</span>
+    <span class="nl">border-radius</span><span class="p">:</span> <span class="m">5px</span><span class="p">;</span>
+    <span class="nl">font-size</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+    <span class="nl">padding</span><span class="p">:</span> <span class="m">2px</span> <span class="m">5px</span> <span class="m">2px</span> <span class="m">6px</span><span class="p">;</span>
+    <span class="nl">text-align</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+    <span class="nl">vertical-align</span><span class="p">:</span> <span class="m">3px</span><span class="p">;</span>
+  <span class="p">}</span>
+</code></pre> <p>While its nice to have an animation that hides each topic item, it&rsquo;d be nice if it didn&rsquo;t run the animation when coming to the ratings page from another page in the app. I&rsquo;d really like for it to only start an animation after the user makes a rating.</p> <pre class="highlight javascript"><code>  <span class="c1">//client/topics/topic_item.js</span>
+  <span class="nx">Template</span><span class="p">.</span><span class="nx">topicItemRate</span><span class="p">.</span><span class="nx">onRendered</span> <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'.hideThis'</span><span class="p">).</span><span class="nx">remove</span><span class="p">();</span>
+  <span class="p">});</span>
+</code></pre> <p>This will remove any rating cards that have a .hideThis class attached once the items have rendered. This is a quick and easy way of skipping the loading animation when we don&rsquo;t really need it.</p> <p>I think these updates will make using Nice Track a little bit more enjoyable and sensible. If you have any suggestions for improvements please let me know!</p> </section> <article> <footer> <ul class=large-column> <li><h5 class=heading>Recent Articles</h5></li> <li> <ol> <li> <a href="/giving-and-receiving-design-feedback.html">Design Feedback That Works</a> <span>Jan 17</span> </li> <li> <a href="/working-with-react-in-meteor.html">Working with a React View Layer in Meteor</a> <span>Dec 3</span> </li> <li> <a href="/improving-ui-with-animations-in-meteor.html">Improving The Nice Track UI</a> <span>Oct 19</span> </li> <li> <a href="/building-capote.html">Building Capote Meteor & Mocha TDD</a> <span>Oct 3</span> </li> <li> <a href="/getting-started-with-cucumber-on-rails.html">Getting Started with Cucumber on Rails</a> <span>Aug 31</span> </li> <li> <a href="/up-state.html">Announcing Up State</a> <span>Jul 10</span> </li> </ol> </li> </ul> <ul class=small-column> <li><h5 class=heading>Tags</h5></li> <li> <ol> <li><a href="/tags/business.html">business (1)</a></li> <li><a href="/tags/software-development.html">software development (1)</a></li> <li><a href="/tags/meteor.html">meteor (4)</a></li> <li><a href="/tags/mocha.html">mocha (1)</a></li> <li><a href="/tags/tdd.html">tdd (1)</a></li> <li><a href="/tags/ux.html">ux (1)</a></li> <li><a href="/tags/animations.html">animations (1)</a></li> <li><a href="/tags/react.html">react (2)</a></li> <li><a href="/tags/javascript.html">javascript (2)</a></li> </ol> </li> <ul> </footer> </div> </body> </html>

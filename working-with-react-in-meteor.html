@@ -1,0 +1,294 @@
+<!doctype html> <html> <head> <meta charset=utf-8 /> <meta http-equiv=X-UA-Compatible content='IE=edge;chrome=1'/> <meta name=viewport content="width=device-width, initial-scale=1"> <title>High Tops Blog - Working with a React View Layer in Meteor</title> <link rel=alternate type="application/atom+xml" title="Atom Feed" href="/feed.xml"/> <link href="/stylesheets/all.css" rel=stylesheet /> <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .cm {
+  color: #999988;
+  font-style: italic;
+}
+.highlight .cp {
+  color: #999999;
+  font-weight: bold;
+}
+.highlight .c1 {
+  color: #999988;
+  font-style: italic;
+}
+.highlight .cs {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic;
+}
+.highlight .c, .highlight .cd {
+  color: #999988;
+  font-style: italic;
+}
+.highlight .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+.highlight .gd {
+  color: #000000;
+  background-color: #ffdddd;
+}
+.highlight .ge {
+  color: #000000;
+  font-style: italic;
+}
+.highlight .gr {
+  color: #aa0000;
+}
+.highlight .gh {
+  color: #999999;
+}
+.highlight .gi {
+  color: #000000;
+  background-color: #ddffdd;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+  font-weight: bold;
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .gt {
+  color: #aa0000;
+}
+.highlight .kc {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .kd {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .kn {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .kp {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .kr {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .kt {
+  color: #445588;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kv {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .mf {
+  color: #009999;
+}
+.highlight .mh {
+  color: #009999;
+}
+.highlight .il {
+  color: #009999;
+}
+.highlight .mi {
+  color: #009999;
+}
+.highlight .mo {
+  color: #009999;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #009999;
+}
+.highlight .sb {
+  color: #d14;
+}
+.highlight .sc {
+  color: #d14;
+}
+.highlight .sd {
+  color: #d14;
+}
+.highlight .s2 {
+  color: #d14;
+}
+.highlight .se {
+  color: #d14;
+}
+.highlight .sh {
+  color: #d14;
+}
+.highlight .si {
+  color: #d14;
+}
+.highlight .sx {
+  color: #d14;
+}
+.highlight .sr {
+  color: #009926;
+}
+.highlight .s1 {
+  color: #d14;
+}
+.highlight .ss {
+  color: #990073;
+}
+.highlight .s {
+  color: #d14;
+}
+.highlight .na {
+  color: #008080;
+}
+.highlight .bp {
+  color: #999999;
+}
+.highlight .nb {
+  color: #0086B3;
+}
+.highlight .nc {
+  color: #445588;
+  font-weight: bold;
+}
+.highlight .no {
+  color: #008080;
+}
+.highlight .nd {
+  color: #3c5d5d;
+  font-weight: bold;
+}
+.highlight .ni {
+  color: #800080;
+}
+.highlight .ne {
+  color: #990000;
+  font-weight: bold;
+}
+.highlight .nf {
+  color: #990000;
+  font-weight: bold;
+}
+.highlight .nl {
+  color: #990000;
+  font-weight: bold;
+}
+.highlight .nn {
+  color: #555555;
+}
+.highlight .nt {
+  color: #000080;
+}
+.highlight .vc {
+  color: #008080;
+}
+.highlight .vg {
+  color: #008080;
+}
+.highlight .vi {
+  color: #008080;
+}
+.highlight .nv {
+  color: #008080;
+}
+.highlight .ow {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .o {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .w {
+  color: #bbbbbb;
+}
+.highlight {
+  background-color: #f8f8f8;
+}
+    </style> <link href='//fonts.googleapis.com/css?family=Archivo+Black|Archivo+Narrow:400,700,400italic|Enriqueta:400,700' rel=stylesheet> </head> <body> <div id=main role=main> <nav> <ul> <li> <a href="/"> <img alt="high tops logo" src="/images/hightops_logo.svg"/> </a> </li> </ul> </nav> <article> <header> <h1> Working with a React View Layer in Meteor </h1> </header> <section> <p>I&rsquo;ve been trying to stay focused in terms of what new technologies I&rsquo;ll try out or learn. I&rsquo;ve been reading about React since the beginning of the year, but I&rsquo;ve held off on doing anything more than a tutorial. Now it seems like <a href="https://forums.meteor.com/t/next-steps-on-blaze-and-the-view-layer/13561">React might be more fully integrated with Meteor</a> as a front end engine, beyond official support by the Meteor Development Group. According to the discussion its possible Blaze 2.0 could be some kind of merger with React. Once I read that, it gave me the excuse I needed to start working with React.</p> <h2>Still &lt;3 you Blaze</h2> <p>Blaze made development really fast and productive. Wrapping HTML in template tags felt like a pretty good separation of concerns and was really easy to conceptualize. I had my HTML, my CSS, and my Javascript. If I needed some logic in my templates I had a lot of options with spacebars, helpers. However, it seems like we can get all that same functionality with React.</p> <h2>Cleaner Code</h2> <p>To test it out, I&rsquo;m creating an app that lets users send letters (or messages), snail mail style — where it takes a few days for each message to be delivered. It&rsquo;s an idea I&rsquo;ve been thinking about for a while.</p> <p>By now I&rsquo;ve run the <a href="https://www.meteor.com/tutorials/react/creating-an-app">official Meteor React tutorial</a> a couple times and used that basic functionality as a starting point for this app. I feel like I finally hit that react style &ldquo;functional&rdquo; (using this word lightly here) programming moment when I refactored a bunch of functionality I was storing in variables&hellip; and moved it out into functions which could be used a little bit more open-endedly and repeatedly. Of course you don&rsquo;t need React to code like this, but this style is more encouraged&hellip; As a reference for the following example, you can see the full code at my <a href="https://github.com/austinsamsel/snail">Github</a>.</p> <p>In my user.jsx file, my code was looking like this. This is probably how I would have written my apps in Meteor before. I&rsquo;d use a lot of variables and make it kind of human readable by naming them well. It always worked! But there&rsquo;s probably a better way…</p> <pre class="highlight javascript"><code>  <span class="c1">// components/User.jsx</span>
+  <span class="nx">render</span><span class="p">(){</span>
+    <span class="kd">var</span> <span class="nx">currentUserId</span> <span class="o">=</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">userId</span><span class="p">();</span>
+    <span class="kd">var</span> <span class="nx">followedUserId</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">_id</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">notCurrentUser</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">_id</span> <span class="o">!=</span> <span class="nx">currentUserId</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">notFollowedByCurrentUser</span> <span class="o">=</span> <span class="nx">Relationships</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span><span class="na">$and</span> <span class="p">:</span> <span class="p">[{</span><span class="na">owner</span> <span class="p">:</span> <span class="nx">currentUserId</span><span class="p">},</span> <span class="p">{</span><span class="na">saveContact</span> <span class="p">:</span> <span class="nx">followedUserId</span><span class="p">}]</span> <span class="p">})</span> <span class="o">==</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">followUserButton</span> <span class="o">=</span> <span class="nx">notCurrentUser</span> <span class="o">&amp;&amp;</span> <span class="nx">notFollowedByCurrentUser</span><span class="p">;</span>
+
+    <span class="kd">var</span> <span class="nx">followedByCurrentUser</span> <span class="o">=</span> <span class="nx">Relationships</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span><span class="na">$and</span> <span class="p">:</span> <span class="p">[{</span><span class="na">owner</span> <span class="p">:</span> <span class="nx">currentUserId</span><span class="p">},</span> <span class="p">{</span><span class="na">saveContact</span> <span class="p">:</span> <span class="nx">followedUserId</span><span class="p">}]</span> <span class="p">})</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">;</span>
+
+    <span class="kd">var</span> <span class="nx">unfollowUserButton</span> <span class="o">=</span> <span class="nx">notCurrentUser</span> <span class="o">&amp;&amp;</span> <span class="nx">followedByCurrentUser</span><span class="p">;</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;</span>
+      <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">username</span><span class="p">}</span>
+      <span class="p">{</span> <span class="nx">followUserButton</span> <span class="p">?</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">className</span><span class="o">=</span><span class="s2">"save"</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">saveThisContact</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">save</span> <span class="nx">contact</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>        <span class="p">)</span> <span class="p">:</span> <span class="s1">''</span><span class="p">}</span>
+
+      <span class="p">{</span> <span class="nx">unfollowUserButton</span> <span class="p">?</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">className</span><span class="o">=</span><span class="s2">"remove"</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">removeThisContact</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">remove</span> <span class="nx">contact</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>      <span class="p">):</span> <span class="s1">''</span><span class="p">}</span>
+    <span class="o">&lt;</span><span class="sr">/li</span><span class="err">&gt;
+</span>    <span class="p">)</span>
+  <span class="p">}</span>
+</code></pre> <p>I searched around for how other people were working with React, especially in terms of Meteor and came across <a href="http://blog.differential.com/react-for-meteor-developers/">this article</a> which inspired me to rearrange my code like this:</p> <pre class="highlight javascript"><code>  <span class="c1">// components/User.jsx</span>
+  <span class="nx">render</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;</span>
+        <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">username</span><span class="p">}</span>
+        <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">followButton</span><span class="p">()}</span>
+        <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">unfollowButton</span><span class="p">()}</span>
+      <span class="o">&lt;</span><span class="sr">/li</span><span class="err">&gt;
+</span>    <span class="p">)</span>
+  <span class="p">},</span>
+  <span class="c1">//method calls</span>
+  <span class="nx">saveThisContact</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="s2">"saveContact"</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">_id</span><span class="p">);</span>
+  <span class="p">},</span>
+  <span class="nx">removeThisContact</span><span class="p">(){</span>
+    <span class="kd">var</span> <span class="nx">currentUserId</span> <span class="o">=</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">userId</span><span class="p">();</span>
+    <span class="kd">var</span> <span class="nx">followedUserId</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">_id</span><span class="p">;</span>
+    <span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="s2">"removeContact"</span><span class="p">,</span> <span class="nx">currentUserId</span><span class="p">,</span> <span class="nx">followedUserId</span><span class="p">);</span>
+  <span class="p">},</span>
+  <span class="c1">// render conditionals</span>
+  <span class="nx">followButton</span><span class="p">(){</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="o">!</span> <span class="k">this</span><span class="p">.</span><span class="nx">isCurrentUser</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="o">!</span> <span class="k">this</span><span class="p">.</span><span class="nx">isFollowed</span><span class="p">()</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="o">&lt;</span><span class="nx">button</span>
+        <span class="nx">className</span><span class="o">=</span><span class="s2">"save"</span>
+        <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">saveThisContact</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="nx">save</span> <span class="nx">contact</span>
+      <span class="o">&lt;</span><span class="sr">/button&gt;</span><span class="err">;
+</span>    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="nx">unfollowButton</span><span class="p">(){</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="o">!</span> <span class="k">this</span><span class="p">.</span><span class="nx">isCurrentUser</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="nx">isFollowed</span><span class="p">()</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="o">&lt;</span><span class="nx">button</span>
+        <span class="nx">className</span><span class="o">=</span><span class="s2">"remove"</span>
+        <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">removeThisContact</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="nx">remove</span> <span class="nx">contact</span>
+      <span class="o">&lt;</span><span class="sr">/button&gt;</span><span class="err">;
+</span>    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="c1">// helper functions</span>
+  <span class="nx">isCurrentUser</span><span class="p">(){</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">_id</span> <span class="o">==</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">userId</span><span class="p">())</span>
+      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="p">},</span>
+  <span class="nx">isFollowed</span><span class="p">(){</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">Relationships</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span><span class="na">$and</span><span class="p">:</span> <span class="p">[{</span><span class="na">owner</span><span class="p">:</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">userId</span><span class="p">()},</span> <span class="p">{</span><span class="na">saveContact</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">_id</span><span class="p">}]</span> <span class="p">})</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span>
+      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="p">},</span>
+</code></pre> <p>Here, I moved the render() function towards the top, so if I&rsquo;m searching through my files, I&rsquo;ll immediately see what&rsquo;s being rendered in the UI, rather than a bunch of functions. I replaced all the variables with functions. I also moved the if/else logic out of the render() function and into helper functions. On the one hand, the first render() function looks a lot more clean, but also a lot more empty. This definitely spreads out the code more, but I think it&rsquo;d also be faster to trace. And as the app grows, or if more is included in the component, it should be easy to maintain.</p> <h2>Atmosphere packages</h2> <p>It isn&rsquo;t explicitly said anywhere, so maybe this is just something that is obvious to everyone but me, but you can use atmosphere packages really easily with React in your Meteor projects. The Meteor-react tutorial gave some special care to the Accounts UI package, setting it up in a wrapper before placing it in the DOM. This got me thinking I&rsquo;d need to drop Atmosphere and start working with meteorhacks:npm and cosmos:browserify packages.</p> <p>However, yes, you can use Atmosphere as your package manager. When I wanted to include a timestamp for each message, I ran &ldquo;meteor add momentjs:moment&rdquo; in the command line as usual to include <a href="http://momentjs.com/">Moment</a>.</p> <p>I like to do things step by step, so I first tried to print the timestamp with a prop like:</p> <pre class="highlight javascript"><code>  <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">letter</span><span class="p">.</span><span class="nx">createdAt</span><span class="p">}</span>
+</code></pre> <p>so that I could at least see the object I&rsquo;d be working with. However this returned a pretty dense error message:</p> <pre class="highlight plaintext"><code>  Uncaught Error: Invariant Violation: Objects are not valid as a React child (found: Sun Nov 29 2015 17:31:47 GMT-0500 (EST)). If you meant to render a collection of children, use an array instead or wrap the object using createFragment(object) from the React add-ons. Check the render method of `Letter`.
+</code></pre> <p>After some googling I caught a hint that the date object needed to be converted to a string first.</p> <p>So I created a function to do just that</p> <pre class="highlight javascript"><code>  <span class="nx">letterCreatedAt</span><span class="p">(){</span>
+    <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">letter</span><span class="p">.</span><span class="nx">createdAt</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">a</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+  <span class="p">}</span>
+</code></pre> <p>And added in a call from the render() function:</p> <pre class="highlight javascript"><code>  <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">letterCreatedAt</span><span class="p">()}</span>
+</code></pre> <p>Seeing that that worked. I updated my function to covert the timestamp with Moment JS.</p> <pre class="highlight javascript"><code>  <span class="nx">letterCreatedAt</span><span class="p">(){</span>
+    <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">letter</span><span class="p">.</span><span class="nx">createdAt</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">moment</span><span class="p">(</span><span class="nx">a</span><span class="p">).</span><span class="nx">format</span><span class="p">(</span><span class="s1">'MMMM Do YYYY, h:mm a'</span><span class="p">);</span>
+  <span class="p">}</span>
+</code></pre> <h2>React packages</h2> <p>Some atmosphere packages won&rsquo;t work well with React. For example, I wanted to build an input field with autocomplete functionality that would help search for users. I began installing the <a href="https://github.com/sergeyt/meteor-typeahead/">typeahead package</a> which was based on meteor templates and found out it was not going to be easily compatible with React.</p> <p>So for a case like this I needed browserify and meteorhacks:npm as described in the <a href="http://react-in-meteor.readthedocs.org/en/latest/client-npm/">React-in-Meteor docs</a></p> <p>I found the <a href="https://github.com/elidoran/cosmos-browserify">cosmos:browserify</a> docs contradicted the React-in-Meteor docs suggesting to use <a href="https://www.npmjs.com/package/browserify-exposify">exposify</a> rather than <a href="https://www.npmjs.com/package/externalify">externalify</a> in order to instruct any npm modules to use Meteor&rsquo;s version of react. The cosmos:browserify docs also suggested to place the browserify files in a client/lib folder so the libraries are only loaded once, instead of twice (client and server).</p> <p>Once following the instructions for set up I was able to get it working with <a href="https://www.npmjs.com/package/react-typeahead">React Typeahead</a>. I tried several different similar packages, but this was the easiest to get working.</p> <h2>Onward</h2> <p>At this point in my app, I&rsquo;ve created the barebones functionality with the backend Meteor logic and simple react components to create views. I&rsquo;m looking forward to animating with React and turning this into a full featured application.</p> </section> <article> <footer> <ul class=large-column> <li><h5 class=heading>Recent Articles</h5></li> <li> <ol> <li> <a href="/giving-and-receiving-design-feedback.html">Design Feedback That Works</a> <span>Jan 17</span> </li> <li> <a href="/working-with-react-in-meteor.html">Working with a React View Layer in Meteor</a> <span>Dec 3</span> </li> <li> <a href="/improving-ui-with-animations-in-meteor.html">Improving The Nice Track UI</a> <span>Oct 19</span> </li> <li> <a href="/building-capote.html">Building Capote Meteor & Mocha TDD</a> <span>Oct 3</span> </li> <li> <a href="/getting-started-with-cucumber-on-rails.html">Getting Started with Cucumber on Rails</a> <span>Aug 31</span> </li> <li> <a href="/up-state.html">Announcing Up State</a> <span>Jul 10</span> </li> </ol> </li> </ul> <ul class=small-column> <li><h5 class=heading>Tags</h5></li> <li> <ol> <li><a href="/tags/business.html">business (1)</a></li> <li><a href="/tags/software-development.html">software development (1)</a></li> <li><a href="/tags/meteor.html">meteor (4)</a></li> <li><a href="/tags/mocha.html">mocha (1)</a></li> <li><a href="/tags/tdd.html">tdd (1)</a></li> <li><a href="/tags/ux.html">ux (1)</a></li> <li><a href="/tags/animations.html">animations (1)</a></li> <li><a href="/tags/react.html">react (2)</a></li> <li><a href="/tags/javascript.html">javascript (2)</a></li> </ol> </li> <ul> </footer> </div> </body> </html>

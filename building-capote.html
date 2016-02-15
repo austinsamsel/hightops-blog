@@ -1,0 +1,720 @@
+<!doctype html> <html> <head> <meta charset=utf-8 /> <meta http-equiv=X-UA-Compatible content='IE=edge;chrome=1'/> <meta name=viewport content="width=device-width, initial-scale=1"> <title>High Tops Blog - Building Capote Meteor & Mocha TDD</title> <link rel=alternate type="application/atom+xml" title="Atom Feed" href="/feed.xml"/> <link href="/stylesheets/all.css" rel=stylesheet /> <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .cm {
+  color: #999988;
+  font-style: italic;
+}
+.highlight .cp {
+  color: #999999;
+  font-weight: bold;
+}
+.highlight .c1 {
+  color: #999988;
+  font-style: italic;
+}
+.highlight .cs {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic;
+}
+.highlight .c, .highlight .cd {
+  color: #999988;
+  font-style: italic;
+}
+.highlight .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+.highlight .gd {
+  color: #000000;
+  background-color: #ffdddd;
+}
+.highlight .ge {
+  color: #000000;
+  font-style: italic;
+}
+.highlight .gr {
+  color: #aa0000;
+}
+.highlight .gh {
+  color: #999999;
+}
+.highlight .gi {
+  color: #000000;
+  background-color: #ddffdd;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+  font-weight: bold;
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .gt {
+  color: #aa0000;
+}
+.highlight .kc {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .kd {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .kn {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .kp {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .kr {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .kt {
+  color: #445588;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kv {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .mf {
+  color: #009999;
+}
+.highlight .mh {
+  color: #009999;
+}
+.highlight .il {
+  color: #009999;
+}
+.highlight .mi {
+  color: #009999;
+}
+.highlight .mo {
+  color: #009999;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #009999;
+}
+.highlight .sb {
+  color: #d14;
+}
+.highlight .sc {
+  color: #d14;
+}
+.highlight .sd {
+  color: #d14;
+}
+.highlight .s2 {
+  color: #d14;
+}
+.highlight .se {
+  color: #d14;
+}
+.highlight .sh {
+  color: #d14;
+}
+.highlight .si {
+  color: #d14;
+}
+.highlight .sx {
+  color: #d14;
+}
+.highlight .sr {
+  color: #009926;
+}
+.highlight .s1 {
+  color: #d14;
+}
+.highlight .ss {
+  color: #990073;
+}
+.highlight .s {
+  color: #d14;
+}
+.highlight .na {
+  color: #008080;
+}
+.highlight .bp {
+  color: #999999;
+}
+.highlight .nb {
+  color: #0086B3;
+}
+.highlight .nc {
+  color: #445588;
+  font-weight: bold;
+}
+.highlight .no {
+  color: #008080;
+}
+.highlight .nd {
+  color: #3c5d5d;
+  font-weight: bold;
+}
+.highlight .ni {
+  color: #800080;
+}
+.highlight .ne {
+  color: #990000;
+  font-weight: bold;
+}
+.highlight .nf {
+  color: #990000;
+  font-weight: bold;
+}
+.highlight .nl {
+  color: #990000;
+  font-weight: bold;
+}
+.highlight .nn {
+  color: #555555;
+}
+.highlight .nt {
+  color: #000080;
+}
+.highlight .vc {
+  color: #008080;
+}
+.highlight .vg {
+  color: #008080;
+}
+.highlight .vi {
+  color: #008080;
+}
+.highlight .nv {
+  color: #008080;
+}
+.highlight .ow {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .o {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .w {
+  color: #bbbbbb;
+}
+.highlight {
+  background-color: #f8f8f8;
+}
+    </style> <link href='//fonts.googleapis.com/css?family=Archivo+Black|Archivo+Narrow:400,700,400italic|Enriqueta:400,700' rel=stylesheet> </head> <body> <div id=main role=main> <nav> <ul> <li> <a href="/"> <img alt="high tops logo" src="/images/hightops_logo.svg"/> </a> </li> </ul> </nav> <article> <header> <h1> Building Capote Meteor & Mocha TDD </h1> </header> <section> <p>Here&rsquo;s a long post I did as I was first working on testing my Meteor apps using Mocha and Chai. Don&rsquo;t take anything here as your one source of truth. I think this is a good post if you&rsquo;re looking to get started and want to see what some basic tests look like.</p> <h2>Building Capote: Meteor &amp; Mocha BDD (Part 1)</h2> <p>You know what&rsquo;s annoying? Testing your app by physically logging in and going through your app to make sure everything works. Also, it takes a lot of time. Also, its scary. If I was doing that while working for a client, I&rsquo;d really be stressed.</p> <p>That&rsquo;s why there&rsquo;s BDD. Writing tests as you write your software. It helps your software suck less, gives you a little more peace of mind, and even though it means writing extra code, there&rsquo;s a really good chance it will save you a lot of time overall.</p> <p>When you&rsquo;re learning a framework, you don&rsquo;t get much exposure to testing. Usually your learning resources are focused on covering the framework itself. They don&rsquo;t cover tests because there&rsquo;s so many different ways to do it. With Meteor there&rsquo;s a bunch of suites to test your app: cucumber, jasmine, mocha, etc.</p> <p>If you&rsquo;re looking to get started with BDD or want to see some examples of using Mocha in BDD to build a Meteor app, this tutorial is for you.</p> <p>If you just want to see the code for this post, you can checkout the <a href="https://github.com/austinsamsel/capote/tree/part-1">GitHub repository</a>.</p> <h2>Resources</h2> <h5>Meteor BDD bible:</h5> <p><a href="www.meteortesting.com">www.meteortesting.com</a></p> <h5>Also, especially relevant:</h5> <p>Mocha documentation: <a href="https://mochajs.org/">https://mochajs.org/</a> Chai documentation: <a href="http://chaijs.com/">http://chaijs.com/</a></p> <p>Because while we&rsquo;re using Mocha we&rsquo;ll use Chai for assertions.</p> <h5>other Meteor mocha tutorials:</h5> <p><a href="http://www.webtempest.com/meteor-js-testing-mocha-tutorial">http://www.webtempest.com/meteor-js-testing-mocha-tutorial</a> <a href="https://github.com/meteor-velocity/velocity-examples">https://github.com/meteor-velocity/velocity-examples</a> (technically just examples)</p> <h2>About our app</h2> <p>In this tutorial, we&rsquo;ll build an app that tracks a user&rsquo;s daily word count. I&rsquo;ve gotten into the habit of waking up in the morning and writing at least 500 words a day. It&rsquo;s a great way to empty out my mind and free myself up for a little more creativity. We&rsquo;re going to name this app Capote, after Truman Capote. Whose that? Doesn&rsquo;t matter. But if you don&rsquo;t know, he was a writer from a long time ago and he probably wrote at least 500 words a day (I have no idea, but probably!). Also his last name sounds kind of cool for an app. So there it is, Capote.</p> <p>Here are the features we&rsquo;ll build:</p> <ul> <li>A listing of posts.</li> <li>Create and edit posts.</li> <li>Daily goal set by user.</li> <li>Count words for each post.</li> </ul> <h2>Set up</h2> <p>For this first post, we&rsquo;ll set up our test suite and write our first test. We&rsquo;ll want to create a sample list of posts so we have some data to work with. First things first, we&rsquo;ll generate a new app.</p> <pre class="highlight plaintext"><code>$ meteor create capote
+</code></pre> <p>Then let&rsquo;s trash the default files <em>capote.css</em>, <em>capote.html</em> and <em>capote.js</em></p> <p>Let&rsquo;s also add in our testing package:</p> <pre class="highlight plaintext"><code>$ meteor add mike:mocha
+</code></pre> <p>Let&rsquo;s set up our tests directory structure like this:</p> <pre class="highlight plaintext"><code>tests/
+- mocha/
+- - client/
+- - server/
+</code></pre> <p>This type of pattern is required for velocity to read the tests and you&rsquo;ll need to use it while testing in Meteor with Cucumber, Jasmine, too. What is velocity? Velocity is Meteor&rsquo;s reactive test-runner and it supports a whole bunch of testing frameworks.</p> <h2>Our first test</h2> <p>Let&rsquo;s start with the server. There&rsquo;s just a few parts to each post we need right now: a timestamp, a title, and the body of the post.</p> <p>We&rsquo;ll write our first test. Any mocha tests are first going to be wrapped in the following:</p> <pre class="highlight javascript"><code><span class="c1">// tests/mocha/server/server.js</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">MochaWeb</span> <span class="o">===</span> <span class="s1">'undefined'</span><span class="p">)){</span>
+  <span class="nx">MochaWeb</span><span class="p">.</span><span class="nx">testOnly</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="cm">/* some test code*/</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+</code></pre> <p>There isn&rsquo;t much documentation I can find about why we ought to do this&hellip; It looks like it helps to only run tests in the dev or mirror environment, but I&rsquo;m honestly not sure. I&rsquo;ve been able to run tests without it. For now, I include it because the Velocity developers do it.</p> <p>Moving along. We&rsquo;ll write our first test, which just makes sure we have at least one post in the database.</p> <pre class="highlight javascript"><code><span class="nx">describe</span><span class="p">(</span><span class="s2">"Server initialization"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"should insert posts into the database on server startup"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">chai</span><span class="p">.</span><span class="nx">assert</span><span class="p">(</span><span class="nx">Posts</span><span class="p">.</span><span class="nx">find</span><span class="p">().</span><span class="nx">count</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre> <p>If you run meteor now you&rsquo;ll see that velocity pops up. In your logs you&rsquo;ll also see a message saying, &ldquo;You can see the mirror logs at: tail -f /path/to/your/logs&rdquo;. You can also pop open another command line window and paste in <em>tail -f /path/to/your/logs</em> and get some extra insight.</p> <p>Both the logs and our UI tell us the same thing. &ldquo;1 test failed&rdquo; and &ldquo;Posts is not defined.&rdquo; I love BDD. It tells us what comes next. We can go ahead and define Posts now.</p> <pre class="highlight javascript"><code><span class="c1">// model/posts.js</span>
+<span class="nx">Posts</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Mongo</span><span class="p">.</span><span class="nx">Collection</span><span class="p">(</span><span class="s1">'posts'</span><span class="p">);</span>
+</code></pre> <p>When the tests run again, we&rsquo;re told we have a failed &ldquo;Server initialization.&rdquo; Let&rsquo;s add some posts on server start up.</p> <pre class="highlight javascript"><code><span class="c1">// server/app.js</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">isServer</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Meteor</span><span class="p">.</span><span class="nx">startup</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">Posts</span><span class="p">.</span><span class="nx">find</span><span class="p">().</span><span class="nx">count</span><span class="p">()</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">Posts</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span>
+        <span class="na">title</span><span class="p">:</span> <span class="s2">"Neutra messenger bag"</span><span class="p">,</span>
+        <span class="na">content</span><span class="p">:</span> <span class="s2">"Tousled forage trust fund readymade Neutra messenger bag. Drinking vinegar chia Marfa, vegan messenger bag disrupt Wes Anderson try-hard. Small batch scenester raw denim synth cronut cornhole, iPhone try-hard single-origin."</span>
+      <span class="p">});</span>
+      <span class="nx">Posts</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span>
+        <span class="na">title</span><span class="p">:</span> <span class="s2">"fatback filet mignon"</span><span class="p">,</span>
+        <span class="na">content</span><span class="p">:</span> <span class="s2">"Bacon ipsum dolor amet alcatra turkey shank cupim corned beef brisket chuck boudin tri-tip t-bone kevin fatback filet mignon. Short loin tongue short ribs."</span>
+      <span class="p">});</span>
+      <span class="nx">Posts</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span>
+        <span class="na">title</span><span class="p">:</span> <span class="s2">"know what I'm sayin'"</span><span class="p">,</span>
+        <span class="na">content</span><span class="p">:</span> <span class="s2">"You see? It's curious. Ted did figure it out - time travel. And when we get back, we gonna tell everyone. How it's possible, how it's done, what the dangers are. But then why fifty years in the future when the spacecraft encounters a black hole does the computer call it an 'unknown entry event'?"</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+</code></pre> <p>I used <a href="http://hipsum.co/">some</a> <a href="https://baconipsum.com/">pretty</a> <a href="http://slipsum.com/">sweet</a> ipsum generators to create some sample content. We&rsquo;re inserting three posts with a title and content only if there are no posts in the database upon start up.</p> <p>If you check the logs or the velocity helper in the UI, you&rsquo;ll notice that our first test passed. Great!</p> <h2>Picking up the pace</h2> <p>I&rsquo;m going to cap this post here, but in the next posts as we build out this app, I&rsquo;m going to pick up the pace with these tests and we&rsquo;ll get a whole bunch done, real fast.</p> <p>You can grab the completed code for this post <a href="https://github.com/austinsamsel/capote/tree/part-1">here</a>.</p> <h1>Building Capote: Meteor &amp; Mocha BDD (Part 2)</h1> <p>In the last post, we set up our app, fixtures, and got our first test to pass. You can grab the code from the last chapter <a href="https://github.com/austinsamsel/capote/tree/part-1">here</a>. If you want to review the last post, you can <a href="http://hightopsnyc.com/blog/building-capote.html">visit it here</a>.</p> <h2>Testing UI Objects and Sort Order</h2> <p>It&rsquo;s time to actually show our posts in the UI to our users. In the first test, I want to make sure there&rsquo;s at least one post displaying by checking if the css class that&rsquo;s associated with the post gets printed to the page. Then I&rsquo;ll know there&rsquo;s a post on the page, no matter the content of the post. Then I want to test the order of the posts so that the most recent posts show up first in the list.</p> <pre class="highlight javascript"><code><span class="c1">// tests/mocha/client/client.js</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">MochaWeb</span> <span class="o">===</span> <span class="s1">'undefined'</span><span class="p">)){</span>
+  <span class="nx">MochaWeb</span><span class="p">.</span><span class="nx">testOnly</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+
+    <span class="nx">describe</span><span class="p">(</span><span class="s2">"Posts"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+      <span class="nx">it</span><span class="p">(</span><span class="s2">"shows a post"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+        <span class="nx">Meteor</span><span class="p">.</span><span class="nx">flush</span><span class="p">();</span>
+        <span class="nx">chai</span><span class="p">.</span><span class="nx">assert</span><span class="p">.</span><span class="nx">typeOf</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s2">".title:eq(0)"</span><span class="p">),</span> <span class="s1">'object'</span><span class="p">);</span>
+      <span class="p">})</span>
+      <span class="nx">it</span><span class="p">(</span><span class="s2">"should show my latest post, first."</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+        <span class="nx">Meteor</span><span class="p">.</span><span class="nx">flush</span><span class="p">();</span>
+        <span class="nx">chai</span><span class="p">.</span><span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s2">".title:eq(0)"</span><span class="p">).</span><span class="nx">html</span><span class="p">(),</span> <span class="s2">"Neutra messenger bag"</span><span class="p">);</span>
+      <span class="p">});</span>
+    <span class="p">});</span>
+
+  <span class="p">});</span>
+<span class="p">}</span>
+</code></pre> <p>After the tests, we&rsquo;ll get to writing the actual code. First we&rsquo;ll create a subscription so our template can find the posts in the database. We don&rsquo;t need to create a publication since we still have the autopublish package installed by default (and we&rsquo;d be sure to remove it if this app was going into production). We also set up our templates to display the posts.</p> <pre class="highlight javascript"><code><span class="c1">// client/posts.js</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">isClient</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Template</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">helpers</span><span class="p">({</span>
+    <span class="na">posts</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">Posts</span><span class="p">.</span><span class="nx">find</span><span class="p">({},</span> <span class="p">{</span><span class="na">sort</span><span class="p">:</span> <span class="p">{</span><span class="na">createdAt</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">}});</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="c1">// client/index.html</span>
+<span class="o">&lt;</span><span class="nx">head</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">meta</span> <span class="nx">name</span><span class="o">=</span><span class="s2">"viewport"</span> <span class="nx">content</span><span class="o">=</span><span class="s2">"width=device-width, initial-scale=1"</span> <span class="o">/&gt;</span>
+  <span class="o">&lt;</span><span class="nx">title</span><span class="o">&gt;</span><span class="nx">Capote</span> <span class="o">-</span> <span class="nx">track</span> <span class="nx">your</span> <span class="nx">words</span> <span class="nx">per</span> <span class="nx">day</span><span class="o">&lt;</span><span class="sr">/title</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="sr">/head</span><span class="err">&gt;
+</span>
+<span class="o">&lt;</span><span class="nx">body</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"container"</span><span class="o">&gt;</span>
+    <span class="p">{{</span><span class="err">#</span><span class="nx">each</span> <span class="nx">posts</span><span class="p">}}</span>
+      <span class="p">{{</span><span class="o">&gt;</span> <span class="nx">post</span><span class="p">}}</span>
+    <span class="p">{{</span><span class="sr">/each}</span><span class="err">}
+</span>  <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="sr">/body</span><span class="err">&gt;
+</span>
+<span class="o">&lt;</span><span class="nx">template</span> <span class="nx">name</span><span class="o">=</span><span class="s2">"post"</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"title"</span><span class="o">&gt;</span><span class="p">{{</span><span class="nx">title</span><span class="p">}}</span><span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>  <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"content"</span><span class="o">&gt;</span><span class="p">{{</span><span class="nx">content</span><span class="p">}}</span><span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="sr">/template</span><span class="err">&gt;
+</span></code></pre> <h2>Testing Timestamps</h2> <p>Before we can think about measuring the daily word count streak, we need to include a timestamp with each post. The following is a test to check for that.</p> <pre class="highlight javascript"><code><span class="c1">// tests/mocha/client/client</span>
+<span class="p">...</span>
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"should show a clean timestamp"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">chai</span><span class="p">.</span><span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s2">".timestamp:eq(1)"</span><span class="p">).</span><span class="nx">html</span><span class="p">(),</span> <span class="s2">"01-03-2015"</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">...</span>
+</code></pre> <p>We&rsquo;ll update our fixtures by adding a date/time for when our posts are created. We&rsquo;ll also include the new field in our templates.</p> <pre class="highlight javascript"><code><span class="c1">// server/app.js</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">isServer</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Meteor</span><span class="p">.</span><span class="nx">startup</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">Posts</span><span class="p">.</span><span class="nx">find</span><span class="p">().</span><span class="nx">count</span><span class="p">()</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">Posts</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span>
+        <span class="na">title</span><span class="p">:</span> <span class="s2">"Neutra messenger bag"</span><span class="p">,</span>
+        <span class="na">content</span><span class="p">:</span> <span class="s2">"Tousled forage trust fund readymade Neutra messenger bag. Drinking vinegar chia Marfa, vegan messenger bag disrupt Wes Anderson try-hard. Small batch scenester raw denim synth cronut cornhole, iPhone try-hard single-origin."</span><span class="p">,</span>
+        <span class="na">createdAt</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span> <span class="c1">// new timestamp</span>
+      <span class="p">});</span>
+      <span class="nx">Posts</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span>
+        <span class="na">title</span><span class="p">:</span> <span class="s2">"fatback filet mignon"</span><span class="p">,</span>
+        <span class="na">content</span><span class="p">:</span> <span class="s2">"Bacon ipsum dolor amet alcatra turkey shank cupim corned beef brisket chuck boudin tri-tip t-bone kevin fatback filet mignon. Short loin tongue short ribs."</span><span class="p">,</span>
+        <span class="na">createdAt</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="c1">// new timestamp</span>
+      <span class="p">});</span>
+      <span class="nx">Posts</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span>
+        <span class="na">title</span><span class="p">:</span> <span class="s2">"know what I'm sayin'"</span><span class="p">,</span>
+        <span class="na">content</span><span class="p">:</span> <span class="s2">"You see? It's curious. Ted did figure it out - time travel. And when we get back, we gonna tell everyone. How it's possible, how it's done, what the dangers are. But then why fifty years in the future when the spacecraft encounters a black hole does the computer call it an 'unknown entry event'?"</span><span class="p">,</span>
+        <span class="na">createdAt</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1">// new timestamp</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="c1">// client/index.html</span>
+
+<span class="o">&lt;</span><span class="nx">template</span> <span class="nx">name</span><span class="o">=</span><span class="s2">"post"</span><span class="o">&gt;</span>
+  <span class="c">&lt;!--</span> <span class="nx">our</span> <span class="k">new</span> <span class="nx">timestamp</span> <span class="nx">below</span> <span class="o">--&gt;</span>
+  <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"timestamp"</span><span class="o">&gt;</span><span class="p">{{</span><span class="nx">createdAt</span><span class="p">}}</span><span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>  <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"title"</span><span class="o">&gt;</span><span class="p">{{</span><span class="nx">title</span><span class="p">}}</span><span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>  <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"content"</span><span class="o">&gt;</span><span class="p">{{</span><span class="nx">content</span><span class="p">}}</span><span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="sr">/template</span><span class="err">&gt;
+</span></code></pre> <p>To see whether this passes or fails, we&rsquo;ll manually reset our app by running <em>meteor reset &amp;&amp; meteor</em> in the command line. Mocha&rsquo;s mirror derives itself from the application your developing, so the fixtures won&rsquo;t reset on their own. The idea is that you wouldn&rsquo;t want to reset the mirror database each time before running tests because it would take too long.</p> <p>Our test still fails because, by default, Meteor prints out the full timestamp, like: <em>Sat Jan 03 2015 00:00:00 GMT-0500 (EST)</em></p> <p>We&rsquo;ll need to make use of <a href="http://momentjs.com/">Moment JS</a> to parse our timestamps. Run the following in the command line to add the moment package to our app.</p> <pre class="highlight plaintext"><code>$ meteor add moments:moment
+</code></pre> <p>Then we&rsquo;ll create a helper to parse the timestamp. It takes the default timestamp as an argument. Next we&rsquo;ll update our template with the cleanDate helper, effectively passing in that long default timestamp and returning our clean timestamp.</p> <pre class="highlight javascript"><code><span class="c1">// client/helper.js</span>
+<span class="nx">Template</span><span class="p">.</span><span class="nx">registerHelper</span><span class="p">(</span><span class="s1">'cleanDate'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">date</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">moment</span><span class="p">(</span><span class="nx">date</span><span class="p">).</span><span class="nx">format</span><span class="p">(</span><span class="s1">'MM-DD-YYYY'</span><span class="p">);</span>
+<span class="p">});</span>
+
+
+<span class="c1">// client/index.html</span>
+<span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"timestamp"</span><span class="o">&gt;</span><span class="p">{{</span><span class="nx">cleanDate</span> <span class="nx">createdAt</span><span class="p">}}</span><span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span></code></pre> <p>Now our tests all pass.</p> <h2>Wrapping Up</h2> <p>If you have any questions or you want me to break down the steps even further, please let me know. If you want to check out the code for this section, you can grab it from <a href="https://github.com/austinsamsel/capote/tree/part-2">GitHub</a>. In the next post we&rsquo;ll write tests for creating and deleting posts.</p> <h1>Building Capote: Meteor &amp; Mocha BDD (Part 2)</h1> <p>In the last post, we set up our app, fixtures, and got our first test to pass. You can grab the code from the last chapter <a href="https://github.com/austinsamsel/capote/tree/part-1">here</a>. If you want to review the last post, you can <a href="http://hightopsnyc.com/blog/building-capote.html">visit it here</a>.</p> <h2>Testing UI Objects and Sort Order</h2> <p>It&rsquo;s time to actually show our posts in the UI to our users. In the first test, I want to make sure there&rsquo;s at least one post displaying by checking if the css class that&rsquo;s associated with the post gets printed to the page. Then I&rsquo;ll know there&rsquo;s a post on the page, no matter the content of the post. Then I want to test the order of the posts so that the most recent posts show up first in the list.</p> <pre class="highlight javascript"><code><span class="c1">// tests/mocha/client/client.js</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">MochaWeb</span> <span class="o">===</span> <span class="s1">'undefined'</span><span class="p">)){</span>
+  <span class="nx">MochaWeb</span><span class="p">.</span><span class="nx">testOnly</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+
+    <span class="nx">describe</span><span class="p">(</span><span class="s2">"Posts"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+      <span class="nx">it</span><span class="p">(</span><span class="s2">"shows a post"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+        <span class="nx">Meteor</span><span class="p">.</span><span class="nx">flush</span><span class="p">();</span>
+        <span class="nx">chai</span><span class="p">.</span><span class="nx">assert</span><span class="p">.</span><span class="nx">typeOf</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s2">".title:eq(0)"</span><span class="p">),</span> <span class="s1">'object'</span><span class="p">);</span>
+      <span class="p">})</span>
+      <span class="nx">it</span><span class="p">(</span><span class="s2">"should show my latest post, first."</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+        <span class="nx">Meteor</span><span class="p">.</span><span class="nx">flush</span><span class="p">();</span>
+        <span class="nx">chai</span><span class="p">.</span><span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s2">".title:eq(0)"</span><span class="p">).</span><span class="nx">html</span><span class="p">(),</span> <span class="s2">"Neutra messenger bag"</span><span class="p">);</span>
+      <span class="p">});</span>
+    <span class="p">});</span>
+
+  <span class="p">});</span>
+<span class="p">}</span>
+</code></pre> <p>After the tests, we&rsquo;ll get to writing the actual code. First we&rsquo;ll create a subscription so our template can find the posts in the database. We don&rsquo;t need to create a publication since we still have the autopublish package installed by default (and we&rsquo;d be sure to remove it if this app was going into production). We also set up our templates to display the posts.</p> <pre class="highlight javascript"><code><span class="c1">// client/posts.js</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">isClient</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Template</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">helpers</span><span class="p">({</span>
+    <span class="na">posts</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">Posts</span><span class="p">.</span><span class="nx">find</span><span class="p">({},</span> <span class="p">{</span><span class="na">sort</span><span class="p">:</span> <span class="p">{</span><span class="na">createdAt</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">}});</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="c1">// client/index.html</span>
+<span class="o">&lt;</span><span class="nx">head</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">meta</span> <span class="nx">name</span><span class="o">=</span><span class="s2">"viewport"</span> <span class="nx">content</span><span class="o">=</span><span class="s2">"width=device-width, initial-scale=1"</span> <span class="o">/&gt;</span>
+  <span class="o">&lt;</span><span class="nx">title</span><span class="o">&gt;</span><span class="nx">Capote</span> <span class="o">-</span> <span class="nx">track</span> <span class="nx">your</span> <span class="nx">words</span> <span class="nx">per</span> <span class="nx">day</span><span class="o">&lt;</span><span class="sr">/title</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="sr">/head</span><span class="err">&gt;
+</span>
+<span class="o">&lt;</span><span class="nx">body</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"container"</span><span class="o">&gt;</span>
+    <span class="p">{{</span><span class="err">#</span><span class="nx">each</span> <span class="nx">posts</span><span class="p">}}</span>
+      <span class="p">{{</span><span class="o">&gt;</span> <span class="nx">post</span><span class="p">}}</span>
+    <span class="p">{{</span><span class="sr">/each}</span><span class="err">}
+</span>  <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="sr">/body</span><span class="err">&gt;
+</span>
+<span class="o">&lt;</span><span class="nx">template</span> <span class="nx">name</span><span class="o">=</span><span class="s2">"post"</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"title"</span><span class="o">&gt;</span><span class="p">{{</span><span class="nx">title</span><span class="p">}}</span><span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>  <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"content"</span><span class="o">&gt;</span><span class="p">{{</span><span class="nx">content</span><span class="p">}}</span><span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="sr">/template</span><span class="err">&gt;
+</span></code></pre> <h2>Testing Timestamps</h2> <p>Before we can think about measuring the daily word count streak, we need to include a timestamp with each post. The following is a test to check for that.</p> <pre class="highlight javascript"><code><span class="c1">// tests/mocha/client/client</span>
+<span class="p">...</span>
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"should show a clean timestamp"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">chai</span><span class="p">.</span><span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s2">".timestamp:eq(1)"</span><span class="p">).</span><span class="nx">html</span><span class="p">(),</span> <span class="s2">"01-03-2015"</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">...</span>
+</code></pre> <p>We&rsquo;ll update our fixtures by adding a date/time for when our posts are created. We&rsquo;ll also include the new field in our templates.</p> <pre class="highlight javascript"><code><span class="c1">// server/app.js</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">isServer</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Meteor</span><span class="p">.</span><span class="nx">startup</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">Posts</span><span class="p">.</span><span class="nx">find</span><span class="p">().</span><span class="nx">count</span><span class="p">()</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">Posts</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span>
+        <span class="na">title</span><span class="p">:</span> <span class="s2">"Neutra messenger bag"</span><span class="p">,</span>
+        <span class="na">content</span><span class="p">:</span> <span class="s2">"Tousled forage trust fund readymade Neutra messenger bag. Drinking vinegar chia Marfa, vegan messenger bag disrupt Wes Anderson try-hard. Small batch scenester raw denim synth cronut cornhole, iPhone try-hard single-origin."</span><span class="p">,</span>
+        <span class="na">createdAt</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span> <span class="c1">// new timestamp</span>
+      <span class="p">});</span>
+      <span class="nx">Posts</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span>
+        <span class="na">title</span><span class="p">:</span> <span class="s2">"fatback filet mignon"</span><span class="p">,</span>
+        <span class="na">content</span><span class="p">:</span> <span class="s2">"Bacon ipsum dolor amet alcatra turkey shank cupim corned beef brisket chuck boudin tri-tip t-bone kevin fatback filet mignon. Short loin tongue short ribs."</span><span class="p">,</span>
+        <span class="na">createdAt</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="c1">// new timestamp</span>
+      <span class="p">});</span>
+      <span class="nx">Posts</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span>
+        <span class="na">title</span><span class="p">:</span> <span class="s2">"know what I'm sayin'"</span><span class="p">,</span>
+        <span class="na">content</span><span class="p">:</span> <span class="s2">"You see? It's curious. Ted did figure it out - time travel. And when we get back, we gonna tell everyone. How it's possible, how it's done, what the dangers are. But then why fifty years in the future when the spacecraft encounters a black hole does the computer call it an 'unknown entry event'?"</span><span class="p">,</span>
+        <span class="na">createdAt</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1">// new timestamp</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="c1">// client/index.html</span>
+
+<span class="o">&lt;</span><span class="nx">template</span> <span class="nx">name</span><span class="o">=</span><span class="s2">"post"</span><span class="o">&gt;</span>
+  <span class="c">&lt;!--</span> <span class="nx">our</span> <span class="k">new</span> <span class="nx">timestamp</span> <span class="nx">below</span> <span class="o">--&gt;</span>
+  <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"timestamp"</span><span class="o">&gt;</span><span class="p">{{</span><span class="nx">createdAt</span><span class="p">}}</span><span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>  <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"title"</span><span class="o">&gt;</span><span class="p">{{</span><span class="nx">title</span><span class="p">}}</span><span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>  <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"content"</span><span class="o">&gt;</span><span class="p">{{</span><span class="nx">content</span><span class="p">}}</span><span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="sr">/template</span><span class="err">&gt;
+</span></code></pre> <p>To see whether this passes or fails, we&rsquo;ll manually reset our app by running <em>meteor reset &amp;&amp; meteor</em> in the command line. Mocha&rsquo;s mirror derives itself from the application your developing, so the fixtures won&rsquo;t reset on their own. The idea is that you wouldn&rsquo;t want to reset the mirror database each time before running tests because it would take too long.</p> <p>Our test still fails because, by default, Meteor prints out the full timestamp, like: <em>Sat Jan 03 2015 00:00:00 GMT-0500 (EST)</em></p> <p>We&rsquo;ll need to make use of <a href="http://momentjs.com/">Moment JS</a> to parse our timestamps. Run the following in the command line to add the moment package to our app.</p> <pre class="highlight plaintext"><code>$ meteor add moments:moment
+</code></pre> <p>Then we&rsquo;ll create a helper to parse the timestamp. It takes the default timestamp as an argument. Next we&rsquo;ll update our template with the cleanDate helper, effectively passing in that long default timestamp and returning our clean timestamp.</p> <pre class="highlight javascript"><code><span class="c1">// client/helper.js</span>
+<span class="nx">Template</span><span class="p">.</span><span class="nx">registerHelper</span><span class="p">(</span><span class="s1">'cleanDate'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">date</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">moment</span><span class="p">(</span><span class="nx">date</span><span class="p">).</span><span class="nx">format</span><span class="p">(</span><span class="s1">'MM-DD-YYYY'</span><span class="p">);</span>
+<span class="p">});</span>
+
+
+<span class="c1">// client/index.html</span>
+<span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"timestamp"</span><span class="o">&gt;</span><span class="p">{{</span><span class="nx">cleanDate</span> <span class="nx">createdAt</span><span class="p">}}</span><span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span></code></pre> <p>Now our tests all pass.</p> <h2>Wrapping Up</h2> <p>If you have any questions or you want me to break down the steps even further, please let me know. If you want to check out the code for this section, you can grab it from <a href="https://github.com/austinsamsel/capote/tree/part-2">GitHub</a>. In the next post we&rsquo;ll write tests for creating and deleting posts.</p> <h1>Building Capote: Meteor &amp; Mocha BDD (Part 4)</h1> <p>Last week we set up the functionality for users to create posts and delete them. In this part, we&rsquo;re going to build our word count feature.</p> <p>You can grab the code from the last chapter <a href="https://github.com/austinsamsel/capote/tree/part-3">here</a>. If you want to review the last post, you can <a href="http://hightopsnyc.com/blog/building-capote-part-3.html">visit it here</a>.</p> <p>Let&rsquo;s make sure there&rsquo;s a word count associated with each post, and that it shows up in the UI. I&rsquo;ll write a quick test based on some of the first ones we wrote. It tests to make sure the first post has a word count of 33 words. I know it will have 33 words because I literally just counted the words in that post.</p> <p>You can add this test in the &ldquo;Posts&rdquo; section, our first set of tests.</p> <pre class="highlight javascript"><code><span class="c1">// tests/mocha/client/client.js</span>
+<span class="p">...</span>
+<span class="nx">it</span><span class="p">(</span><span class="s2">"should show a wordcount"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="nx">chai</span><span class="p">.</span><span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">'.wordcount:eq(0)'</span><span class="p">).</span><span class="nx">html</span><span class="p">(),</span> <span class="s2">"33"</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="p">...</span>
+</code></pre> <p>First, let&rsquo;s update our fixtures and give each post a word count.</p> <pre class="highlight javascript"><code><span class="c1">// tests/mocha/client/client.js</span>
+<span class="p">...</span>
+<span class="nx">Posts</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span>
+  <span class="na">title</span><span class="p">:</span> <span class="s2">"Neutra messenger bag"</span><span class="p">,</span>
+  <span class="na">content</span><span class="p">:</span> <span class="s2">"Tousled forage trust fund readymade Neutra messenger bag. Drinking vinegar chia Marfa, vegan messenger bag disrupt Wes Anderson try-hard. Small batch scenester raw denim synth cronut cornhole, iPhone try-hard single-origin."</span><span class="p">,</span>
+  <span class="na">createdAt</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span>
+  <span class="na">wordCount</span><span class="p">:</span> <span class="mi">33</span>
+<span class="p">});</span>
+<span class="nx">Posts</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span>
+  <span class="na">title</span><span class="p">:</span> <span class="s2">"fatback filet mignon"</span><span class="p">,</span>
+  <span class="na">content</span><span class="p">:</span> <span class="s2">"Bacon ipsum dolor amet alcatra turkey shank cupim corned beef brisket chuck boudin tri-tip t-bone kevin fatback filet mignon. Short loin tongue short ribs."</span><span class="p">,</span>
+  <span class="na">createdAt</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span>
+  <span class="na">wordCount</span><span class="p">:</span> <span class="mi">26</span>
+<span class="p">});</span>
+<span class="nx">Posts</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span>
+  <span class="na">title</span><span class="p">:</span> <span class="s2">"know what I'm sayin'"</span><span class="p">,</span>
+  <span class="na">content</span><span class="p">:</span> <span class="s2">"You see? It's curious. Ted did figure it out - time travel. And when we get back, we gonna tell everyone. How it's possible, how it's done, what the dangers are. But then why fifty years in the future when the spacecraft encounters a black hole does the computer call it an 'unknown entry event'?"</span><span class="p">,</span>
+  <span class="na">createdAt</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span>
+  <span class="na">wordCount</span><span class="p">:</span> <span class="mi">54</span>
+<span class="p">});</span>
+<span class="p">...</span>
+</code></pre> <p>Cool.</p> <p>Reset the server <em>meteor reset &amp;&amp; meteor</em></p> <p>Let&rsquo;s make the word count visible in the app. You can add this line in the &ldquo;post&rdquo; template at the end.</p> <pre class="highlight javascript"><code><span class="c1">// client/index.html</span>
+
+<span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"wordcount"</span><span class="o">&gt;</span><span class="p">{{</span><span class="nx">wordCount</span><span class="p">}}</span><span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span></code></pre> <p>Our test should be passing.</p> <p>If you create a new post, there&rsquo;s still no way to calculate or record how many words are in the post. It&rsquo;s time to build that feature. We&rsquo;re going to make use of <a href="https://www.npmjs.com/package/wordcount">wordcount</a>, an npm package. It does what you might think it does, it counts the words in a string. In order to use npm packages with Meteor, we&rsquo;ll need to add the meteorhacks:npm package.</p> <p>In the command line, run:</p> <pre class="highlight plaintext"><code>$ meteor add meteorhacks:npm
+</code></pre> <p>Adding this package will automatically create a packages.json file. This is where we&rsquo;ll list our packages, like this:</p> <pre class="highlight javascript"><code><span class="c1">// packages.json</span>
+<span class="p">{</span>
+  <span class="s2">"wordcount"</span><span class="err">:</span> <span class="s2">"1.1.1"</span>
+<span class="p">}</span>
+</code></pre> <p>Its a good idea to restart the meteor server at this point so npm and the new package can be loaded into our meteor app.</p> <p>Its important to know that when you use meteorhacks:npm, these packages are only available server side. So we&rsquo;ll set up our word count function in our server code as a method, then call it from the client when we need to make use of it.</p> <p>Before we write the code, let&rsquo;s also add one more package:</p> <pre class="highlight plaintext"><code>$ meteor add check
+</code></pre> <p>The <a href="https://atmospherejs.com/meteor/check">check</a> package helps with security by ensuring your users can only pass through the right types of data. You used to be able to use the audit-argument-checks package for the same purpose. But it seems that the check package has taken over. You can read some more about it <a href="http://docs.meteor.com/#/full/check">in the documentation</a></p> <p>Here we are creating a new method called &lsquo;getWordcount&rsquo; which accepts one argument, words, which will be coming from the client. We check to make sure it is only accepting a string. We also require the wordcount package. Finally, we return our argument after running it through the wordcount function that counts the words in our string.</p> <pre class="highlight javascript"><code><span class="c1">//server/app.js</span>
+
+<span class="nx">Meteor</span><span class="p">.</span><span class="nx">methods</span><span class="p">({</span>
+  <span class="s1">'getWordcount'</span><span class="p">:</span> <span class="kd">function</span> <span class="nx">getWordcount</span><span class="p">(</span><span class="nx">words</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">check</span><span class="p">(</span><span class="nx">words</span><span class="p">,</span> <span class="nb">String</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">wordcount</span> <span class="o">=</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">npmRequire</span><span class="p">(</span><span class="s1">'wordcount'</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">wordcount</span><span class="p">(</span><span class="nx">words</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre> <p>To see if this is going to work, we call the method in our server file and watch the command line console for an update.</p> <pre class="highlight javascript"><code><span class="c1">//server/app.js</span>
+
+<span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="s1">'getWordcount'</span><span class="p">,</span> <span class="s1">'hows it going world?'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">results</span><span class="p">){</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">err</span><span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">else</span><span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'HEY! it worked, it was '</span> <span class="o">+</span> <span class="nx">results</span> <span class="o">+</span> <span class="s1">' words!'</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre> <p>The message should be logged in the console and look like: &ldquo;HEY! it worked, it was 4 words!&rdquo;</p> <p>Now we need a way to record how many words the user is actually typing as they type and once we have that number we can easily save it into the database when the user submits their post.</p> <p>We&rsquo;ll write a test to make sure that if a user enters two words into the &#39;content&rsquo; section of the post, then it should be reflected that the word count is 2. This is the first post where we need to set a timeout before running our assertion. Apparently there is some minimal lag in updating the session and reflecting that in the UI, so we&rsquo;ll give it half a second to update. Our test is going to look something like this:</p> <pre class="highlight javascript"><code><span class="c1">// tests/mocha/client/client.js</span>
+
+<span class="nx">describe</span><span class="p">(</span><span class="s2">"wordcount"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">before</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">done</span><span class="p">){</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'[name="content"]'</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="s1">'a new'</span><span class="p">);</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'[name="content"]'</span><span class="p">).</span><span class="nx">keyup</span><span class="p">();</span>
+    <span class="nx">done</span><span class="p">();</span>
+  <span class="p">});</span>
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"displays the wordcount when the user types in the form"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">Meteor</span><span class="p">.</span><span class="nx">flush</span><span class="p">();</span>
+    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+      <span class="nx">chai</span><span class="p">.</span><span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">'span.wordcount-num'</span><span class="p">).</span><span class="nx">text</span><span class="p">(),</span> <span class="s2">"2"</span><span class="p">)</span>
+    <span class="p">},</span> <span class="mi">500</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre> <p>Let&rsquo;s create a new template.</p> <pre class="highlight javascript"><code><span class="c1">// client/index.html</span>
+
+<span class="o">&lt;</span><span class="nx">template</span> <span class="nx">name</span><span class="o">=</span><span class="s2">"wordcount"</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"wordcount-msg"</span><span class="o">&gt;</span>
+    <span class="nx">word</span> <span class="nx">count</span><span class="err">:</span> <span class="o">&lt;</span><span class="nx">span</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"wordcount-num"</span><span class="o">&gt;</span><span class="p">{{</span><span class="nx">wordcount</span><span class="p">}}</span><span class="o">&lt;</span><span class="sr">/span</span><span class="err">&gt;
+</span>  <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="sr">/template</span><span class="err">&gt;
+</span></code></pre> <p>And include it in underneath the createPost helper.</p> <pre class="highlight javascript"><code><span class="c1">// client/index.html</span>
+
+<span class="o">&lt;</span><span class="nx">body</span><span class="o">&gt;</span>
+  <span class="p">{{</span><span class="o">&gt;</span> <span class="nx">createPost</span><span class="p">}}</span>
+  <span class="p">{{</span><span class="o">&gt;</span> <span class="nx">wordcount</span><span class="p">}}</span> <span class="c">&lt;!--</span> <span class="k">new</span> <span class="nx">helper</span> <span class="nx">here</span> <span class="o">--&gt;</span>
+  <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"container"</span><span class="o">&gt;</span>
+    <span class="p">{{</span><span class="err">#</span><span class="nx">each</span> <span class="nx">posts</span><span class="p">}}</span>
+      <span class="p">{{</span><span class="o">&gt;</span> <span class="nx">post</span><span class="p">}}</span>
+    <span class="p">{{</span><span class="sr">/each}</span><span class="err">}
+</span>  <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="sr">/body</span><span class="err">&gt;
+</span></code></pre> <p>We&rsquo;re going to add a helper and an onRendered call. The onRendered call will set the word count to zero. This makes sense because this should only be called on render, before anyone&rsquo;s typed in the form. Then the helper gets the wordcount&rsquo;s session value.</p> <pre class="highlight javascript"><code><span class="c1">//model/posts.js</span>
+
+<span class="nx">Template</span><span class="p">.</span><span class="nx">wordcount</span><span class="p">.</span><span class="nx">onRendered</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+  <span class="nx">Session</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'wordcount'</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="nx">Template</span><span class="p">.</span><span class="nx">wordcount</span><span class="p">.</span><span class="nx">helpers</span><span class="p">({</span>
+  <span class="na">wordcount</span><span class="p">:</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'wordcount'</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre> <p>Now we need to set the session value. We will tie this in to the keyup action in the form. I got this idea from <a href="http://meteortips.com/second-meteor-tutorial/managing-todos/">Meteortips</a>. Whenever a user presses a key (and lifts up their finger) we can fire an event in Meteor that will send whatever is in the form to our wordcount package to count the words. In the createPost events block, add in:</p> <pre class="highlight javascript"><code><span class="c1">//model/posts.js</span>
+
+<span class="s1">'keyup [name=content]'</span><span class="err">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+  <span class="kd">var</span> <span class="nx">wordsToCount</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'[name="content"]'</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
+  <span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="s1">'getWordcount'</span><span class="p">,</span> <span class="nx">wordsToCount</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">results</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">err</span><span class="p">){</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span><span class="p">{</span>
+      <span class="nx">Session</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'wordcount'</span><span class="p">,</span> <span class="nx">results</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+</code></pre> <p><em>Note:</em> I moved all the content from client/posts.js into model/posts.js &ndash; it didn&rsquo;t make sense to have two posts.js files. The above code gets wrapped by the Meteor.isClient if statement.</p> <p>This should put our test in the green.</p> <p>We&rsquo;ll also take care of one more detail. In order to start again with a clean slate after submitting a post and clearing the form, we should also programmatically wipe the word count session. If we don&rsquo;t, the session value will remain at the previous word count until we start typing again. We can update this by adding in our createPost events function:</p> <pre class="highlight javascript"><code><span class="c1">//model/posts.js</span>
+
+<span class="nx">$</span><span class="p">(</span><span class="s1">'[name=title]'</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'[name=content]'</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+<span class="nx">Session</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'wordcount'</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// clears the session.</span>
+</code></pre> <p>Awesome!!!!</p> <p>Next up, we&rsquo;re going to add in a daily goals feature and connect it to the word count so we can set a minimum word count for each post.</p> <p>If you want to check out the code from this section, you can grab it from <a href="https://github.com/austinsamsel/capote/tree/part-4">GitHub</a></p> <h1>Building Capote: Meteor &amp; Mocha BDD (Part 5)</h1> <p>In the last post we built our word count feature. In this part, we&rsquo;re going to create our daily goal feature. We&rsquo;ll be using the daily goal to compare with the word count. Once the user sets the daily goal then we can set a minimum word count for each post and prevent the user from submitting a post that doesn&rsquo;t have enough words.</p> <p>You can grab the code from the last chapter <a href="https://github.com/austinsamsel/capote/tree/part-4">here</a>. If you want to review the last post, you can <a href="http://hightopsnyc.com/blog/building-capote-part-4.html">visit it here</a>.</p> <p>Here&rsquo;s the test for our daily goal. I want to make sure I can see the goal in the DOM, and I also want the user to be able to change the goal and we&rsquo;ll see that goal&rsquo;s value in the database.</p> <pre class="highlight javascript"><code><span class="c1">// tests/mocha/client/client.js</span>
+
+<span class="nx">describe</span><span class="p">(</span><span class="s2">"change daily words goal"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="nx">after</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">done</span><span class="p">){</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'[name="goal"]'</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+    <span class="nx">done</span><span class="p">();</span>
+  <span class="p">});</span>
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"user can change their goal"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">Meteor</span><span class="p">.</span><span class="nx">flush</span><span class="p">();</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'[name="goal"]'</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+    <span class="nx">chai</span><span class="p">.</span><span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">'[name="goal"]'</span><span class="p">).</span><span class="nx">val</span><span class="p">(),</span> <span class="mi">2</span><span class="p">)</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre> <p>Let&rsquo;s create a new template for the daily goal.</p> <pre class="highlight javascript"><code><span class="c1">// client/index.html</span>
+<span class="err">…</span>
+
+<span class="p">{{</span><span class="o">&gt;</span> <span class="nx">createPost</span><span class="p">}}</span>
+<span class="p">{{</span><span class="o">&gt;</span> <span class="nx">wordcount</span><span class="p">}}</span>
+<span class="p">{{</span><span class="o">&gt;</span> <span class="nx">dailyGoal</span><span class="p">}}</span> <span class="c">&lt;!--</span> <span class="nx">include</span> <span class="nx">the</span> <span class="nx">helper</span> <span class="nx">right</span> <span class="nx">below</span> <span class="nx">the</span> <span class="nx">word</span> <span class="nx">count</span> <span class="o">--&gt;</span>
+
+<span class="err">…</span>
+<span class="o">&lt;</span><span class="nx">template</span> <span class="nx">name</span><span class="o">=</span><span class="s2">"dailyGoal"</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"dailyGoal"</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">form</span><span class="o">&gt;</span>
+      <span class="nx">Your</span> <span class="nx">daily</span> <span class="nx">goal</span><span class="err">:</span> <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">value</span><span class="o">=</span><span class="s2">"{{dailyGoal}}"</span> <span class="nx">placeholder</span><span class="o">=</span><span class="s2">"your goal"</span> <span class="nx">name</span><span class="o">=</span><span class="s2">"goal"</span><span class="o">&gt;</span> <span class="nx">words</span><span class="p">.</span>
+   <span class="o">&lt;</span><span class="sr">/form</span><span class="err">&gt;
+</span> <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="sr">/template</span><span class="err">&gt;
+</span></code></pre> <p>Our test passes because it just checks the UI. Now we need to create a Goals collection so we can save the goal in our database as well.</p> <p>I&rsquo;ll add this test to our server tests:</p> <pre class="highlight javascript"><code><span class="c1">//tests/mocha/server/server.js</span>
+
+<span class="nx">describe</span><span class="p">(</span><span class="s2">"save daily words goal in database"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="nx">before</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">done</span><span class="p">){</span>
+    <span class="kd">var</span> <span class="nx">goalSaved</span> <span class="o">=</span> <span class="nx">Goals</span><span class="p">.</span><span class="nx">findOne</span><span class="p">().</span><span class="nx">_id</span><span class="p">;</span>
+    <span class="nx">Goals</span><span class="p">.</span><span class="nx">update</span><span class="p">({</span><span class="na">_id</span><span class="p">:</span> <span class="nx">goalSaved</span><span class="p">},</span> <span class="p">{</span><span class="na">$set</span><span class="p">:</span> <span class="p">{</span><span class="na">dailyGoal</span><span class="p">:</span> <span class="mi">1</span><span class="p">}});</span>
+    <span class="nx">done</span><span class="p">();</span>
+  <span class="p">});</span>
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"saves the goal in the database"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">Meteor</span><span class="p">.</span><span class="nx">flush</span><span class="p">();</span>
+    <span class="nx">chai</span><span class="p">.</span><span class="nx">assert</span><span class="p">(</span><span class="nx">Goals</span><span class="p">.</span><span class="nx">findOne</span><span class="p">().</span><span class="nx">dailyGoal</span> <span class="o">==</span> <span class="mi">1</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre> <p>We&rsquo;ll also need a Goals publication and subscription. We&rsquo;ll take care of feeding our form the daily goal value with a helper. Finally, we&rsquo;ll structure the form to update our goal&rsquo;s value in the database on the keyup event, so that when the user edits their daily goal, it&rsquo;s automatically saved.</p> <pre class="highlight javascript"><code><span class="c1">// model/goals.js</span>
+<span class="nx">Goals</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Mongo</span><span class="p">.</span><span class="nx">Collection</span><span class="p">(</span><span class="s1">'goals'</span><span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">isClient</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Meteor</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="s1">'goals'</span><span class="p">);</span>
+
+  <span class="nx">Template</span><span class="p">.</span><span class="nx">dailyGoal</span><span class="p">.</span><span class="nx">helpers</span><span class="p">({</span>
+    <span class="na">dailyGoal</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">theGoal</span> <span class="o">=</span> <span class="nx">Goals</span><span class="p">.</span><span class="nx">findOne</span><span class="p">().</span><span class="nx">dailyGoal</span><span class="p">;</span>
+      <span class="k">return</span> <span class="nx">theGoal</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+
+  <span class="nx">Template</span><span class="p">.</span><span class="nx">dailyGoal</span><span class="p">.</span><span class="nx">events</span><span class="p">({</span>
+    <span class="s1">'keyup [name=goal]'</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+      <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+
+      <span class="kd">var</span> <span class="nx">mostRecent</span> <span class="o">=</span> <span class="nx">Goals</span><span class="p">.</span><span class="nx">findOne</span><span class="p">();</span>
+      <span class="kd">var</span> <span class="nx">documentId</span> <span class="o">=</span> <span class="nx">mostRecent</span><span class="p">.</span><span class="nx">_id</span><span class="p">;</span>
+      <span class="kd">var</span> <span class="nx">goal</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'[name="goal"]'</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
+      <span class="nx">Goals</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span>
+        <span class="p">{</span> <span class="na">_id</span><span class="p">:</span> <span class="nx">documentId</span> <span class="p">},</span>
+        <span class="p">{</span><span class="na">$set</span><span class="p">:</span> <span class="p">{</span> <span class="na">dailyGoal</span><span class="p">:</span> <span class="nx">goal</span> <span class="p">}</span>
+      <span class="p">});</span>
+    <span class="p">},</span>
+    <span class="s1">'keyup [name=content]'</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+      <span class="kd">var</span> <span class="nx">wordsToCount</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'[name="content"]'</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
+      <span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="s1">'getWordcount'</span><span class="p">,</span> <span class="nx">wordsToCount</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">results</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+        <span class="k">else</span>    <span class="nx">Session</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'wordCountResult'</span><span class="p">,</span> <span class="nx">results</span><span class="p">);</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+<span class="p">}</span>
+
+<span class="c1">// server/app.js</span>
+
+<span class="nx">Meteor</span><span class="p">.</span><span class="nx">publish</span><span class="p">(</span><span class="s2">"posts"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="k">return</span> <span class="nx">Posts</span><span class="p">.</span><span class="nx">find</span><span class="p">();</span>
+<span class="p">});</span>
+
+<span class="nx">Meteor</span><span class="p">.</span><span class="nx">publish</span><span class="p">(</span><span class="s2">"goals"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="k">return</span> <span class="nx">Goals</span><span class="p">.</span><span class="nx">find</span><span class="p">();</span>
+<span class="p">});</span>
+</code></pre> <p>Finally, for development purposes, let&rsquo;s kick off our Goals collection with one entry since our code only covers updating the daily goal value. We&rsquo;ll add the following to our startup function:</p> <pre class="highlight javascript"><code><span class="c1">// server/app.js</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">Goals</span><span class="p">.</span><span class="nx">find</span><span class="p">().</span><span class="nx">count</span><span class="p">()</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Goals</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span>
+    <span class="na">dailyGoal</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">createdAt</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(),</span>
+  <span class="p">});</span>
+<span class="p">};</span>
+</code></pre> <p>Once we reset the database we&rsquo;ll be able to work with our daily goal. Our test should now be passing.</p> <p>Finally we can begin to enforce a minimum word count that matches the daily goal. I&rsquo;m not creating a new tests because this code is going to cause some older tests to break since they don&rsquo;t factor in a minimum word count before submitting their posts. I&rsquo;ll update the tests once they start breaking.</p> <p>In order to disallow the user to post, while still providing some feedback, we can wrap the submit input in an if statement. If there&rsquo;s enough words, then display the submit button&hellip; if not, then post the message, &ldquo;Keep writing!&rdquo;</p> <pre class="highlight javascript"><code><span class="c1">// client/index.html</span>
+<span class="o">&lt;</span><span class="nx">form</span><span class="o">&gt;</span>
+  <span class="nx">Create</span> <span class="nx">a</span> <span class="nx">post</span><span class="err">:</span>
+  <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="s2">"text"</span> <span class="nx">placeholder</span><span class="o">=</span><span class="s2">"add a title"</span> <span class="nx">name</span><span class="o">=</span><span class="s2">"title"</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">textarea</span> <span class="nx">placeholder</span><span class="o">=</span><span class="s2">"write your words here"</span> <span class="nx">name</span><span class="o">=</span><span class="s2">"content"</span><span class="o">&gt;&lt;</span><span class="sr">/textarea</span><span class="err">&gt;
+</span>  <span class="p">{{</span><span class="err">#</span><span class="k">if</span> <span class="nx">enoughWords</span><span class="p">}}</span>
+    <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="s2">"submit"</span> <span class="nx">value</span><span class="o">=</span><span class="s2">"Submit"</span> <span class="o">/&gt;</span>
+  <span class="p">{{</span><span class="k">else</span><span class="p">}}</span>
+    <span class="nx">Keep</span> <span class="nx">writing</span><span class="o">!</span>
+  <span class="p">{{</span><span class="sr">/if}</span><span class="err">}
+</span><span class="o">&lt;</span><span class="sr">/form</span><span class="err">&gt;
+</span></code></pre> <p>In order to execute this logic, we&rsquo;ll add a new helper method, enoughWords:</p> <pre class="highlight javascript"><code><span class="c1">// model/posts.js</span>
+
+<span class="nx">Template</span><span class="p">.</span><span class="nx">createPost</span><span class="p">.</span><span class="nx">helpers</span><span class="p">({</span>
+  <span class="na">enoughWords</span><span class="p">:</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="kd">var</span> <span class="nx">wordcount</span> <span class="o">=</span> <span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'wordcount'</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">theGoal</span> <span class="o">=</span> <span class="nx">Goals</span><span class="p">.</span><span class="nx">findOne</span><span class="p">().</span><span class="nx">dailyGoal</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">wordcount</span> <span class="o">&gt;=</span> <span class="nx">theGoal</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre> <p>If you were to test this out in the UI, you&rsquo;ll see that everything is working. Unfortunately this one modification wreaks havoc on our tests. The main culprits are the &ldquo;creating posts&rdquo; and &ldquo;deleting posts&rdquo; blocks. So we&rsquo;ll need to rewrite them in order to handle the new word count limitations on posting.</p> <p>I updated the tests with setTimeout functions. I experienced a lot of issues with this part in particular. The way to go when there&rsquo;s so much action and dynamism in the UI is to wrap everything in setTimeout functions to give each block of code time to run and for the UI to update itself.</p> <pre class="highlight javascript"><code><span class="c1">// tests/mocha/client/client.js</span>
+
+<span class="nx">describe</span><span class="p">(</span><span class="s2">"Creating Posts"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="nx">before</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">done</span><span class="p">){</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'[name="goal"]'</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'[name="goal"]'</span><span class="p">).</span><span class="nx">keyup</span><span class="p">();</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'[name="title"]'</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="s1">'a new post'</span><span class="p">);</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'[name="content"]'</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="s1">'a new sample post'</span><span class="p">);</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'[name="content"]'</span><span class="p">).</span><span class="nx">keyup</span><span class="p">();</span>
+    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+      <span class="nx">$</span><span class="p">(</span><span class="s1">'[type="submit"]'</span><span class="p">).</span><span class="nx">click</span><span class="p">();</span>
+    <span class="p">},</span> <span class="mi">500</span><span class="p">)</span>
+    <span class="nx">done</span><span class="p">();</span>
+  <span class="p">});</span>
+  <span class="nx">after</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">done</span><span class="p">){</span>
+    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+      <span class="nx">$</span><span class="p">(</span><span class="s1">'.title:contains("a new post")'</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">siblings</span><span class="p">(</span><span class="s1">'.deletePost'</span><span class="p">).</span><span class="nx">first</span><span class="p">().</span><span class="nx">click</span><span class="p">();</span>
+    <span class="p">},</span> <span class="mi">500</span><span class="p">);</span>
+    <span class="nx">done</span><span class="p">();</span>
+  <span class="p">});</span>
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"creates a post when I fill in the fields"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">Meteor</span><span class="p">.</span><span class="nx">flush</span><span class="p">();</span>
+    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+      <span class="nx">chai</span><span class="p">.</span><span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s2">".title:eq(0)"</span><span class="p">).</span><span class="nx">html</span><span class="p">(),</span> <span class="s2">"a new post"</span><span class="p">);</span>
+    <span class="p">},</span> <span class="mi">500</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+
+<span class="nx">describe</span><span class="p">(</span><span class="s2">"deleting posts"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="nx">before</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">done</span><span class="p">){</span>
+    <span class="nx">Posts</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span>
+      <span class="na">title</span><span class="p">:</span> <span class="s2">"delete me"</span><span class="p">,</span>
+      <span class="na">content</span><span class="p">:</span> <span class="s2">"please delete me"</span><span class="p">,</span>
+      <span class="na">createdAt</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">()</span>
+    <span class="p">});</span>
+    <span class="nx">done</span><span class="p">();</span>
+  <span class="p">});</span>
+  <span class="nx">after</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">done</span><span class="p">){</span>
+    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+      <span class="nx">$</span><span class="p">(</span><span class="s1">'.title:contains("delete me")'</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">siblings</span><span class="p">(</span><span class="s1">'.deletePost'</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">first</span><span class="p">()</span>
+        <span class="p">.</span><span class="nx">click</span><span class="p">();</span>
+    <span class="p">},</span> <span class="mi">500</span><span class="p">);</span>
+    <span class="nx">done</span><span class="p">();</span>
+  <span class="p">});</span>
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"deletes when I tell it to delete"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">Meteor</span><span class="p">.</span><span class="nx">flush</span><span class="p">();</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'.title:contains("delete me")'</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">siblings</span><span class="p">(</span><span class="s1">'.deletePost'</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">first</span><span class="p">()</span>
+      <span class="p">.</span><span class="nx">click</span><span class="p">();</span>
+    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+        <span class="nx">chai</span><span class="p">.</span><span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s2">".title:eq(0)"</span><span class="p">).</span><span class="nx">html</span><span class="p">(),</span> <span class="s2">"Neutra messenger bag"</span><span class="p">);</span>
+    <span class="p">},</span> <span class="mi">500</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre> <p>Now that we have these tests passing, we&rsquo;ve completed a prototype version of Capote. It doesn&rsquo;t have users, and it still has the autopublish and insecure packages. At least now that we have tests written we can continue development without having to worry so much about whether we&rsquo;re breaking functionality with each update.</p> <p>If you want to check out the code from this section, you can grab it from <a href="https://github.com/austinsamsel/capote/tree/part-5">GitHub</a></p> </section> <article> <footer> <ul class=large-column> <li><h5 class=heading>Recent Articles</h5></li> <li> <ol> <li> <a href="/giving-and-receiving-design-feedback.html">Design Feedback That Works</a> <span>Jan 17</span> </li> <li> <a href="/working-with-react-in-meteor.html">Working with a React View Layer in Meteor</a> <span>Dec 3</span> </li> <li> <a href="/improving-ui-with-animations-in-meteor.html">Improving The Nice Track UI</a> <span>Oct 19</span> </li> <li> <a href="/building-capote.html">Building Capote Meteor & Mocha TDD</a> <span>Oct 3</span> </li> <li> <a href="/getting-started-with-cucumber-on-rails.html">Getting Started with Cucumber on Rails</a> <span>Aug 31</span> </li> <li> <a href="/up-state.html">Announcing Up State</a> <span>Jul 10</span> </li> </ol> </li> </ul> <ul class=small-column> <li><h5 class=heading>Tags</h5></li> <li> <ol> <li><a href="/tags/business.html">business (1)</a></li> <li><a href="/tags/software-development.html">software development (1)</a></li> <li><a href="/tags/meteor.html">meteor (4)</a></li> <li><a href="/tags/mocha.html">mocha (1)</a></li> <li><a href="/tags/tdd.html">tdd (1)</a></li> <li><a href="/tags/ux.html">ux (1)</a></li> <li><a href="/tags/animations.html">animations (1)</a></li> <li><a href="/tags/react.html">react (2)</a></li> <li><a href="/tags/javascript.html">javascript (2)</a></li> </ol> </li> <ul> </footer> </div> </body> </html>
