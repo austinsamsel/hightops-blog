@@ -26,4 +26,10 @@ gem 'bourbon'
 gem 'neat'
 gem 'middleman-autoprefixer'
 
+# development
+
 gem "middleman-livereload"
+
+# deploy
+
+gem 'middleman-gh-pages'

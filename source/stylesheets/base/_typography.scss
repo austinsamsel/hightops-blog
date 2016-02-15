@@ -1,3 +1,41 @@
+// sassy-gridlover
+
+//To use in the `<body>`.
+//
+//Outputs `font-size` and `line-height`.
+//
+//@param {number} $font-size [$sgl-base-font-size] - Base font size
+//@param {string} $unit [$sgl-base-unit] - Unit to output
+//
+//@example scss
+
+
+body {
+  @include sassy-gridlover-body($sgl-base-font-size, "pxrem");
+}
+
+h1 {
+  @include sassy-gridlover-heading(3, "em");
+}
+
+h2 {
+  @include sassy-gridlover-heading(2, "px");
+}
+
+h3 {
+  @include sassy-gridlover-heading(1, "pxrem");
+}
+
+h4 {
+  @include sassy-gridlover-heading(0);
+}
+
+p, ul, ol, pre, table, blockquote {
+  @include sassy-gridlover-margins();
+}
+
+// bitters
+
 body {
   @include font-feature-settings("kern", "liga", "pnum");
   -webkit-font-smoothing: antialiased;
@@ -5,6 +43,7 @@ body {
   font-family: $base-font-family;
   font-size: $base-font-size;
   line-height: $base-line-height;
+  margin:0 1em;
 }
 
 h1,
@@ -14,9 +53,9 @@ h4,
 h5,
 h6 {
   font-family: $heading-font-family;
-  font-size: $base-font-size;
-  line-height: $heading-line-height;
-  margin: 0 0 $small-spacing;
+  //font-size: $base-font-size;
+  line-height: ($heading-line-height * 1);
+  margin: $small-spacing 0 $small-spacing;
 }
 
 p {
@@ -74,39 +113,4 @@ pre {
   color: inherit;
   background-color: transparent;
   font-weight: bold;
-}
-
-
-// sassy-gridlover
-
-//To use in the `<body>`.
-//
-//Outputs `font-size` and `line-height`.
-//
-//@param {number} $font-size [$sgl-base-font-size] - Base font size
-//@param {string} $unit [$sgl-base-unit] - Unit to output
-//
-//@example scss
-body {
-  @include sassy-gridlover-body($sgl-base-font-size, "pxrem");
-}
-
-h1 {
-  @include sassy-gridlover-heading(3, "em");
-}
-
-h2 {
-  @include sassy-gridlover-heading(2, "px");
-}
-
-h3 {
-  @include sassy-gridlover-heading(1, "pxrem");
-}
-
-h4 {
-  @include sassy-gridlover-heading(0);
-}
-
-p, ul, ol, pre, table, blockquote {
-  @include sassy-gridlover-margins();
 }

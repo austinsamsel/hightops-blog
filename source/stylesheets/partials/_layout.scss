@@ -27,3 +27,8 @@ ol {
 .small-column {
   @include span-columns(4 of 12);
 }
+
+.article-block{
+  border-bottom: 1px solid $base-border-color;
+  padding-bottom:$base-line-height * 1em;
+}

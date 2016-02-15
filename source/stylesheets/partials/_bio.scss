@@ -3,8 +3,7 @@ img.bio-pic{
   border-radius:5px;
   float:left;
   margin-right:0.5rem;
-  display:flex;
 }
 .bio{
-  border-bottom: 1px solid $base-border-color;
+  padding-bottom:$small-spacing * 2;
 }
