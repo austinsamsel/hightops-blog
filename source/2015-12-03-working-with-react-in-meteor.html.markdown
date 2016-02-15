@@ -18,18 +18,18 @@ By now I've run the [official Meteor React tutorial](https://www.meteor.com/tuto
 
 In my user.jsx file, my code was looking like this. This is probably how I would have written my apps in Meteor before. I'd use a lot of variables and make it kind of human readable by naming them well. It always worked! But there's probably a better way…
 
-  ```javascript
-  // components/User.jsx
-  render(){
-    var currentUserId = Meteor.userId();
-    var followedUserId = this.props.user._id;
-    var notCurrentUser = this.props.user._id != currentUserId;
-    var notFollowedByCurrentUser = Relationships.findOne({$and : [{owner : currentUserId}, {saveContact : followedUserId}] }) == null;
-    var followUserButton = notCurrentUser && notFollowedByCurrentUser;
+```javascript
+// components/User.jsx
+render(){
+  var currentUserId = Meteor.userId();
+  var followedUserId = this.props.user._id;
+  var notCurrentUser = this.props.user._id != currentUserId;
+  var notFollowedByCurrentUser = Relationships.findOne({$and : [{owner : currentUserId}, {saveContact : followedUserId}] }) == null;
+  var followUserButton = notCurrentUser && notFollowedByCurrentUser;
 
-    var followedByCurrentUser = Relationships.findOne({$and : [{owner : currentUserId}, {saveContact : followedUserId}] }) != null;
+  var followedByCurrentUser = Relationships.findOne({$and : [{owner : currentUserId}, {saveContact : followedUserId}] }) != null;
 
-    var unfollowUserButton = notCurrentUser && followedByCurrentUser;
+  var unfollowUserButton = notCurrentUser && followedByCurrentUser;
 
   return (
     <li>
@@ -44,7 +44,7 @@ In my user.jsx file, my code was looking like this. This is probably how I would
     </li>
     )
   }
-  ```
+```
 
 I searched around for how other people were working with React, especially in terms of Meteor and came across [this article](http://blog.differential.com/react-for-meteor-developers/) which inspired me to rearrange my code like this:
 
