@@ -79,3 +79,7 @@ end
 # end
 
 activate :autoprefixer
+
+#deploy
+activate :relative_assets
+set :relative_links, true
