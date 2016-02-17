@@ -6,9 +6,9 @@ tags: meteor, react, javascript
 
 Being a designer used to be a sad business. People would tell me what they wanted their website to be like. Then I did my best to Make It Look Good™. Maybe in a week or two I'd report back with the work and figure we'd be all set.
 
-Instead I'd get a huge list of things that were wrong. I'd be totally frustrated. I didn't agree with anything. But I'd go ahead and make all the changes. I just figured business was about making things that sucked but had to do anyway for money.
+Instead I'd get a huge list of things that were wrong. I'd be totally frustrated. I didn't agree with anything. But I'd go ahead and make all the changes. I just figured business was about making things I didn't like and just doing it for the money.
 
-But you know what really, truly sucked? ME 😹
+But you know what actually sucked? ME 😹
 
 I didn't know how to communicate. I didn't know how to lead a discussion. I didn't know how to present my work. Even worse I didn't really even know how to dig in to the problem I was being hired to solve.
 
