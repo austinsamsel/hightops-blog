@@ -5,10 +5,155 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-01-17T14:04:00-05:00</updated>
+  <updated>2016-03-08T12:04:00-05:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>What has inspired me so far in 2016</title>
+    <link rel="alternate" href="http://blog.url.com/what-has-inspired-me-so-far-in-2016.html"/>
+    <id>http://blog.url.com/what-has-inspired-me-so-far-in-2016.html</id>
+    <published>2016-03-08T12:04:00-05:00</published>
+    <updated>2016-03-08T12:31:12-05:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;I love &lt;a href="https://getpocket.com"&gt;Pocket&lt;/a&gt;. It&amp;rsquo;s a modern bookmarking app. However, stuff I like tends to get lost in there. I&amp;rsquo;ve also noticed that once I&amp;rsquo;ve filed something in Pocket, if I don&amp;rsquo;t return to it within a few weeks, I probably lose track forever.&lt;/p&gt;
+
+&lt;p&gt;So in 2016 I started a doc in which I save all the things that I really really like (as well as my Todo&amp;rsquo;s and other ideas). Now that its getting kind of long, I still want to hold on to this stuff so I can continue to reflect on it.&lt;/p&gt;
+
+&lt;p&gt;The following is a list of resources and people/organizations I&amp;rsquo;ve found especially cool so far this year.&lt;/p&gt;
+
+&lt;h2&gt;People and Projects&lt;/h2&gt;
+
+&lt;h3&gt;&lt;a href="https://github.com/tastejs/awesome-app-ideas"&gt;awesome-app-ideas&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;I already have at least 10+ side project ideas I want to build, but I thought this repo was pretty great incase I ever had coder&amp;rsquo;s block or needed a small idea to try out while testing out some new technology.&lt;/p&gt;
+
+&lt;h3&gt;&lt;a href="http://diskcact.us/"&gt;Disk Cactus&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;This is just a really cool company. I found out about them when my friend &lt;a href="http://madelenamak.com/"&gt;Madelena&lt;/a&gt; gave me their &lt;a href="https://www.kickstarter.com/projects/diskcactus/the-emoji-keyboard-type-emoji-on-your-mac"&gt;Emoji Keyboard&lt;/a&gt; for my birthday this year. Also, they officially incorporated their name in unicode for their 💾🌵 emoji.&lt;/p&gt;
+
+&lt;h3&gt;&lt;a href="http://www.because-recollection.com/"&gt;Because Recollection&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;This one has received a lot of attention. It&amp;rsquo;s great.&lt;/p&gt;
+
+&lt;h3&gt;&lt;a href="http://beta.rallyinteractive.com/"&gt;Rally Interactive&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;I really like their website and their work. Rally Interactive is an interaction design studio in Salt Lake City, Utah.&lt;/p&gt;
+
+&lt;h3&gt;&lt;a href="http://www.stinkdigital.com/"&gt;Stink Digital&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;Another cool company. They created the super weird &lt;a href="http://hands.wtf/"&gt;hands.wtf&lt;/a&gt; project.&lt;/p&gt;
+
+&lt;h3&gt;&lt;a href="http://bysusanlin.com/"&gt;Susan Lin&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;Nice website with scrolling animation + highlights really great design/illustration work.&lt;/p&gt;
+
+&lt;h3&gt;&lt;a href="http://science.slashdot.org/story/16/02/20/1823241/a-19-year-old-made-a-free-robot-lawyer-that-has-appealed-3m-in-parking-tickets?utm_source=feedly1.0mainlinkanon&amp;amp;utm_medium=feed"&gt;Bad ass&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;Some kid made a &amp;ldquo;free robot lawyer&amp;rdquo; that has appealed over $3M in parking tickets.&lt;/p&gt;
+
+&lt;h3&gt;&lt;a href="http://www.brianfolts.com/driver/"&gt;Google Maps Streetview Player&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;This is something I always wanted to build&amp;hellip; so I could take roadtrips using only google maps street view! Looks like this guy got to it first. Congratuations, its awesome!&lt;/p&gt;
+
+&lt;h3&gt;&lt;a href="http://www.thesill.com/"&gt;The Sill&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;This is a company in NYC. 💯 for working with plants.&lt;/p&gt;
+
+&lt;h3&gt;&lt;a href="http://www.voxelcss.com/"&gt;Voxel CSS 3D Rendering&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;Need to build something with this ASAP.&lt;/p&gt;
+
+&lt;h3&gt;Interactive Story Telling&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://medium.com/truth-labs/re-thinking-reading-on-the-web-158e789eddd7#.awjorqmo6"&gt;Rethinking Reading on The Web&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.theatlantic.com/sponsored/athenahealth/"&gt;Athena Health&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.nytimes.com/interactive/2015/us/year-in-interactive-storytelling.html?_r=0*"&gt;Year in Interactive Storytelling&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;&lt;a href="http://webglstudio.org/"&gt;WebGL&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;&amp;ldquo;A platform to create interactive 3D scenes directly from the browser&amp;rdquo;&lt;/p&gt;
+
+&lt;h3&gt;&lt;a href="http://www.lokidesign.net/journal/2016/2/22/the-propaganda-of-pantone-colour-and-subcultural-sublimation"&gt;Pantone Propaganda&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;One of the most interesting articles having to do with design and culture I&amp;rsquo;ve read, ever.&lt;/p&gt;
+
+&lt;h3&gt;&lt;a href="http://genius.com/a/kanye-west-s-life-story-in-lyrics"&gt;The future of lit?&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;Someone wrote Kanye West&amp;rsquo;s autobiography entirely from his lyrics.&lt;/p&gt;
+
+&lt;h3&gt;&lt;a href="http://lmgonzalves.github.io/loading-buttons/"&gt;Nice UI Loading Buttons&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;Because, nice.&lt;/p&gt;
+
+&lt;h2&gt;Useful Tools - Resources&lt;/h2&gt;
+
+&lt;h3&gt;&lt;a href="http://www.uxbooth.com/articles/creating-personas/"&gt;Creating Personas&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;Important for UX, Design, thinking about your users.&lt;/p&gt;
+
+&lt;h3&gt;&lt;a href="http://dottedpaper.com/"&gt;Grid Paper&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;I tend to do a lot digitally, but I thought this was cool to help with sketches.&lt;/p&gt;
+
+&lt;h3&gt;&lt;a href="http://chir.ag/projects/name-that-color/#6195ED"&gt;Name That Color&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;For stylesheet color variables that are less rigid.&lt;/p&gt;
+
+&lt;h3&gt;&lt;a href="http://a11yproject.com/"&gt;Accessibility&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;All inclusive internet.&lt;/p&gt;
+
+&lt;h3&gt;&lt;a href="https://percy.io/"&gt;continuous visual integration&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;The problem with CSS is changes you make to one page can have disastrous consequences to another without your realizing it. Percy is a service for continuous integration testing with CSS.&lt;/p&gt;
+
+&lt;h3&gt;&lt;a href="http://www.sitepoint.com/jquery-vs-raw-javascript-2-css3-animation/"&gt;Not using JQuery when you don&amp;rsquo;t need to&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;Equivalents in vanilla javascript that you can use instead of JQuery. I definitely tend to think in JQuery rather than Javascript when I&amp;rsquo;m writing presentational JS for static websites&amp;hellip; its a nice to do without JQuery when practical.&lt;/p&gt;
+
+&lt;h3&gt;&lt;a href="http://collectui.com/"&gt;UI Examples&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;When I need some quick inspiration for designing user interfaces.&lt;/p&gt;
+
+&lt;h3&gt;&lt;a href="http://www.sketchappsources.com/"&gt;Sketch App Sources&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;Great respository of resources for Sketch. If you need some starter kits for wireframes or graphs/charts, this is a good place to go.&lt;/p&gt;
+
+&lt;h3&gt;&lt;a href="http://tympanus.net/Development/Animocons/"&gt;icon animations with mo.js&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;Obligatory codrops article.&lt;/p&gt;
+
+&lt;h3&gt;&lt;a href="https://unsplash.com"&gt;stock photos&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;I hate to use stock photos. But sometimes you have no choice.&lt;/p&gt;
+
+&lt;h3&gt;&lt;a href="https://github.com/szynszyliszys/repaintless"&gt;Repaintless CSS Animations&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;For Fast CSS Animations. See the &lt;a href="http://blog.lunarlogic.io/2016/boost-your-css-animation-performance-with-repaintless-css/?utm_source=CSS-Weekly&amp;amp;utm_campaign=Issue-205&amp;amp;utm_medium=email"&gt;article&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3&gt;&lt;a href="https://css-tricks.com/introducing-css-scroll-snap-points/?utm_source=CSS-Weekly&amp;amp;utm_campaign=Issue-205&amp;amp;utm_medium=email"&gt;CSS Scroll Snap Points&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;Great example of a future, soon-to-be current CSS feature.&lt;/p&gt;
+
+&lt;h2&gt;Holistic Vibes&lt;/h2&gt;
+
+&lt;p&gt;Because who we are and what we do affects everything&amp;hellip; these are a few items that have helped inform my thinking over the past few months.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://www.rodalesorganiclife.com/garden/why-this-farmer-refused-to-plow-his-land?cid=soc_Rodale%27s+Organic+Life+-+RodalesOrganicLife_FBPAGE_Rodale%27s+Organic+Life__"&gt;Why This Farmer Refused To Plow His Land&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.nytimes.com/2015/04/12/opinion/sunday/david-brooks-the-moral-bucket-list.html?_r=0"&gt;The Moral Bucket List&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://monofonuspress.com/how-to-live-like-a-king-for-very-little-by-thor-harris"&gt;HOW TO LIVE LIKE A KING FOR VERY LITTLE&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://news.mongabay.com/2016/02/nganyi-the-tiny-forest-in-kenya-that-can-predict-the-weather/?n3wsletter"&gt;Nganyi: The tiny forest in Kenya that predicts the weather&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.thefader.com/2016/02/29/artists-explain-how-digital-art-can-improve-the-real-world"&gt;5 Artists Explain How Digital Art Can Make The Real World Better&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://thenewinquiry.com/essays/closing-the-loop/"&gt;Closing The Loop&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Design Feedback That Works</title>
     <link rel="alternate" href="http://blog.url.com/giving-and-receiving-design-feedback.html"/>
@@ -1912,57 +2057,6 @@ li.completed{
 &lt;p&gt;Nice! We created a Todo app using Cucumber that allows us to create tasks, validates against invalid tasks, mark tasks as complete, and delete tasks. This this type of functionality is pretty common and can be applied in a lot of scenarios.&lt;/p&gt;
 
 &lt;p&gt;If you have any questions, or notice anything that can be improved, please let me know!&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Announcing Up State</title>
-    <link rel="alternate" href="http://blog.url.com/up-state.html"/>
-    <id>http://blog.url.com/up-state.html</id>
-    <published>2015-07-10T03:00:00-04:00</published>
-    <updated>2016-02-14T10:22:43-05:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;a href="http://www.upstatebiz.com/"&gt;Up State is a WordPress website building service&lt;/a&gt;. The Up State service generates websites and gets them into the State of Up - online, launched, live. Not only does Up State get your website launched, but it&amp;rsquo;ll be a &lt;strong&gt;high quality&lt;/strong&gt;, &lt;strong&gt;mobile-responsive&lt;/strong&gt; website, built in just one week. There&amp;rsquo;s no quotes, no haggling, no weird stuff, just a flat-rate price of $999.&lt;/p&gt;
-
-&lt;p&gt;That&amp;rsquo;s Up State.&lt;/p&gt;
-
-&lt;h2&gt;Is this for me?&lt;/h2&gt;
-
-&lt;p&gt;I created Up State for two types of people:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;You&amp;rsquo;re a &lt;strong&gt;small business owner&lt;/strong&gt; and you need a website to promote your business.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;You&amp;rsquo;re a leader&lt;/strong&gt; at a company that is launching a new product, organizing a conference, or starting a new marketing campaign and you need to promote your product by creating a new website.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;You may have tried the following ways of getting a website up:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Do-It-Yourself&lt;/li&gt;
-&lt;li&gt;Hire a freelancer&lt;/li&gt;
-&lt;li&gt;Hire an agency&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;…and you had results ranging from &lt;strong&gt;wtf&lt;/strong&gt; to &lt;strong&gt;meh&lt;/strong&gt; to &lt;strong&gt;okay-we&amp;rsquo;re-broke-now&lt;/strong&gt;. And maybe you wondered if there was something else that could make the whole process easier.&lt;/p&gt;
-
-&lt;h2&gt;Is my project a fit?&lt;/h2&gt;
-
-&lt;p&gt;Up State isn&amp;rsquo;t for every project. It&amp;rsquo;s meant for small, simple projects — usually brochure-style websites that only require some basic functionality: contact form, content slider, a mailing list sign up form, and so on. These are the types of features that come prepackaged with most premium WordPress themes.&lt;/p&gt;
-
-&lt;p&gt;If your project requires more advanced functionality, like eCommerce, webinar sign ups, subscription services, or a lot of design customization, then sometimes Up State is a great way to quickly jumpstart your project and put you ahead of schedule. Starting with a premium theme allows for the streamlining of a lot of design and layout decisions. It keeps costs down and saves time.&lt;/p&gt;
-
-&lt;p&gt;Up State makes sense for brand new projects as well as for existing, older websites that need to be totally refreshed. Up State websites are created with modern specs: a mobile-friendly responsive design, Google Analytics, global SEO, optimized page loading, and spam filters.&lt;/p&gt;
-
-&lt;h2&gt;Everyone wins&lt;/h2&gt;
-
-&lt;p&gt;As a developer/designer, I get to be more productive by offering a standardized, streamlined service. My clients get a great product that&amp;rsquo;s tailored just for them and they get to save time, money, and sanity. Awesome!!&lt;/p&gt;
-
-&lt;h2&gt;Up next&lt;/h2&gt;
-
-&lt;p&gt;I&amp;rsquo;m planning on creating a &amp;ldquo;playbook&amp;rdquo; that describes the whole process of building an Up State website. It will include cool stuff like which plugins I like to use and how I take my client&amp;rsquo;s goals into consideration throughout the process. I&amp;rsquo;m also thinking about creating some add-on packages for more advanced analytics and visitor tracking &amp;ndash; or possibly a more involved SEO package.&lt;/p&gt;
-
-&lt;p&gt;Is there something else you&amp;rsquo;d want in a new website? I&amp;rsquo;d love to hear what you&amp;rsquo;re looking for in the comments below.&lt;/p&gt;
 </content>
   </entry>
 </feed>
