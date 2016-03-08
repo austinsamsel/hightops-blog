@@ -17,6 +17,16 @@ ol {
   }
 }
 
+article li{
+  list-style-type:disc;
+  margin-left: $base-spacing;
+}
+
+footer li{
+  list-style-type:none;
+  margin-left:0;
+}
+
 dl {
   margin-bottom: $small-spacing;
 

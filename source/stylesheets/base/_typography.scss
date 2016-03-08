@@ -55,7 +55,7 @@ h6 {
   font-family: $heading-font-family;
   //font-size: $base-font-size;
   line-height: ($heading-line-height * 1);
-  //margin: $small-spacing 0 $small-spacing;
+  margin: $small-spacing 0 ($small-spacing / 1.5);
 }
 h5,
 h6{
@@ -63,7 +63,7 @@ h6{
 }
 
 p {
-  margin: 0 0 $small-spacing;
+  margin: 0 0 ($small-spacing * 1.5);
 }
 
 a {
