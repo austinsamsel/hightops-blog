@@ -26,7 +26,7 @@ Before we get into how to code a design with consistent vertical rhythm, this is
 * **Code Faster.** If we're designing in the browser, we can fall back on a pattern, so that we write less code and spend less time tinkering.
 * **Better Designs.** Whether we're designing in the browser or coding a mock up, we can spend more mental energy where it counts, knowing that we've appropriately handled this part of the design from the start.
 
-## Doing it
+## Setting up the CSS
 
 I created [a codepen](http://codepen.io/austinnnnnnn/full/WwwmKP/) for our vertical rhythm example. Feel free to fork it and wipe out the CSS to see the examples for yourself - then add the CSS back in to see what we've accomplished.
 
