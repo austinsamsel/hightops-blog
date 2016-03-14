@@ -5,16 +5,162 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-03-08T12:04:00-05:00</updated>
+  <updated>2016-03-14T11:04:00-04:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Creating Vertical Rhythm with CSS</title>
+    <link rel="alternate" href="http://blog.url.com/vertical-rhythm-css.html"/>
+    <id>http://blog.url.com/vertical-rhythm-css.html</id>
+    <published>2016-03-14T11:04:00-04:00</published>
+    <updated>2016-03-14T10:47:27-04:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Vertical Rhythm is the pacing of our layout going up and down. Its a concept of typography that&amp;rsquo;s been around since ever. When you see it, things feel right. If it&amp;rsquo;s not there, something is somehow, kind of off&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s what a layout looks like when a vertical rhythm hasn&amp;rsquo;t been established, or is not consistent.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="../images/blog/vertical-no-rhythm.jpg" style="max-width:400px"&gt;&lt;/p&gt;
+
+&lt;p&gt;Notice how there&amp;rsquo;s not much spacing between the text and it doesn&amp;rsquo;t fall on any of the grid lines?&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s what an established vertical rhythm looks like. There&amp;rsquo;s some nice spacing between the lines of text and they are all placed neatly in the grid.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="../images/blog/vertical-rhythm.jpg" style="max-width:400px"&gt;&lt;/p&gt;
+
+&lt;p&gt;The grid lines here are called the baseline grid. In print design, all the elements should rest on the lines. However there isn&amp;rsquo;t really a concept for vertical rhythm built into CSS, so sometimes our elements will end up in the middle of the baseline grid&amp;hellip; or somewhere close to it.&lt;/p&gt;
+
+&lt;h2&gt;Goals&lt;/h2&gt;
+
+&lt;p&gt;Before we get into how to code a design with consistent vertical rhythm, this is why I&amp;rsquo;m so interested in this concept:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Looks Better.&lt;/strong&gt; Vertical rhythm helps with readability and comprehension. When things are visually organized on the page, the information is more accessible.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Code Faster.&lt;/strong&gt; If we&amp;rsquo;re designing in the browser, we can fall back on a pattern, so that we write less code and spend less time tinkering.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Better Designs.&lt;/strong&gt; Whether we&amp;rsquo;re designing in the browser or coding a mock up, we can spend more mental energy where it counts, knowing that we&amp;rsquo;ve appropriately handled this part of the design from the start.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Doing it&lt;/h2&gt;
+
+&lt;p&gt;I created &lt;a href="http://codepen.io/austinnnnnnn/full/WwwmKP/"&gt;a codepen&lt;/a&gt; for our vertical rhythm example. Feel free to fork it and wipe out the CSS to see the examples for yourself - then add the CSS back in to see what we&amp;rsquo;ve accomplished.&lt;/p&gt;
+
+&lt;p&gt;First, for demonstration purposes we&amp;rsquo;ll create a simple baseline grid:&lt;/p&gt;
+&lt;pre class="highlight css"&gt;&lt;code&gt;&lt;span class="nt"&gt;body&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="c"&gt;/* baseline grid is created by background */&lt;/span&gt;
+  &lt;span class="nl"&gt;background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;linear-gradient&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;#ccc&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;#eee&lt;/span&gt; &lt;span class="m"&gt;1px&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+  &lt;span class="nl"&gt;background-size&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="m"&gt;24px&lt;/span&gt; &lt;span class="m"&gt;24px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="nl"&gt;max-width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="m"&gt;800px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="nl"&gt;margin&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="nb"&gt;auto&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="nl"&gt;padding&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="m"&gt;1rem&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The way to set the baseline for the grid is to match it to the line height of the body text. For our example, we&amp;rsquo;ll use 16px as the baseline font size. Normally on the web, type shouldn&amp;rsquo;t be smaller than that, or we risk making it unreadable. Allowing a line-height of 1.4 - 1.6 helps to give our text more breathing room. Doing the math: 16px * 1.5(line-height) = 24px. This is the leading. We&amp;rsquo;ll use 24px (and some variations of it), for our spacing from here on out.&lt;/p&gt;
+&lt;pre class="highlight css"&gt;&lt;code&gt;&lt;span class="nt"&gt;body&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="c"&gt;/* ... */&lt;/span&gt;
+  &lt;span class="nl"&gt;background-size&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="m"&gt;24px&lt;/span&gt; &lt;span class="m"&gt;24px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="c"&gt;/* ... */&lt;/span&gt;
+
+  &lt;span class="c"&gt;/* #2 setting up baseline font and line-height */&lt;/span&gt;
+  &lt;span class="nl"&gt;font-size&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="m"&gt;16px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="nl"&gt;line-height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="m"&gt;24px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;One way to keep images in line with the baseline is to make sure their height is a number divisible by 24. At the same time images are really fluid on the web. We&amp;rsquo;ll set a max height to 480px, but on smaller screens it will be full width of the column&amp;hellip; and also break the baseline grid. If you wanted to keep the image always matched to the baseline, you&amp;rsquo;d need javascript to continually resize it so its height is always evenly divisible by 24px&amp;hellip; which I don&amp;rsquo;t think anyone does.&lt;/p&gt;
+&lt;pre class="highlight css"&gt;&lt;code&gt;&lt;span class="nt"&gt;img&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="nl"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="m"&gt;100%&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="nl"&gt;height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nb"&gt;auto&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="nl"&gt;max-height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="m"&gt;480px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For typescale. I use &lt;a href="http://www.modularscale.com/"&gt;this modular scale tool&lt;/a&gt; to visualize various scales and find the values it. For this example I&amp;rsquo;ll go with the Perfect Fourth scale and match my fonts and their line-heights accordingly. I&amp;rsquo;m approximating the line-heights by first multiplying the font size in rem with 16, our base font size. Then I choose the smallest number that is greater in value and evenly divisible by 6. I&amp;rsquo;m choosing 6 because that&amp;rsquo;s one quarter of the leading. Ideally I&amp;rsquo;d just use the leading, but it&amp;rsquo;s too large a number. the h2 and h3 would both of the same line-height of 48px - which would be way too big especially for the h3.&lt;/p&gt;
+&lt;pre class="highlight css"&gt;&lt;code&gt;&lt;span class="c"&gt;/*
+3.157rem * 16 = 50.512
+2.369rem * 16 = 37.904
+1.777rem * 16 = 28.432
+1.333rem * 16 = 21.328
+*/&lt;/span&gt;
+
+&lt;span class="nt"&gt;h1&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nl"&gt;font-size&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="m"&gt;3.157rem&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nl"&gt;line-height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="m"&gt;54px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="nt"&gt;h2&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nl"&gt;font-size&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="m"&gt;2.369rem&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nl"&gt;line-height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="m"&gt;42px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="nt"&gt;h3&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nl"&gt;font-size&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="m"&gt;1.777rem&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nl"&gt;line-height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="m"&gt;30px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="nt"&gt;h4&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nl"&gt;font-size&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="m"&gt;1.333rem&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nl"&gt;line-height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="m"&gt;24px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="nt"&gt;h1&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;h2&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;h3&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;h4&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="nl"&gt;margin-top&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="m"&gt;0px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="nl"&gt;margin-bottom&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="m"&gt;24px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After the last step I changed the baseline grid to 12px to allow us more flexibility in laying out these elements. And everything should continue to fall near a baseline.&lt;/p&gt;
+&lt;pre class="highlight css"&gt;&lt;code&gt;&lt;span class="nt"&gt;body&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="c"&gt;/* ... */&lt;/span&gt;
+  &lt;span class="nl"&gt;background-size&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="m"&gt;12px&lt;/span&gt; &lt;span class="m"&gt;12px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="c"&gt;/* ... */&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We can use the leading, 24px, for padding and margins for any element we like, like lists, boxes, and button elements, while keeping the flow uninterrupted.&lt;/p&gt;
+&lt;pre class="highlight css"&gt;&lt;code&gt;&lt;span class="nt"&gt;li&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="nl"&gt;margin-bottom&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="m"&gt;12px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="nt"&gt;button&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="nl"&gt;margin-bottom&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="m"&gt;24px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="nl"&gt;padding&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="m"&gt;12px&lt;/span&gt; &lt;span class="m"&gt;24px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="c"&gt;/* extra style */&lt;/span&gt;
+  &lt;span class="nl"&gt;background-color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="no"&gt;plum&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="nl"&gt;border&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nb"&gt;none&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="nc"&gt;.box&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="nl"&gt;padding&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="m"&gt;12px&lt;/span&gt; &lt;span class="m"&gt;36px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="nl"&gt;background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="no"&gt;aqua&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;How obsessed should we get?&lt;/h2&gt;
+
+&lt;p&gt;I&amp;rsquo;m not sure. Notice if the headers go over one line in length, it becomes apparent that a sidebar column&amp;rsquo;s paragraph text can go off baseline compared to the main column because the total height of the header element can fall into a 6px difference.&lt;/p&gt;
+
+&lt;p&gt;Should we use javascript to enforce all image heights stay within the leading? Should line-heights of header texts be recalculated if they run over one or two lines in length? Is there some perfect type scale with matching line-heights that will allow all elements of the page to sit perfectly on the baseline? I&amp;rsquo;m not sure.&lt;/p&gt;
+
+&lt;p&gt;To me, I think the most important highlights are using a modular type scale, and building spacing variables off the leading. A good practice for making spacing consistent would be to use only a few sizes:&lt;/p&gt;
+&lt;pre class="highlight scss"&gt;&lt;code&gt;&lt;span class="nl"&gt;line-height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nv"&gt;$leading&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="na"&gt;margin-bottom-xs&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;     &lt;span class="nv"&gt;$leading&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt;
+&lt;span class="n"&gt;margin-bottom-small&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;  &lt;span class="nv"&gt;$leading&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;
+&lt;span class="n"&gt;margin-bottom-normal&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nv"&gt;$leading&lt;/span&gt;
+&lt;span class="n"&gt;margin-bottom-large&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;  &lt;span class="nv"&gt;$leading&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;
+&lt;span class="n"&gt;margin-bottom-xl&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;     &lt;span class="nv"&gt;$leading&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The same can be done for padding bottom or horizontal paddings and margins.&lt;/p&gt;
+
+&lt;p&gt;I like the idea of having 0px values for margin-top and padding-top whenever possible as a way of keeping the spacing flowing unidirectionally. This decreases the likelihood of a time when there is unexpected extra spacing between elements because one has a padding-top and another has a padding-bottom.  I came across this particular idea in this article, &lt;a href="http://webdesign.tutsplus.com/articles/improving-layout-with-vertical-rhythm--webdesign-14070"&gt;Improving Layout With Vertical Rhythm&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;In researching this, I came across some great articles, and I&amp;rsquo;d also like to share some tools I&amp;rsquo;ve used in the past, or that I found this time around:&lt;/p&gt;
+
+&lt;h3&gt;Resources&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://matejlatin.github.io/Gutenberg/"&gt;Gutenberg - A meaningful web typography starter kit&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.modularscale.com"&gt;Modularscale&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.smashingmagazine.com/2012/12/css-baseline-the-good-the-bad-and-the-ugly/"&gt;CSS Baseline: The Good, The Bad And The Ugly&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://zellwk.com/blog/why-vertical-rhythms/"&gt;Why is Vertical Rhythm an Important Typography Practice?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.sitepoint.com/understanding-baseline-rhythm-in-typography/"&gt;Understanding Baseline Rhythm in Typography&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://webdesign.tutsplus.com/articles/improving-layout-with-vertical-rhythm--webdesign-14070"&gt;Improving Layout With Vertical Rhythm&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>What has inspired me so far in 2016</title>
     <link rel="alternate" href="http://blog.url.com/what-has-inspired-me-so-far-in-2016.html"/>
     <id>http://blog.url.com/what-has-inspired-me-so-far-in-2016.html</id>
     <published>2016-03-08T12:04:00-05:00</published>
-    <updated>2016-03-08T12:31:12-05:00</updated>
+    <updated>2016-03-14T09:49:05-04:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -50,7 +196,7 @@
 
 &lt;p&gt;Nice website with scrolling animation + highlights really great design/illustration work.&lt;/p&gt;
 
-&lt;h3&gt;&lt;a href="http://science.slashdot.org/story/16/02/20/1823241/a-19-year-old-made-a-free-robot-lawyer-that-has-appealed-3m-in-parking-tickets?utm_source=feedly1.0mainlinkanon&amp;amp;utm_medium=feed"&gt;Bad ass&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a href="http://science.slashdot.org/story/16/02/20/1823241/a-19-year-old-made-a-free-robot-lawyer-that-has-appealed-3m-in-parking-tickets?utm_source=feedly1.0mainlinkanon&amp;amp;utm_medium=feed"&gt;Bad ass use of technology&lt;/a&gt;&lt;/h3&gt;
 
 &lt;p&gt;Some kid made a &amp;ldquo;free robot lawyer&amp;rdquo; that has appealed over $3M in parking tickets.&lt;/p&gt;
 
@@ -102,19 +248,19 @@
 
 &lt;h3&gt;&lt;a href="http://chir.ag/projects/name-that-color/#6195ED"&gt;Name That Color&lt;/a&gt;&lt;/h3&gt;
 
-&lt;p&gt;For stylesheet color variables that are less rigid.&lt;/p&gt;
+&lt;p&gt;For stylesheet color variables to be namespaced more flexibly.&lt;/p&gt;
 
 &lt;h3&gt;&lt;a href="http://a11yproject.com/"&gt;Accessibility&lt;/a&gt;&lt;/h3&gt;
 
-&lt;p&gt;All inclusive internet.&lt;/p&gt;
+&lt;p&gt;More all-inclusive internet.&lt;/p&gt;
 
 &lt;h3&gt;&lt;a href="https://percy.io/"&gt;continuous visual integration&lt;/a&gt;&lt;/h3&gt;
 
-&lt;p&gt;The problem with CSS is changes you make to one page can have disastrous consequences to another without your realizing it. Percy is a service for continuous integration testing with CSS.&lt;/p&gt;
+&lt;p&gt;The problem with CSS is changes you make to one page can have unintended effects to another without your realizing it. Percy is a service for continuous integration testing with CSS so you know what changes.&lt;/p&gt;
 
 &lt;h3&gt;&lt;a href="http://www.sitepoint.com/jquery-vs-raw-javascript-2-css3-animation/"&gt;Not using JQuery when you don&amp;rsquo;t need to&lt;/a&gt;&lt;/h3&gt;
 
-&lt;p&gt;Equivalents in vanilla javascript that you can use instead of JQuery. I definitely tend to think in JQuery rather than Javascript when I&amp;rsquo;m writing presentational JS for static websites&amp;hellip; its a nice to do without JQuery when practical.&lt;/p&gt;
+&lt;p&gt;Equivalents in vanilla javascript that you can use instead of JQuery. I tend to think in JQuery before Javascript when I&amp;rsquo;m writing presentational JS for static websites&amp;hellip; its a nice to do without JQuery when its possible.&lt;/p&gt;
 
 &lt;h3&gt;&lt;a href="http://collectui.com/"&gt;UI Examples&lt;/a&gt;&lt;/h3&gt;
 
@@ -122,7 +268,7 @@
 
 &lt;h3&gt;&lt;a href="http://www.sketchappsources.com/"&gt;Sketch App Sources&lt;/a&gt;&lt;/h3&gt;
 
-&lt;p&gt;Great respository of resources for Sketch. If you need some starter kits for wireframes or graphs/charts, this is a good place to go.&lt;/p&gt;
+&lt;p&gt;Great repository of resources for Sketch. If you need some starter kits for wireframes or graphs/charts, this is a good place to go.&lt;/p&gt;
 
 &lt;h3&gt;&lt;a href="http://tympanus.net/Development/Animocons/"&gt;icon animations with mo.js&lt;/a&gt;&lt;/h3&gt;
 
@@ -138,7 +284,7 @@
 
 &lt;h3&gt;&lt;a href="https://css-tricks.com/introducing-css-scroll-snap-points/?utm_source=CSS-Weekly&amp;amp;utm_campaign=Issue-205&amp;amp;utm_medium=email"&gt;CSS Scroll Snap Points&lt;/a&gt;&lt;/h3&gt;
 
-&lt;p&gt;Great example of a future, soon-to-be current CSS feature.&lt;/p&gt;
+&lt;p&gt;Great example of a future/soon-to-be-current, CSS feature.&lt;/p&gt;
 
 &lt;h2&gt;Holistic Vibes&lt;/h2&gt;
 
@@ -1337,726 +1483,6 @@ Chai documentation: &lt;a href="http://chaijs.com/"&gt;http://chaijs.com/&lt;/a&
 &lt;p&gt;Now that we have these tests passing, we&amp;rsquo;ve completed a prototype version of Capote. It doesn&amp;rsquo;t have users, and it still has the autopublish and insecure packages. At least now that we have tests written we can continue development without having to worry so much about whether we&amp;rsquo;re breaking functionality with each update.&lt;/p&gt;
 
 &lt;p&gt;If you want to check out the code from this section, you can grab it from &lt;a href="https://github.com/austinsamsel/capote/tree/part-5"&gt;GitHub&lt;/a&gt;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Getting Started with Cucumber on Rails</title>
-    <link rel="alternate" href="http://blog.url.com/getting-started-with-cucumber-on-rails.html"/>
-    <id>http://blog.url.com/getting-started-with-cucumber-on-rails.html</id>
-    <published>2015-08-31T13:09:00-04:00</published>
-    <updated>2016-02-14T14:15:24-05:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;This is a &amp;ldquo;getting started&amp;rdquo; with Cucumber and BDD testing in rails. We&amp;rsquo;re literally jumping straight into it. I&amp;rsquo;m assuming you&amp;rsquo;ve already read up on some testing concepts and you&amp;rsquo;ve found your way here in order to understand what a workflow with Cucumber might look like and how we think about problems along the way. If you like, you can grab the finished code from &lt;a href="https://github.com/austinsamsel/rails-cuke-todo"&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h3&gt;Step 1 - Set up.&lt;/h3&gt;
-
-&lt;p&gt;Create a new app&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;rails&lt;/span&gt; &lt;span class="kp"&gt;new&lt;/span&gt; &lt;span class="n"&gt;todos&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;tdd&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cucumber&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;skip&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;test&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;unit&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Add Cucumber to your Gemfile. We&amp;rsquo;ll include database_cleaner, which comes highly recommended as per &lt;a href="https://github.com/cucumber/cucumber-rails"&gt;cucumber docs&lt;/a&gt;&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;group&lt;/span&gt; &lt;span class="ss"&gt;:test&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="n"&gt;gem&lt;/span&gt; &lt;span class="s1"&gt;'cucumber-rails'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;require: &lt;/span&gt;&lt;span class="kp"&gt;false&lt;/span&gt;
-  &lt;span class="n"&gt;gem&lt;/span&gt; &lt;span class="s1"&gt;'database_cleaner'&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;bundle&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Run cucumber installer.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;rails&lt;/span&gt; &lt;span class="n"&gt;generate&lt;/span&gt; &lt;span class="n"&gt;cucumber&lt;/span&gt;&lt;span class="ss"&gt;:install&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This gives us a new directory called &lt;em&gt;features&lt;/em&gt; which is where we&amp;rsquo;ll write tests.&lt;/p&gt;
-
-&lt;h3&gt;Step 2 - Create first feature: Add a Task.&lt;/h3&gt;
-
-&lt;p&gt;Create the feature. Using (Gherkin)[https://github.com/cucumber/cucumber/wiki/Gherkin] - an easy to read syntax that works as both documentation and as tests. Your clients can read it and you can write it together. Even if you&amp;rsquo;re not working with a client (or a client that wants to read it), its still worthwhile to use it because it forces you to &amp;ldquo;think like the user&amp;rdquo; as you write your features. Rather than mapping out your database and building your models, you&amp;rsquo;ll develop your features with an &amp;ldquo;outside in&amp;rdquo; approach, starting from the homepage, and working with what you would see in the browser.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;touch&lt;/span&gt; &lt;span class="n"&gt;features&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;todos&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;feature&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Your feature should express what you&amp;rsquo;d like to build and conclude with the business value behind it.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#todos.feature&lt;/span&gt;
-
-&lt;span class="no"&gt;Feature&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="no"&gt;Todos&lt;/span&gt;
-  &lt;span class="no"&gt;In&lt;/span&gt; &lt;span class="n"&gt;order&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;things&lt;/span&gt; &lt;span class="n"&gt;done&lt;/span&gt;
-  &lt;span class="no"&gt;As&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;todo&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;list&lt;/span&gt; &lt;span class="n"&gt;freak&lt;/span&gt;
-  &lt;span class="no"&gt;I&lt;/span&gt; &lt;span class="n"&gt;want&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="n"&gt;able&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;create&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;tasks&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Great. Let&amp;rsquo;s write our first scenario. Each scenario is composed of steps that begin with keywords like &lt;em&gt;Given&lt;/em&gt; &lt;em&gt;And&lt;/em&gt; &lt;em&gt;When&lt;/em&gt; and finally &lt;em&gt;Then&lt;/em&gt;.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#todos.feature&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
-
-&lt;span class="no"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="no"&gt;Create&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;task&lt;/span&gt;
-  &lt;span class="no"&gt;Given&lt;/span&gt; &lt;span class="no"&gt;I&lt;/span&gt; &lt;span class="n"&gt;am&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;home&lt;/span&gt; &lt;span class="n"&gt;page&lt;/span&gt;
-  &lt;span class="no"&gt;And&lt;/span&gt; &lt;span class="no"&gt;I&lt;/span&gt; &lt;span class="n"&gt;go&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="s2"&gt;"Add new task"&lt;/span&gt;
-  &lt;span class="no"&gt;When&lt;/span&gt; &lt;span class="no"&gt;I&lt;/span&gt; &lt;span class="n"&gt;fill&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="s2"&gt;"Task Field"&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="s2"&gt;"My first todo!"&lt;/span&gt;
-  &lt;span class="no"&gt;And&lt;/span&gt; &lt;span class="no"&gt;I&lt;/span&gt; &lt;span class="n"&gt;press&lt;/span&gt; &lt;span class="s2"&gt;"Submit"&lt;/span&gt;
-  &lt;span class="no"&gt;Then&lt;/span&gt; &lt;span class="no"&gt;I&lt;/span&gt; &lt;span class="n"&gt;should&lt;/span&gt; &lt;span class="n"&gt;see&lt;/span&gt; &lt;span class="s2"&gt;"My first todo!"&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Run cucumber for the first time as a rake task.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;rake&lt;/span&gt; &lt;span class="n"&gt;cucumber&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Copy and paste the console output into our step definitions file.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;touch&lt;/span&gt; &lt;span class="n"&gt;features&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;step_definitions&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;todos&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;rb&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;!-- --&gt;
-
-&lt;p&gt;&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#features/step_definitions/todos.rb&lt;/span&gt;
-
-&lt;span class="no"&gt;Given&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I am on the home page$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="n"&gt;pending&lt;/span&gt; &lt;span class="c1"&gt;# express the regexp above with the code you wish you had&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="no"&gt;Given&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I go to "(.*?)"$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;arg1&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="n"&gt;pending&lt;/span&gt; &lt;span class="c1"&gt;# express the regexp above with the code you wish you had&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="no"&gt;When&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I fill in "(.*?)" with "(.*?)"$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;arg1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;arg2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="n"&gt;pending&lt;/span&gt; &lt;span class="c1"&gt;# express the regexp above with the code you wish you had&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="no"&gt;When&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I press "(.*?)"$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;arg1&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="n"&gt;pending&lt;/span&gt; &lt;span class="c1"&gt;# express the regexp above with the code you wish you had&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="no"&gt;Then&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I should see "(.*?)"$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;arg1&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="n"&gt;pending&lt;/span&gt; &lt;span class="c1"&gt;# express the regexp above with the code you wish you had&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Whenever we want some feedback from cucumber, we&amp;rsquo;ll run &lt;em&gt;$ rake cucumber&lt;/em&gt;  And we&amp;rsquo;ll see that it tells us our first step is pending.&lt;/p&gt;
-
-&lt;p&gt;Fill out the first step definition with the following.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#features/step_definitions/todos.rb&lt;/span&gt;
-
-&lt;span class="no"&gt;Given&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I am on the home page$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="n"&gt;visit&lt;/span&gt; &lt;span class="s2"&gt;"/"&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This tells Cucumber we expect to be on the home page to start things off.&lt;/p&gt;
-
-&lt;p&gt;Cucumber tells us&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;No&lt;/span&gt; &lt;span class="n"&gt;route&lt;/span&gt; &lt;span class="n"&gt;matches&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="no"&gt;GET&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="s2"&gt;"/"&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;ActionController&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;RoutingError&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;What we need is a route to our homepage. Even if we build a route, we know we&amp;rsquo;ll need a view and a controller (plus an index) to get it started&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;Let&amp;rsquo;s add a route.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;# config/routes.rb&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
-&lt;span class="nf"&gt;root&lt;/span&gt; &lt;span class="s1"&gt;'tasks#index'&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Run cucumber again.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;uninitialized&lt;/span&gt; &lt;span class="n"&gt;constant&lt;/span&gt; &lt;span class="no"&gt;TasksController&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;ActionController&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;RoutingError&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Cucumber tells us we need a controller for our tasks. This is really TDD. Just taking one step, then another, letting the tests dictate each next step in development.&lt;/p&gt;
-
-&lt;p&gt;Let&amp;rsquo;s create a controller.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;rails&lt;/span&gt; &lt;span class="n"&gt;g&lt;/span&gt; &lt;span class="n"&gt;controller&lt;/span&gt; &lt;span class="no"&gt;Tasks&lt;/span&gt; &lt;span class="n"&gt;home&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;no&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;helper&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;no&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;assets&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This will also give us the view we need as well at &lt;em&gt;app/views/tasks/home.html.erb&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;When we run cucumber again, our first step passes! Now our next step is pending. So let&amp;rsquo;s write the code for that.&lt;/p&gt;
-
-&lt;p&gt;Now we need to write the code for our next feature. We want to go to a page to add a new task. So we&amp;rsquo;ll need a link users can click. We&amp;rsquo;ll update the argument so its human readable, the_link and reference it in the code.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Given&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I go to "(.*?)"$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;the_link&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="n"&gt;click_link&lt;/span&gt; &lt;span class="n"&gt;the_link&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Cucumber tells us:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Unable&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;find&lt;/span&gt; &lt;span class="n"&gt;link&lt;/span&gt; &lt;span class="s2"&gt;"Add new task"&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;ElementNotFound&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now we have a failing test. It&amp;rsquo;s time to update our application code with a link to add a new task.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#app/views/tasks/home.html.erb&lt;/span&gt;
-&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="sx"&gt;%= link_to "Add new task", new_task_path %&amp;amp;gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Cucumber tells us:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;undefined&lt;/span&gt; &lt;span class="n"&gt;local&lt;/span&gt; &lt;span class="n"&gt;variable&lt;/span&gt; &lt;span class="n"&gt;or&lt;/span&gt; &lt;span class="nb"&gt;method&lt;/span&gt; &lt;span class="sb"&gt;`new_task_path' for #&amp;amp;lt;#&amp;amp;lt;Class:0x007fcc04b53060&amp;amp;gt;:0x007fcc04b51dc8&amp;amp;gt; (ActionView::Template::Error)
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We don&amp;rsquo;t have a route for new. So let&amp;rsquo;s change our code in our routes to:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;routes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;rb&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
-&lt;span class="nf"&gt;root&lt;/span&gt; &lt;span class="s1"&gt;'tasks#home'&lt;/span&gt;
-&lt;span class="n"&gt;resources&lt;/span&gt; &lt;span class="ss"&gt;:tasks&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Cucumber tells us:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;The&lt;/span&gt; &lt;span class="n"&gt;action&lt;/span&gt; &lt;span class="s1"&gt;'new'&lt;/span&gt; &lt;span class="n"&gt;could&lt;/span&gt; &lt;span class="n"&gt;not&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="n"&gt;found&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="no"&gt;TasksController&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;AbstractController&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;ActionNotFound&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;So we need to update our controller with a new action.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#app/controllers/task_controller.rb&lt;/span&gt;
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;TasksController&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="no"&gt;ApplicationController&lt;/span&gt;
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;new&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Cucumber tells us:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Missing&lt;/span&gt; &lt;span class="n"&gt;template&lt;/span&gt; &lt;span class="n"&gt;tasks&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="kp"&gt;new&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="kp"&gt;new&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:locale&lt;/span&gt;&lt;span class="o"&gt;=&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;[&lt;/span&gt;&lt;span class="ss"&gt;:en&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="ss"&gt;:formats&lt;/span&gt;&lt;span class="o"&gt;=&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;[&lt;/span&gt;&lt;span class="ss"&gt;:html&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="ss"&gt;:variants&lt;/span&gt;&lt;span class="o"&gt;=&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;[],&lt;/span&gt; &lt;span class="ss"&gt;:handlers&lt;/span&gt;&lt;span class="o"&gt;=&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;[&lt;/span&gt;&lt;span class="ss"&gt;:erb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:builder&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:raw&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:ruby&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:coffee&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:jbuilder&lt;/span&gt;&lt;span class="p"&gt;]}&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="no"&gt;Searched&lt;/span&gt; &lt;span class="ss"&gt;in:
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We need a view template for our new action.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;touch&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;views&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;tasks&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="kp"&gt;new&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;html&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;erb&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Rake tells us this step passes!&lt;/p&gt;
-
-&lt;p&gt;Let&amp;rsquo;s write the code for our next step.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;# features/step_definitions/todos.rb&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
-&lt;span class="no"&gt;When&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I fill in "(.*?)" with "(.*?)"$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;input&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="n"&gt;fill_in&lt;/span&gt; &lt;span class="n"&gt;input&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;with: &lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We updated the argument variables from &lt;em&gt;arg1, arg2&lt;/em&gt; to &lt;em&gt;input, value&lt;/em&gt; to be more readable.&lt;/p&gt;
-
-&lt;p&gt;When we run cucumber, we get:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Unable&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;find&lt;/span&gt; &lt;span class="n"&gt;field&lt;/span&gt; &lt;span class="s2"&gt;"Task Field"&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;ElementNotFound&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Cucumber is looking for the form to add a new task. Let&amp;rsquo;s create the form. First let&amp;rsquo;s add Simple Form to our gemfile.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#Gemfile&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
-&lt;span class="nf"&gt;gem&lt;/span&gt; &lt;span class="s1"&gt;'simple_form'&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
-
-&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;bundle&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt;
-
-&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;rails&lt;/span&gt; &lt;span class="n"&gt;g&lt;/span&gt; &lt;span class="n"&gt;simple_form&lt;/span&gt;&lt;span class="ss"&gt;:install&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;!-- --&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#app/views/tasks/home.html.erb&lt;/span&gt;
-&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="sx"&gt;%= simple_form_for(@task) do |f| %&amp;amp;gt;
-  &amp;amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;input&lt;/span&gt; &lt;span class="ss"&gt;:name&lt;/span&gt; &lt;span class="o"&gt;%&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="sx"&gt;%= f.button :submit, "Submit" %&amp;amp;gt;
-&amp;amp;lt;% end %&amp;amp;gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Run Cucumber and we get:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;undefined&lt;/span&gt; &lt;span class="nb"&gt;method&lt;/span&gt; &lt;span class="sb"&gt;`model_name' for nil:NilClass (ActionView::Template::Error)
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We need to update our controller action that will allow us to create a new task.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#app/controllers/tasks_controller.rb&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
-&lt;span class="nf"&gt;def&lt;/span&gt; &lt;span class="kp"&gt;new&lt;/span&gt;
-  &lt;span class="vi"&gt;@task&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Task&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We need to create a model.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;rails&lt;/span&gt; &lt;span class="n"&gt;g&lt;/span&gt; &lt;span class="n"&gt;model&lt;/span&gt; &lt;span class="no"&gt;Task&lt;/span&gt; &lt;span class="nb"&gt;name&lt;/span&gt;&lt;span class="ss"&gt;:string&lt;/span&gt;
-&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;rake&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="ss"&gt;:migrate&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Then we get&amp;hellip;&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Unable&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;find&lt;/span&gt; &lt;span class="n"&gt;field&lt;/span&gt; &lt;span class="s2"&gt;"Task Field"&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;ElementNotFound&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Capybara is having trouble finding the field for which we&amp;rsquo;d like to add in the name of our task. It&amp;rsquo;s time to take a second look at our original step definition and enter a revision. If you run your rails server and inspect the source code, our rails form field looks like this: &lt;code class="language-ruby"&gt;&amp;lt;input class="string optional" type="text" name="task[name]" id="task_name" /&amp;gt;&lt;/code&gt; Cucumber is able to find the field by name or ID. So let&amp;rsquo;s update our feature with the id as the form field identifier:&lt;/p&gt;
-
-&lt;p&gt;Our step definition passes.&lt;/p&gt;
-
-&lt;p&gt;Let&amp;rsquo;s write the code for our third step definition.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#features/step_definitions/todos.rb&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
-&lt;span class="no"&gt;When&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I press "(.*?)"$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;the_button&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="n"&gt;click_button&lt;/span&gt; &lt;span class="n"&gt;the_button&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Run cucumber and we get:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;The&lt;/span&gt; &lt;span class="n"&gt;action&lt;/span&gt; &lt;span class="s1"&gt;'create'&lt;/span&gt; &lt;span class="n"&gt;could&lt;/span&gt; &lt;span class="n"&gt;not&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="n"&gt;found&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="no"&gt;TasksController&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;AbstractController&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;ActionNotFound&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="no"&gt;We&lt;/span&gt; &lt;span class="n"&gt;need&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;create&lt;/span&gt; &lt;span class="n"&gt;action&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;our&lt;/span&gt; &lt;span class="n"&gt;controller&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
-
-&lt;span class="c1"&gt;#app/controllers/task_controller.erb&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
-&lt;span class="nf"&gt;def&lt;/span&gt; &lt;span class="n"&gt;create&lt;/span&gt;
-  &lt;span class="vi"&gt;@task&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Task&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Run Cucumber.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Missing&lt;/span&gt; &lt;span class="n"&gt;template&lt;/span&gt; &lt;span class="n"&gt;tasks&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;create&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;create&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:locale&lt;/span&gt;&lt;span class="o"&gt;=&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;[&lt;/span&gt;&lt;span class="ss"&gt;:en&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="ss"&gt;:formats&lt;/span&gt;&lt;span class="o"&gt;=&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;[&lt;/span&gt;&lt;span class="ss"&gt;:html&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="ss"&gt;:variants&lt;/span&gt;&lt;span class="o"&gt;=&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;[],&lt;/span&gt; &lt;span class="ss"&gt;:handlers&lt;/span&gt;&lt;span class="o"&gt;=&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;[&lt;/span&gt;&lt;span class="ss"&gt;:erb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:builder&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:raw&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:ruby&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:coffee&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:jbuilder&lt;/span&gt;&lt;span class="p"&gt;]}&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="no"&gt;Searched&lt;/span&gt; &lt;span class="ss"&gt;in:
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;By default Rails is trying to take us to a new page&amp;hellip; Since this is just a one page app, let&amp;rsquo;s keep everything on the home page. And so our app is secure, I&amp;rsquo;m including in params at this time.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#app/controllers/task_controller.erb&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
-&lt;span class="nf"&gt;def&lt;/span&gt; &lt;span class="n"&gt;create&lt;/span&gt;
-  &lt;span class="vi"&gt;@task&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Task&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;task_params&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vi"&gt;@task&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;save&lt;/span&gt;
-    &lt;span class="n"&gt;redirect_to&lt;/span&gt; &lt;span class="n"&gt;root_url&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="kp"&gt;private&lt;/span&gt;
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;task_params&lt;/span&gt;
-    &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:task&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;permit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Our step passes. Now we should verify that we can see our new task. Let&amp;rsquo;s finish out the code for the fourth step. Where we test to make sure we can actually see the new task posted.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#features/step_definitions/todos.rb&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
-&lt;span class="no"&gt;Then&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I should see "(.*?)"$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;task&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="n"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;has_content?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;task&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Run Cucumber:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Failed&lt;/span&gt; &lt;span class="n"&gt;assertion&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;no&lt;/span&gt; &lt;span class="n"&gt;message&lt;/span&gt; &lt;span class="n"&gt;given&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Minitest&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Assertion&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This isn&amp;rsquo;t that informative. But considering we haven&amp;rsquo;t done anything to actually list tasks, let&amp;rsquo;s start with the view.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#app/views/tasks/home.html.erb&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
-&lt;span class="nf"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="sx"&gt;% for &lt;/span&gt;&lt;span class="n"&gt;task&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="vi"&gt;@tasks&lt;/span&gt; &lt;span class="o"&gt;%&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="n"&gt;li&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="sx"&gt;%= task.name %&amp;amp;gt;&amp;amp;lt;/li&amp;amp;gt;
-&amp;amp;lt;% end %&amp;amp;gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Run Cucumber:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;undefined&lt;/span&gt; &lt;span class="nb"&gt;method&lt;/span&gt; &lt;span class="sb"&gt;`each' for nil:NilClass (ActionView::Template::Error)
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We don&amp;rsquo;t have anything in the controller to feed the view any data. So let&amp;rsquo;s update that.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#app/controllers/task_controller.rb&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
-&lt;span class="nf"&gt;def&lt;/span&gt; &lt;span class="n"&gt;home&lt;/span&gt;
-  &lt;span class="vi"&gt;@tasks&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Task&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;all&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Then all our tests pass.&lt;/p&gt;
-
-&lt;h3&gt;Step 3: Create a failing test&lt;/h3&gt;
-
-&lt;p&gt;What happens when the user does something weird? Do we want users to create empty tasks? No. So let&amp;rsquo;s test to make sure that invalid tasks are not posted.&lt;/p&gt;
-
-&lt;p&gt;Let&amp;rsquo;s write a feature:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#features/todos.feature&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
-&lt;span class="no"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="no"&gt;Create&lt;/span&gt; &lt;span class="n"&gt;an&lt;/span&gt; &lt;span class="n"&gt;invalid&lt;/span&gt; &lt;span class="n"&gt;task&lt;/span&gt;
-  &lt;span class="no"&gt;Given&lt;/span&gt; &lt;span class="no"&gt;I&lt;/span&gt; &lt;span class="n"&gt;am&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;home&lt;/span&gt; &lt;span class="n"&gt;page&lt;/span&gt;
-  &lt;span class="no"&gt;And&lt;/span&gt; &lt;span class="no"&gt;I&lt;/span&gt; &lt;span class="n"&gt;go&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="s2"&gt;"Add new task"&lt;/span&gt;
-  &lt;span class="no"&gt;When&lt;/span&gt; &lt;span class="no"&gt;I&lt;/span&gt; &lt;span class="n"&gt;fill&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="s2"&gt;"task_name"&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="s2"&gt;""&lt;/span&gt;
-  &lt;span class="no"&gt;And&lt;/span&gt; &lt;span class="no"&gt;I&lt;/span&gt; &lt;span class="n"&gt;press&lt;/span&gt; &lt;span class="s2"&gt;"Submit"&lt;/span&gt;
-  &lt;span class="no"&gt;Then&lt;/span&gt; &lt;span class="no"&gt;I&lt;/span&gt; &lt;span class="n"&gt;should&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="n"&gt;told&lt;/span&gt; &lt;span class="s2"&gt;"Can't be blank"&lt;/span&gt;
-  &lt;span class="no"&gt;And&lt;/span&gt; &lt;span class="no"&gt;I&lt;/span&gt; &lt;span class="n"&gt;fill&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="s2"&gt;"Name"&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="s2"&gt;"My first todo!"&lt;/span&gt;
-  &lt;span class="no"&gt;And&lt;/span&gt; &lt;span class="no"&gt;I&lt;/span&gt; &lt;span class="n"&gt;press&lt;/span&gt; &lt;span class="s2"&gt;"Submit"&lt;/span&gt;
-  &lt;span class="no"&gt;Then&lt;/span&gt; &lt;span class="no"&gt;I&lt;/span&gt; &lt;span class="n"&gt;should&lt;/span&gt; &lt;span class="n"&gt;see&lt;/span&gt; &lt;span class="s2"&gt;"My first todo!"&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;There&amp;rsquo;s some repetition here in the steps. We&amp;rsquo;re only going to have to write one new step definition. The rest is repeat. The new step definition is &lt;code class="language-ruby"&gt;Then I should be told "Can't be blank"&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;When we run Cucumber, it gives us our new step definition to implement. We&amp;rsquo;ll copy and paste it into our todos.rb&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#features/step_definitions/todos.rb&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
-&lt;span class="c1"&gt;# invalid post&lt;/span&gt;
-&lt;span class="no"&gt;Then&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I should be told "(.*?)"$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;arg1&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="n"&gt;pending&lt;/span&gt; &lt;span class="c1"&gt;# express the regexp above with the code you wish you had&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And let&amp;rsquo;s update this step definition with our test code.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#features/step_definitions/todos.rb&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
-&lt;span class="c1"&gt;# invalid post&lt;/span&gt;
-&lt;span class="no"&gt;Then&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I should be told "(.*?)"$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;error_message&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="n"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;has_content?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;error_message&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Cucumber tells us:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Failed&lt;/span&gt; &lt;span class="n"&gt;assertion&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;no&lt;/span&gt; &lt;span class="n"&gt;message&lt;/span&gt; &lt;span class="n"&gt;given&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Minitest&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Assertion&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Not that informative. But we know we don&amp;rsquo;t have any validations on our task model. So let&amp;rsquo;s update that.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#app/models/task.rb&lt;/span&gt;
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Task&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Base&lt;/span&gt;
-  &lt;span class="n"&gt;validates&lt;/span&gt; &lt;span class="ss"&gt;:name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;presence: &lt;/span&gt;&lt;span class="kp"&gt;true&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Cucumber tells us:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Missing&lt;/span&gt; &lt;span class="n"&gt;template&lt;/span&gt; &lt;span class="n"&gt;tasks&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;create&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;create&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:locale&lt;/span&gt;&lt;span class="o"&gt;=&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;[&lt;/span&gt;&lt;span class="ss"&gt;:en&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="ss"&gt;:formats&lt;/span&gt;&lt;span class="o"&gt;=&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;[&lt;/span&gt;&lt;span class="ss"&gt;:html&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="ss"&gt;:variants&lt;/span&gt;&lt;span class="o"&gt;=&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;[],&lt;/span&gt; &lt;span class="ss"&gt;:handlers&lt;/span&gt;&lt;span class="o"&gt;=&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;[&lt;/span&gt;&lt;span class="ss"&gt;:erb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:builder&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:raw&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:ruby&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:coffee&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:jbuilder&lt;/span&gt;&lt;span class="p"&gt;]}&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="no"&gt;Searched&lt;/span&gt; &lt;span class="ss"&gt;in:
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;It looks like Rails is trying to reroute us. We want to stay on the same page and see the error. Let&amp;rsquo;s update the controller action with a scenario detailing what happens when a task is not saved.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#app/controllers/tasks_controller.rb&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
-&lt;span class="nf"&gt;def&lt;/span&gt; &lt;span class="n"&gt;create&lt;/span&gt;
-  &lt;span class="vi"&gt;@task&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Task&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;task_params&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vi"&gt;@task&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;save&lt;/span&gt;
-    &lt;span class="n"&gt;redirect_to&lt;/span&gt; &lt;span class="n"&gt;root_url&lt;/span&gt;
-  &lt;span class="k"&gt;else&lt;/span&gt;
-    &lt;span class="n"&gt;render&lt;/span&gt; &lt;span class="ss"&gt;:new&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Cucumber tells us:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Failed&lt;/span&gt; &lt;span class="n"&gt;assertion&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;no&lt;/span&gt; &lt;span class="n"&gt;message&lt;/span&gt; &lt;span class="n"&gt;given&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Minitest&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Assertion&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We still aren&amp;rsquo;t being told of the failure. If we run &lt;em&gt;rails s&lt;/em&gt; to start the server and see what&amp;rsquo;s going on when we submit a blank task, we&amp;rsquo;re told &amp;ldquo;can&amp;rsquo;t be blank&amp;rdquo;. It is working! Cross referencing with our feature, we previously wrote, &amp;ldquo;Can&amp;rsquo;t be blank&amp;rdquo;. So we need to update our feature with the proper capitalization.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#features/todos.feature&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
-&lt;span class="c1"&gt;# old&lt;/span&gt;
-&lt;span class="c1"&gt;# Then I should be told "Can't be blank"&lt;/span&gt;
-&lt;span class="no"&gt;Then&lt;/span&gt; &lt;span class="no"&gt;I&lt;/span&gt; &lt;span class="n"&gt;should&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="n"&gt;told&lt;/span&gt; &lt;span class="s2"&gt;"can't be blank"&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now all our tests pass.&lt;/p&gt;
-
-&lt;h3&gt;Step 4: Completing Tasks&lt;/h3&gt;
-
-&lt;p&gt;Let&amp;rsquo;s write the scenario for marking a task as complete.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="no"&gt;Mark&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;task&lt;/span&gt; &lt;span class="n"&gt;as&lt;/span&gt; &lt;span class="n"&gt;completed&lt;/span&gt;
-  &lt;span class="no"&gt;Given&lt;/span&gt; &lt;span class="no"&gt;I&lt;/span&gt; &lt;span class="n"&gt;have&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;following&lt;/span&gt; &lt;span class="ss"&gt;tasks:
-    &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nb"&gt;name&lt;/span&gt;          &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;completed&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;
-    &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="no"&gt;My&lt;/span&gt; &lt;span class="no"&gt;First&lt;/span&gt; &lt;span class="no"&gt;Todo&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="kp"&gt;false&lt;/span&gt;     &lt;span class="o"&gt;|&lt;/span&gt;
-    &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="no"&gt;My&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="n"&gt;nd&lt;/span&gt; &lt;span class="no"&gt;Todo&lt;/span&gt;   &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="kp"&gt;false&lt;/span&gt;     &lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="no"&gt;When&lt;/span&gt; &lt;span class="no"&gt;I&lt;/span&gt; &lt;span class="n"&gt;am&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;home&lt;/span&gt; &lt;span class="n"&gt;page&lt;/span&gt;
-  &lt;span class="no"&gt;And&lt;/span&gt; &lt;span class="no"&gt;I&lt;/span&gt; &lt;span class="n"&gt;follow&lt;/span&gt; &lt;span class="s2"&gt;"Edit"&lt;/span&gt; &lt;span class="n"&gt;associated&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="s2"&gt;"My 1st Todo"&lt;/span&gt;
-  &lt;span class="no"&gt;And&lt;/span&gt; &lt;span class="no"&gt;I&lt;/span&gt; &lt;span class="n"&gt;check&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="s2"&gt;"Done"&lt;/span&gt; &lt;span class="n"&gt;checkbox&lt;/span&gt;
-  &lt;span class="no"&gt;And&lt;/span&gt; &lt;span class="no"&gt;I&lt;/span&gt; &lt;span class="n"&gt;press&lt;/span&gt; &lt;span class="s2"&gt;"Submit"&lt;/span&gt;
-  &lt;span class="no"&gt;Then&lt;/span&gt; &lt;span class="no"&gt;I&lt;/span&gt; &lt;span class="n"&gt;should&lt;/span&gt; &lt;span class="n"&gt;see&lt;/span&gt; &lt;span class="s2"&gt;"My 1st Todo"&lt;/span&gt; &lt;span class="n"&gt;as&lt;/span&gt; &lt;span class="n"&gt;completed&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;You&amp;rsquo;ll notice a new format here. We created some sample data within Cucumber that can run. It&amp;rsquo;s a simple and fast way to start writing more complex tests.&lt;/p&gt;
-
-&lt;p&gt;We&amp;rsquo;ll run cucumber and grab the output and paste it in our &lt;em&gt;step_definitons/todos.rb&lt;/em&gt; file.&lt;/p&gt;
-
-&lt;p&gt;In order to work with the data in the fixtures, we&amp;rsquo;ll modify our first step definition:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Given&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I have the following tasks:$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;table&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;hash&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;table&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;hashes&lt;/span&gt;
-    &lt;span class="no"&gt;Task&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;hash&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Then we&amp;rsquo;re told:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;unknown&lt;/span&gt; &lt;span class="n"&gt;attribute&lt;/span&gt; &lt;span class="s1"&gt;'completed'&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="no"&gt;Task&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;UnknownAttributeError&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We never created the a field for &amp;ldquo;completed&amp;rdquo; so let&amp;rsquo;s add that now.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;rails&lt;/span&gt; &lt;span class="n"&gt;g&lt;/span&gt; &lt;span class="n"&gt;migration&lt;/span&gt; &lt;span class="no"&gt;AddCompletedToTasks&lt;/span&gt; &lt;span class="n"&gt;completed&lt;/span&gt;&lt;span class="ss"&gt;:boolean&lt;/span&gt;
-&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;rake&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="ss"&gt;:migrate&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Our second step passes. Now we need to write another step definition:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;When&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I follow "(.*?)" associated with "(.*?)"$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;arg1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;arg2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="n"&gt;first&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'li'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;click_link&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Edit'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This will find the first &amp;ldquo;Edit&amp;rdquo; link on the page, which will be associated with our first todo. Capybara will tell us it can&amp;rsquo;t find it:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Unable&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;find&lt;/span&gt; &lt;span class="n"&gt;link&lt;/span&gt; &lt;span class="s2"&gt;"Edit"&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;ElementNotFound&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We&amp;rsquo;ll add an edit link into our view.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#app/views/tasks/home.html.erb&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
-&lt;span class="nf"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="sx"&gt;% for &lt;/span&gt;&lt;span class="n"&gt;task&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="vi"&gt;@tasks&lt;/span&gt; &lt;span class="o"&gt;%&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="n"&gt;li&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="sx"&gt;%= task.name %&amp;amp;gt; • &amp;amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;link_to&lt;/span&gt; &lt;span class="s1"&gt;'Edit'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;edit_task_path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;task&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;%&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="sr"&gt;/li&amp;amp;gt;
-&amp;amp;lt;% end %&amp;amp;gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Then Cucumber tells us we don&amp;rsquo;t have a controller action:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;The&lt;/span&gt; &lt;span class="n"&gt;action&lt;/span&gt; &lt;span class="s1"&gt;'edit'&lt;/span&gt; &lt;span class="n"&gt;could&lt;/span&gt; &lt;span class="n"&gt;not&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="n"&gt;found&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="no"&gt;TasksController&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;AbstractController&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;ActionNotFound&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We&amp;rsquo;ll add the action to our tasks controller:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#app/controllers/tasks_controller.rb&lt;/span&gt;
-
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;edit&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now we&amp;rsquo;re missing our view&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Missing&lt;/span&gt; &lt;span class="n"&gt;template&lt;/span&gt; &lt;span class="n"&gt;tasks&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;edit&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;edit&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:locale&lt;/span&gt;&lt;span class="o"&gt;=&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;[&lt;/span&gt;&lt;span class="ss"&gt;:en&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="ss"&gt;:formats&lt;/span&gt;&lt;span class="o"&gt;=&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;[&lt;/span&gt;&lt;span class="ss"&gt;:html&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="ss"&gt;:variants&lt;/span&gt;&lt;span class="o"&gt;=&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;[],&lt;/span&gt; &lt;span class="ss"&gt;:handlers&lt;/span&gt;&lt;span class="o"&gt;=&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;[&lt;/span&gt;&lt;span class="ss"&gt;:erb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:builder&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:raw&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:ruby&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:coffee&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:jbuilder&lt;/span&gt;&lt;span class="p"&gt;]}&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="no"&gt;Searched&lt;/span&gt; &lt;span class="ss"&gt;in:
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We&amp;rsquo;ll add it in. Again just doing the bare minimum at each step.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;touch&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;views&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;tasks&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;edit&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;html&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;erb&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Our step passes. We now need to write the code for the next step definition to test completing a task.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;When&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I check the "(.*?)" checkbox$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;arg1&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'input[type=checkbox]'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;true&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Cucumber:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Unable&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;find&lt;/span&gt; &lt;span class="n"&gt;css&lt;/span&gt; &lt;span class="s2"&gt;"input[type=checkbox]"&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;ElementNotFound&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;All we have is a blank page. Its time to add in a form to edit the task on our edit page. It&amp;rsquo;s the same form as on the new view, except with a new field to mark todos as completed.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#app/views/tasks/edit.html.erb&lt;/span&gt;
-
-&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="sx"&gt;%= simple_form_for(@task) do |f| %&amp;amp;gt;
-  &amp;amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;input&lt;/span&gt; &lt;span class="ss"&gt;:name&lt;/span&gt; &lt;span class="o"&gt;%&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="sx"&gt;%= f.input :completed, as: :boolean, checked_value: true, unchecked_value: false %&amp;amp;gt;
-  &amp;amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;button&lt;/span&gt; &lt;span class="ss"&gt;:submit&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"Submit"&lt;/span&gt; &lt;span class="o"&gt;%&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="sx"&gt;% end &lt;/span&gt;&lt;span class="o"&gt;%&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We get:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;undefined&lt;/span&gt; &lt;span class="nb"&gt;method&lt;/span&gt; &lt;span class="sb"&gt;`model_name' for nil:NilClass (ActionView::Template::Error)
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;There&amp;rsquo;s nothing in the controller to help rails find the task. So let&amp;rsquo;s update the edit method:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#app/controllers/task_controller.rb&lt;/span&gt;
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;edit&lt;/span&gt;
-  &lt;span class="vi"&gt;@task&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Task&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:id&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Cucumber tells us:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;The&lt;/span&gt; &lt;span class="n"&gt;action&lt;/span&gt; &lt;span class="s1"&gt;'update'&lt;/span&gt; &lt;span class="n"&gt;could&lt;/span&gt; &lt;span class="n"&gt;not&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="n"&gt;found&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="no"&gt;TasksController&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;AbstractController&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;ActionNotFound&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Let&amp;rsquo;s add an update action to our tasks controller.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#app/controllers/task_controller.rb&lt;/span&gt;
-
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;update&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Cucumber says:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Missing&lt;/span&gt; &lt;span class="n"&gt;template&lt;/span&gt; &lt;span class="n"&gt;tasks&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;update&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;update&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:locale&lt;/span&gt;&lt;span class="o"&gt;=&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;[&lt;/span&gt;&lt;span class="ss"&gt;:en&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="ss"&gt;:formats&lt;/span&gt;&lt;span class="o"&gt;=&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;[&lt;/span&gt;&lt;span class="ss"&gt;:html&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="ss"&gt;:variants&lt;/span&gt;&lt;span class="o"&gt;=&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;[],&lt;/span&gt; &lt;span class="ss"&gt;:handlers&lt;/span&gt;&lt;span class="o"&gt;=&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;[&lt;/span&gt;&lt;span class="ss"&gt;:erb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:builder&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:raw&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:ruby&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:coffee&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:jbuilder&lt;/span&gt;&lt;span class="p"&gt;]}&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="no"&gt;Searched&lt;/span&gt; &lt;span class="ss"&gt;in:
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We don&amp;rsquo;t want to create a view for update&amp;hellip; so let&amp;rsquo;s try updating the action to include some rerouting&amp;hellip; After a successful update we want to go to the home page and if there&amp;rsquo;s been an error, we want to stay on the edit page.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#app/controllers/task_controller.rb&lt;/span&gt;
-
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;update&lt;/span&gt;
-  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vi"&gt;@task&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;update&lt;/span&gt;
-    &lt;span class="n"&gt;redirect_to&lt;/span&gt; &lt;span class="n"&gt;root_url&lt;/span&gt;
-  &lt;span class="k"&gt;else&lt;/span&gt;
-    &lt;span class="n"&gt;render&lt;/span&gt; &lt;span class="ss"&gt;:edit&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;One more problem, rails can&amp;rsquo;t find the task we&amp;rsquo;re trying to update&amp;hellip; so let&amp;rsquo;s copy over the same find code from the edit action&amp;hellip;&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#app/controllers/task_controller.rb&lt;/span&gt;
-
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;update&lt;/span&gt;
-  &lt;span class="vi"&gt;@task&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Task&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:id&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vi"&gt;@task&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;update&lt;/span&gt;
-    &lt;span class="n"&gt;redirect_to&lt;/span&gt; &lt;span class="n"&gt;root_url&lt;/span&gt;
-  &lt;span class="k"&gt;else&lt;/span&gt;
-    &lt;span class="n"&gt;render&lt;/span&gt; &lt;span class="ss"&gt;:edit&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And now&amp;hellip;&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;wrong&lt;/span&gt; &lt;span class="n"&gt;number&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;arguments&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;ArgumentError&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We need to fix our strong parameters in our private task_params method.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#app/controllers/task_controller.rb&lt;/span&gt;
-
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;task_params&lt;/span&gt;
-  &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:task&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;permit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:completed&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We also need to pass our params into the update method.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#app/controllers/task_controller.rb&lt;/span&gt;
-
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;update&lt;/span&gt;
-  &lt;span class="vi"&gt;@task&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Task&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:id&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vi"&gt;@task&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;update&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;task_params&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;redirect_to&lt;/span&gt; &lt;span class="n"&gt;root_url&lt;/span&gt;
-  &lt;span class="k"&gt;else&lt;/span&gt;
-    &lt;span class="n"&gt;render&lt;/span&gt; &lt;span class="ss"&gt;:edit&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The step passes. Before we go on, let&amp;rsquo;s refactor the code so we aren&amp;rsquo;t repeating the same line of code in the edit and update methods in the controller. Remove the following line from the edit and update actions.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="vi"&gt;@task&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Task&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:id&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Then create a new private method:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#app/controllers/task_controller.rb&lt;/span&gt;
-
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;find_task&lt;/span&gt;
-  &lt;span class="vi"&gt;@task&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Task&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:id&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And at the top of our controller we&amp;rsquo;ll call our new method with a before_action hook:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#app/controllers/task_controller.rb&lt;/span&gt;
-
-&lt;span class="n"&gt;before_action&lt;/span&gt; &lt;span class="ss"&gt;:find_task&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;only: &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:edit&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:update&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If we run cucumber again and see it still working, we were just able to &amp;ldquo;fearlessly&amp;rdquo; refactor.&lt;/p&gt;
-
-&lt;p&gt;Finally, let&amp;rsquo;s finish this last step. We need to communicate to the user that the task is completed.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Then&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I should see "(.*?)" as completed\.$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;task&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="n"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;first&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'li'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;parent&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;has_css?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'.completed'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This code checks if our list item has the css class &lt;em&gt;.completed&lt;/em&gt;. The argument has_css? looks within the list item to its children, when we wanted to check the list item itself. So we used &lt;em&gt;.parent&lt;/em&gt; to return the search to the list item element itself.&lt;/p&gt;
-
-&lt;p&gt;Let&amp;rsquo;s update the home page view with some logic that determines if the task is marked as completed, and if it is, to add the class, &amp;ldquo;completed&amp;rdquo;&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#app/views/tasks/home.html.erb&lt;/span&gt;
-
-&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="n"&gt;li&lt;/span&gt; &lt;span class="k"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"&amp;amp;lt;%= task.completed == true ? "&lt;/span&gt;&lt;span class="n"&gt;completed&lt;/span&gt;&lt;span class="s2"&gt;" : "" %&amp;amp;gt;"&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="sx"&gt;%= task.name %&amp;amp;gt; • &amp;amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;link_to&lt;/span&gt; &lt;span class="s1"&gt;'Edit'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;edit_task_path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;task&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;%&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="sr"&gt;/li&amp;amp;gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;You may want to move this logic out into a helper method, but for now, this will adequately accomplish what we want.&lt;/p&gt;
-
-&lt;p&gt;Then let&amp;rsquo;s add a new CSS file:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ touch app/assets/stylesheets/tasks.css
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And add the code:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;#app/assets/stylesheets/tasks.css
-
-li.completed{
-  text-decoration: line-through;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Then we can run cucumber and verify that all our tests are passing. It kind of sucks that we have a line running through even the edit and delete actions, but oh well - this isn&amp;rsquo;t about being pretty, but just showing how this can all work.&lt;/p&gt;
-
-&lt;h3&gt;Step 5: Removing Tasks&lt;/h3&gt;
-
-&lt;p&gt;When a user has completed a bunch of tasks, after a time, it makes sense to that our user may no longer want to view the tasks. So we need a way to delete tasks.&lt;/p&gt;
-
-&lt;p&gt;So let&amp;rsquo;s write the following scenario:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="no"&gt;Delete&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;task&lt;/span&gt;
-  &lt;span class="no"&gt;Given&lt;/span&gt; &lt;span class="no"&gt;I&lt;/span&gt; &lt;span class="n"&gt;have&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;following&lt;/span&gt; &lt;span class="ss"&gt;tasks:
-    &lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nb"&gt;name&lt;/span&gt;          &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;completed&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;
-    &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="no"&gt;My&lt;/span&gt; &lt;span class="no"&gt;First&lt;/span&gt; &lt;span class="no"&gt;Todo&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="kp"&gt;false&lt;/span&gt;     &lt;span class="o"&gt;|&lt;/span&gt;
-    &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="no"&gt;My&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="n"&gt;nd&lt;/span&gt; &lt;span class="no"&gt;Todo&lt;/span&gt;   &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="kp"&gt;false&lt;/span&gt;     &lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="no"&gt;When&lt;/span&gt; &lt;span class="no"&gt;I&lt;/span&gt; &lt;span class="n"&gt;am&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;home&lt;/span&gt; &lt;span class="n"&gt;page&lt;/span&gt;
-  &lt;span class="no"&gt;And&lt;/span&gt; &lt;span class="no"&gt;I&lt;/span&gt; &lt;span class="n"&gt;press&lt;/span&gt; &lt;span class="s2"&gt;"Delete"&lt;/span&gt; &lt;span class="n"&gt;associated&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="s2"&gt;"My First Todo"&lt;/span&gt;
-  &lt;span class="no"&gt;Then&lt;/span&gt; &lt;span class="no"&gt;I&lt;/span&gt; &lt;span class="n"&gt;should&lt;/span&gt; &lt;span class="n"&gt;no&lt;/span&gt; &lt;span class="n"&gt;longer&lt;/span&gt; &lt;span class="n"&gt;see&lt;/span&gt; &lt;span class="s2"&gt;"My First Todo"&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Let&amp;rsquo;s write our first step. We want to tell Cucumber to click the delete link:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;When&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I click on the "(.*?)" next to "(.*?)"$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;arg1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;arg2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="n"&gt;first&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'li'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;click_link&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Delete'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Cucumber tells us:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Unable&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;find&lt;/span&gt; &lt;span class="n"&gt;link&lt;/span&gt; &lt;span class="s2"&gt;"Delete"&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;ElementNotFound&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Let&amp;rsquo;s add a delete link to the Home page view.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#app/views/tasks/new.html.erb&lt;/span&gt;
-
-&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="sx"&gt;% for &lt;/span&gt;&lt;span class="n"&gt;task&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="vi"&gt;@tasks&lt;/span&gt; &lt;span class="o"&gt;%&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="n"&gt;li&lt;/span&gt; &lt;span class="k"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"&amp;amp;lt;%# task.completed == true ? "&lt;/span&gt;&lt;span class="n"&gt;completed&lt;/span&gt;&lt;span class="s2"&gt;" : "" %&amp;amp;gt;"&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="sx"&gt;%= task.name %&amp;amp;gt;
-    • &amp;amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;link_to&lt;/span&gt; &lt;span class="s1"&gt;'Edit'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;edit_task_path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;task&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;%&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="err"&gt;•&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="sx"&gt;%= link_to 'Delete', task, method: :delete, data: { confirm: 'Are you sure?' } %&amp;amp;gt;
-  &amp;amp;lt;/li&amp;amp;gt;
-&amp;amp;lt;% end %&amp;amp;gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Cucumber tells us:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;The&lt;/span&gt; &lt;span class="n"&gt;action&lt;/span&gt; &lt;span class="s1"&gt;'destroy'&lt;/span&gt; &lt;span class="n"&gt;could&lt;/span&gt; &lt;span class="n"&gt;not&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="n"&gt;found&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="no"&gt;TasksController&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;AbstractController&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;ActionNotFound&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Let&amp;rsquo;s add the necessary controller action:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#app/controllers/task_controller.rb&lt;/span&gt;
-
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;destroy&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Cucumber tells us:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Missing&lt;/span&gt; &lt;span class="n"&gt;template&lt;/span&gt; &lt;span class="n"&gt;tasks&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;destroy&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;destroy&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:locale&lt;/span&gt;&lt;span class="o"&gt;=&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;[&lt;/span&gt;&lt;span class="ss"&gt;:en&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="ss"&gt;:formats&lt;/span&gt;&lt;span class="o"&gt;=&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;[&lt;/span&gt;&lt;span class="ss"&gt;:html&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="ss"&gt;:variants&lt;/span&gt;&lt;span class="o"&gt;=&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;[],&lt;/span&gt; &lt;span class="ss"&gt;:handlers&lt;/span&gt;&lt;span class="o"&gt;=&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;[&lt;/span&gt;&lt;span class="ss"&gt;:erb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:builder&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:raw&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:ruby&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:coffee&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:jbuilder&lt;/span&gt;&lt;span class="p"&gt;]}&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="no"&gt;Searched&lt;/span&gt; &lt;span class="ss"&gt;in:
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Let&amp;rsquo;s fill out the action with:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#app/controllers/task_controller.rb&lt;/span&gt;
-
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;destroy&lt;/span&gt;
-  &lt;span class="vi"&gt;@task&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;destroy&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And also include the destroy action in the before_action hook:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#app/controllers/task_controller.rb&lt;/span&gt;
-
-&lt;span class="n"&gt;before_action&lt;/span&gt; &lt;span class="ss"&gt;:find_task&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;only: &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:edit&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:update&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:destroy&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We keep getting the same message:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt; &lt;span class="no"&gt;Missing&lt;/span&gt; &lt;span class="n"&gt;template&lt;/span&gt; &lt;span class="n"&gt;tasks&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;destroy&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;destroy&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:locale&lt;/span&gt;&lt;span class="o"&gt;=&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;[&lt;/span&gt;&lt;span class="ss"&gt;:en&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="ss"&gt;:formats&lt;/span&gt;&lt;span class="o"&gt;=&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;[&lt;/span&gt;&lt;span class="ss"&gt;:html&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="ss"&gt;:variants&lt;/span&gt;&lt;span class="o"&gt;=&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;[],&lt;/span&gt; &lt;span class="ss"&gt;:handlers&lt;/span&gt;&lt;span class="o"&gt;=&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;[&lt;/span&gt;&lt;span class="ss"&gt;:erb&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:builder&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:raw&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:ruby&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:coffee&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:jbuilder&lt;/span&gt;&lt;span class="p"&gt;]}&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="no"&gt;Searched&lt;/span&gt; &lt;span class="ss"&gt;in:
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;So let&amp;rsquo;s add a redirect&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#app/controllers/task_controller.rb&lt;/span&gt;
-
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;destroy&lt;/span&gt;
-  &lt;span class="vi"&gt;@task&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;destroy&lt;/span&gt;
-  &lt;span class="n"&gt;redirect_to&lt;/span&gt; &lt;span class="n"&gt;root_url&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Our step passes.&lt;/p&gt;
-
-&lt;p&gt;Let&amp;rsquo;s write the last step here.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Then&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I should no longer see "(.*?)"$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;task&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="n"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;has_content?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;task&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This is similar to when we were first checking to see if the task would appear on the page when we created a new task. Here we want to test that it doesn&amp;rsquo;t show. So I slightly modified the code with a bang, to assert the opposite.&lt;/p&gt;
-
-&lt;p&gt;Cucumber tells us:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;And&lt;/span&gt; &lt;span class="no"&gt;I&lt;/span&gt; &lt;span class="n"&gt;press&lt;/span&gt; &lt;span class="s2"&gt;"Delete"&lt;/span&gt; &lt;span class="n"&gt;associated&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="s2"&gt;"My First Todo"&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Nice! We created a Todo app using Cucumber that allows us to create tasks, validates against invalid tasks, mark tasks as complete, and delete tasks. This this type of functionality is pretty common and can be applied in a lot of scenarios.&lt;/p&gt;
-
-&lt;p&gt;If you have any questions, or notice anything that can be improved, please let me know!&lt;/p&gt;
 </content>
   </entry>
 </feed>

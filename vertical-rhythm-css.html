@@ -1,0 +1,275 @@
+<!doctype html> <html> <head> <meta charset=utf-8 /> <meta http-equiv=X-UA-Compatible content='IE=edge;chrome=1'/> <meta name=viewport content="width=device-width, initial-scale=1"> <meta name=author content="austin samsel"> <meta name=description content="This is the High Tops blog. Design, Programming, and Business."> <link rel=apple-touch-icon sizes=57x57 href="images/favicon/apple-icon-57x57.png"> <link rel=apple-touch-icon sizes=60x60 href="images/favicon/apple-icon-60x60.png"> <link rel=apple-touch-icon sizes=72x72 href="images/favicon/apple-icon-72x72.png"> <link rel=apple-touch-icon sizes=76x76 href="images/favicon/apple-icon-76x76.png"> <link rel=apple-touch-icon sizes=114x114 href="images/favicon/apple-icon-114x114.png"> <link rel=apple-touch-icon sizes=120x120 href="images/favicon/apple-icon-120x120.png"> <link rel=apple-touch-icon sizes=144x144 href="images/favicon/apple-icon-144x144.png"> <link rel=apple-touch-icon sizes=152x152 href="images/favicon/apple-icon-152x152.png"> <link rel=apple-touch-icon sizes=180x180 href="images/favicon/apple-icon-180x180.png"> <link rel=icon type="image/png" sizes=192x192 href="images/favicon/android-icon-192x192.png"> <link rel=icon type="image/png" sizes=32x32 href="images/favicon/favicon-32x32.png"> <link rel=icon type="image/png" sizes=96x96 href="images/favicon/favicon-96x96.png"> <link rel=icon type="image/png" sizes=16x16 href="images/favicon/favicon-16x16.png"> <link rel=manifest href="manifest.json"> <meta name=msapplication-TileColor content="#ffffff"> <meta name=msapplication-TileImage content="images/favicon/ms-icon-144x144.png"> <meta name=theme-color content="#ffffff"> <title>High Tops Blog - Creating Vertical Rhythm with CSS</title> <link rel=alternate type="application/atom+xml" title="Atom Feed" href="/feed.xml"/> <link href="stylesheets/all.css" rel=stylesheet /> <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .cm {
+  color: #999988;
+  font-style: italic;
+}
+.highlight .cp {
+  color: #999999;
+  font-weight: bold;
+}
+.highlight .c1 {
+  color: #999988;
+  font-style: italic;
+}
+.highlight .cs {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic;
+}
+.highlight .c, .highlight .cd {
+  color: #999988;
+  font-style: italic;
+}
+.highlight .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+.highlight .gd {
+  color: #000000;
+  background-color: #ffdddd;
+}
+.highlight .ge {
+  color: #000000;
+  font-style: italic;
+}
+.highlight .gr {
+  color: #aa0000;
+}
+.highlight .gh {
+  color: #999999;
+}
+.highlight .gi {
+  color: #000000;
+  background-color: #ddffdd;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+  font-weight: bold;
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .gt {
+  color: #aa0000;
+}
+.highlight .kc {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .kd {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .kn {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .kp {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .kr {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .kt {
+  color: #445588;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kv {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .mf {
+  color: #009999;
+}
+.highlight .mh {
+  color: #009999;
+}
+.highlight .il {
+  color: #009999;
+}
+.highlight .mi {
+  color: #009999;
+}
+.highlight .mo {
+  color: #009999;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #009999;
+}
+.highlight .sb {
+  color: #d14;
+}
+.highlight .sc {
+  color: #d14;
+}
+.highlight .sd {
+  color: #d14;
+}
+.highlight .s2 {
+  color: #d14;
+}
+.highlight .se {
+  color: #d14;
+}
+.highlight .sh {
+  color: #d14;
+}
+.highlight .si {
+  color: #d14;
+}
+.highlight .sx {
+  color: #d14;
+}
+.highlight .sr {
+  color: #009926;
+}
+.highlight .s1 {
+  color: #d14;
+}
+.highlight .ss {
+  color: #990073;
+}
+.highlight .s {
+  color: #d14;
+}
+.highlight .na {
+  color: #008080;
+}
+.highlight .bp {
+  color: #999999;
+}
+.highlight .nb {
+  color: #0086B3;
+}
+.highlight .nc {
+  color: #445588;
+  font-weight: bold;
+}
+.highlight .no {
+  color: #008080;
+}
+.highlight .nd {
+  color: #3c5d5d;
+  font-weight: bold;
+}
+.highlight .ni {
+  color: #800080;
+}
+.highlight .ne {
+  color: #990000;
+  font-weight: bold;
+}
+.highlight .nf {
+  color: #990000;
+  font-weight: bold;
+}
+.highlight .nl {
+  color: #990000;
+  font-weight: bold;
+}
+.highlight .nn {
+  color: #555555;
+}
+.highlight .nt {
+  color: #000080;
+}
+.highlight .vc {
+  color: #008080;
+}
+.highlight .vg {
+  color: #008080;
+}
+.highlight .vi {
+  color: #008080;
+}
+.highlight .nv {
+  color: #008080;
+}
+.highlight .ow {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .o {
+  color: #000000;
+  font-weight: bold;
+}
+.highlight .w {
+  color: #bbbbbb;
+}
+.highlight {
+  background-color: #f8f8f8;
+}
+    </style> <link href='//fonts.googleapis.com/css?family=Archivo+Black|Archivo+Narrow:400,700,400italic|Enriqueta:400,700' rel=stylesheet> </head> <body> <div id=main role=main> <nav> <ul> <li> <a href="./"> <img class=logo alt="high tops logo" src="images/hightops_logo.svg"/> </a> </li> </ul> </nav> <article> <header> <h1> Creating Vertical Rhythm with CSS </h1> </header> <section> <p>Vertical Rhythm is the pacing of our layout going up and down. Its a concept of typography that&rsquo;s been around since ever. When you see it, things feel right. If it&rsquo;s not there, something is somehow, kind of off&hellip;</p> <p>Here&rsquo;s what a layout looks like when a vertical rhythm hasn&rsquo;t been established, or is not consistent.</p> <p><img src="../images/blog/vertical-no-rhythm.jpg" style="max-width:400px"></p> <p>Notice how there&rsquo;s not much spacing between the text and it doesn&rsquo;t fall on any of the grid lines?</p> <p>Here&rsquo;s what an established vertical rhythm looks like. There&rsquo;s some nice spacing between the lines of text and they are all placed neatly in the grid.</p> <p><img src="../images/blog/vertical-rhythm.jpg" style="max-width:400px"></p> <p>The grid lines here are called the baseline grid. In print design, all the elements should rest on the lines. However there isn&rsquo;t really a concept for vertical rhythm built into CSS, so sometimes our elements will end up in the middle of the baseline grid&hellip; or somewhere close to it.</p> <h2>Goals</h2> <p>Before we get into how to code a design with consistent vertical rhythm, this is why I&rsquo;m so interested in this concept:</p> <ul> <li><strong>Looks Better.</strong> Vertical rhythm helps with readability and comprehension. When things are visually organized on the page, the information is more accessible.</li> <li><strong>Code Faster.</strong> If we&rsquo;re designing in the browser, we can fall back on a pattern, so that we write less code and spend less time tinkering.</li> <li><strong>Better Designs.</strong> Whether we&rsquo;re designing in the browser or coding a mock up, we can spend more mental energy where it counts, knowing that we&rsquo;ve appropriately handled this part of the design from the start.</li> </ul> <h2>Doing it</h2> <p>I created <a href="http://codepen.io/austinnnnnnn/full/WwwmKP/">a codepen</a> for our vertical rhythm example. Feel free to fork it and wipe out the CSS to see the examples for yourself - then add the CSS back in to see what we&rsquo;ve accomplished.</p> <p>First, for demonstration purposes we&rsquo;ll create a simple baseline grid:</p> <pre class="highlight css"><code><span class="nt">body</span> <span class="p">{</span>
+  <span class="c">/* baseline grid is created by background */</span>
+  <span class="nl">background</span><span class="p">:</span> <span class="n">linear-gradient</span><span class="p">(</span><span class="m">#ccc</span><span class="p">,</span> <span class="m">#eee</span> <span class="m">1px</span><span class="p">);</span>
+  <span class="nl">background-size</span><span class="p">:</span> <span class="m">24px</span> <span class="m">24px</span><span class="p">;</span>
+  <span class="nl">max-width</span><span class="p">:</span> <span class="m">800px</span><span class="p">;</span>
+  <span class="nl">margin</span><span class="p">:</span> <span class="m">0</span> <span class="nb">auto</span><span class="p">;</span>
+  <span class="nl">padding</span><span class="p">:</span> <span class="m">1rem</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre> <p>The way to set the baseline for the grid is to match it to the line height of the body text. For our example, we&rsquo;ll use 16px as the baseline font size. Normally on the web, type shouldn&rsquo;t be smaller than that, or we risk making it unreadable. Allowing a line-height of 1.4 - 1.6 helps to give our text more breathing room. Doing the math: 16px * 1.5(line-height) = 24px. This is the leading. We&rsquo;ll use 24px (and some variations of it), for our spacing from here on out.</p> <pre class="highlight css"><code><span class="nt">body</span> <span class="p">{</span>
+  <span class="c">/* ... */</span>
+  <span class="nl">background-size</span><span class="p">:</span> <span class="m">24px</span> <span class="m">24px</span><span class="p">;</span>
+  <span class="c">/* ... */</span>
+
+  <span class="c">/* #2 setting up baseline font and line-height */</span>
+  <span class="nl">font-size</span><span class="p">:</span><span class="m">16px</span><span class="p">;</span>
+  <span class="nl">line-height</span><span class="p">:</span><span class="m">24px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre> <p>One way to keep images in line with the baseline is to make sure their height is a number divisible by 24. At the same time images are really fluid on the web. We&rsquo;ll set a max height to 480px, but on smaller screens it will be full width of the column&hellip; and also break the baseline grid. If you wanted to keep the image always matched to the baseline, you&rsquo;d need javascript to continually resize it so its height is always evenly divisible by 24px&hellip; which I don&rsquo;t think anyone does.</p> <pre class="highlight css"><code><span class="nt">img</span> <span class="p">{</span>
+  <span class="nl">width</span><span class="p">:</span><span class="m">100%</span><span class="p">;</span>
+  <span class="nl">height</span><span class="p">:</span><span class="nb">auto</span><span class="p">;</span>
+  <span class="nl">max-height</span><span class="p">:</span><span class="m">480px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre> <p>For typescale. I use <a href="http://www.modularscale.com/">this modular scale tool</a> to visualize various scales and find the values it. For this example I&rsquo;ll go with the Perfect Fourth scale and match my fonts and their line-heights accordingly. I&rsquo;m approximating the line-heights by first multiplying the font size in rem with 16, our base font size. Then I choose the smallest number that is greater in value and evenly divisible by 6. I&rsquo;m choosing 6 because that&rsquo;s one quarter of the leading. Ideally I&rsquo;d just use the leading, but it&rsquo;s too large a number. the h2 and h3 would both of the same line-height of 48px - which would be way too big especially for the h3.</p> <pre class="highlight css"><code><span class="c">/*
+3.157rem * 16 = 50.512
+2.369rem * 16 = 37.904
+1.777rem * 16 = 28.432
+1.333rem * 16 = 21.328
+*/</span>
+
+<span class="nt">h1</span> <span class="p">{</span> <span class="nl">font-size</span><span class="p">:</span> <span class="m">3.157rem</span><span class="p">;</span> <span class="nl">line-height</span><span class="p">:</span><span class="m">54px</span><span class="p">;</span> <span class="p">}</span>
+<span class="nt">h2</span> <span class="p">{</span> <span class="nl">font-size</span><span class="p">:</span> <span class="m">2.369rem</span><span class="p">;</span> <span class="nl">line-height</span><span class="p">:</span><span class="m">42px</span><span class="p">;</span> <span class="p">}</span>
+<span class="nt">h3</span> <span class="p">{</span> <span class="nl">font-size</span><span class="p">:</span> <span class="m">1.777rem</span><span class="p">;</span> <span class="nl">line-height</span><span class="p">:</span><span class="m">30px</span><span class="p">;</span> <span class="p">}</span>
+<span class="nt">h4</span> <span class="p">{</span> <span class="nl">font-size</span><span class="p">:</span> <span class="m">1.333rem</span><span class="p">;</span> <span class="nl">line-height</span><span class="p">:</span><span class="m">24px</span><span class="p">;</span> <span class="p">}</span>
+
+<span class="nt">h1</span><span class="o">,</span> <span class="nt">h2</span><span class="o">,</span> <span class="nt">h3</span><span class="o">,</span> <span class="nt">h4</span> <span class="p">{</span>
+  <span class="nl">margin-top</span><span class="p">:</span><span class="m">0px</span><span class="p">;</span>
+  <span class="nl">margin-bottom</span><span class="p">:</span><span class="m">24px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre> <p>After the last step I changed the baseline grid to 12px to allow us more flexibility in laying out these elements. And everything should continue to fall near a baseline.</p> <pre class="highlight css"><code><span class="nt">body</span><span class="p">{</span>
+  <span class="c">/* ... */</span>
+  <span class="nl">background-size</span><span class="p">:</span> <span class="m">12px</span> <span class="m">12px</span><span class="p">;</span>
+  <span class="c">/* ... */</span>
+<span class="p">}</span>
+</code></pre> <p>We can use the leading, 24px, for padding and margins for any element we like, like lists, boxes, and button elements, while keeping the flow uninterrupted.</p> <pre class="highlight css"><code><span class="nt">li</span><span class="p">{</span>
+  <span class="nl">margin-bottom</span><span class="p">:</span><span class="m">12px</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">button</span><span class="p">{</span>
+  <span class="nl">margin-bottom</span><span class="p">:</span><span class="m">24px</span><span class="p">;</span>
+  <span class="nl">padding</span><span class="p">:</span><span class="m">12px</span> <span class="m">24px</span><span class="p">;</span>
+  <span class="c">/* extra style */</span>
+  <span class="nl">background-color</span><span class="p">:</span><span class="no">plum</span><span class="p">;</span>
+  <span class="nl">border</span><span class="p">:</span><span class="nb">none</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.box</span> <span class="p">{</span>
+  <span class="nl">padding</span><span class="p">:</span><span class="m">12px</span> <span class="m">36px</span><span class="p">;</span>
+  <span class="nl">background</span><span class="p">:</span><span class="no">aqua</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre> <h2>How obsessed should we get?</h2> <p>I&rsquo;m not sure. Notice if the headers go over one line in length, it becomes apparent that a sidebar column&rsquo;s paragraph text can go off baseline compared to the main column because the total height of the header element can fall into a 6px difference.</p> <p>Should we use javascript to enforce all image heights stay within the leading? Should line-heights of header texts be recalculated if they run over one or two lines in length? Is there some perfect type scale with matching line-heights that will allow all elements of the page to sit perfectly on the baseline? I&rsquo;m not sure.</p> <p>To me, I think the most important highlights are using a modular type scale, and building spacing variables off the leading. A good practice for making spacing consistent would be to use only a few sizes:</p> <pre class="highlight scss"><code><span class="nl">line-height</span><span class="p">:</span> <span class="nv">$leading</span><span class="p">;</span>
+
+<span class="na">margin-bottom-xs</span><span class="p">:</span>     <span class="nv">$leading</span> <span class="o">/</span> <span class="m">4</span>
+<span class="n">margin-bottom-small</span><span class="o">:</span>  <span class="nv">$leading</span> <span class="o">/</span> <span class="m">2</span>
+<span class="n">margin-bottom-normal</span><span class="o">:</span> <span class="nv">$leading</span>
+<span class="n">margin-bottom-large</span><span class="o">:</span>  <span class="nv">$leading</span> <span class="o">*</span> <span class="m">2</span>
+<span class="n">margin-bottom-xl</span><span class="o">:</span>     <span class="nv">$leading</span> <span class="o">*</span> <span class="m">4</span>
+</code></pre> <p>The same can be done for padding bottom or horizontal paddings and margins.</p> <p>I like the idea of having 0px values for margin-top and padding-top whenever possible as a way of keeping the spacing flowing unidirectionally. This decreases the likelihood of a time when there is unexpected extra spacing between elements because one has a padding-top and another has a padding-bottom. I came across this particular idea in this article, <a href="http://webdesign.tutsplus.com/articles/improving-layout-with-vertical-rhythm--webdesign-14070">Improving Layout With Vertical Rhythm</a></p> <p>In researching this, I came across some great articles, and I&rsquo;d also like to share some tools I&rsquo;ve used in the past, or that I found this time around:</p> <h3>Resources</h3> <ul> <li><a href="http://matejlatin.github.io/Gutenberg/">Gutenberg - A meaningful web typography starter kit</a></li> <li><a href="http://www.modularscale.com">Modularscale</a></li> <li><a href="https://www.smashingmagazine.com/2012/12/css-baseline-the-good-the-bad-and-the-ugly/">CSS Baseline: The Good, The Bad And The Ugly</a></li> <li><a href="http://zellwk.com/blog/why-vertical-rhythms/">Why is Vertical Rhythm an Important Typography Practice?</a></li> <li><a href="http://www.sitepoint.com/understanding-baseline-rhythm-in-typography/">Understanding Baseline Rhythm in Typography</a></li> <li><a href="http://webdesign.tutsplus.com/articles/improving-layout-with-vertical-rhythm--webdesign-14070">Improving Layout With Vertical Rhythm</a></li> </ul> </section> <article> <footer> <ul class=large-column> <li><h5 class=heading>Recent Articles</h5></li> <li> <ol> <li> <a href="vertical-rhythm-css.html">Creating Vertical Rhythm with CSS</a> <span>Mar 14</span> </li> <li> <a href="what-has-inspired-me-so-far-in-2016.html">What has inspired me so far in 2016</a> <span>Mar 8</span> </li> <li> <a href="giving-and-receiving-design-feedback.html">Design Feedback That Works</a> <span>Jan 17</span> </li> <li> <a href="working-with-react-in-meteor.html">Working with a React View Layer in Meteor</a> <span>Dec 3</span> </li> <li> <a href="improving-ui-with-animations-in-meteor.html">Improving The Nice Track UI</a> <span>Oct 19</span> </li> <li> <a href="building-capote.html">Building Capote Meteor & Mocha TDD</a> <span>Oct 3</span> </li> <li> <a href="getting-started-with-cucumber-on-rails.html">Getting Started with Cucumber on Rails</a> <span>Aug 31</span> </li> <li> <a href="up-state.html">Announcing Up State</a> <span>Jul 10</span> </li> </ol> </li> </ul> <ul class=small-column> <li><h5 class=heading>Tags</h5></li> <li> <ol> <li><a href="tags/business.html">business (1)</a></li> <li><a href="tags/software-development.html">software development (1)</a></li> <li><a href="tags/meteor.html">meteor (4)</a></li> <li><a href="tags/mocha.html">mocha (1)</a></li> <li><a href="tags/tdd.html">tdd (1)</a></li> <li><a href="tags/ux.html">ux (1)</a></li> <li><a href="tags/animations.html">animations (1)</a></li> <li><a href="tags/react.html">react (2)</a></li> <li><a href="tags/javascript.html">javascript (2)</a></li> <li><a href="tags/cool.html">cool (1)</a></li> <li><a href="tags/css.html">css (1)</a></li> <li><a href="tags/design.html">design (1)</a></li> </ol> </li> <ul> </footer> </div> </body> </html>
