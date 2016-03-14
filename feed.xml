@@ -14,7 +14,7 @@
     <link rel="alternate" href="http://blog.url.com/vertical-rhythm-css.html"/>
     <id>http://blog.url.com/vertical-rhythm-css.html</id>
     <published>2016-03-14T11:04:00-04:00</published>
-    <updated>2016-03-14T10:47:27-04:00</updated>
+    <updated>2016-03-14T11:30:42-04:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -42,7 +42,7 @@
 &lt;li&gt;&lt;strong&gt;Better Designs.&lt;/strong&gt; Whether we&amp;rsquo;re designing in the browser or coding a mock up, we can spend more mental energy where it counts, knowing that we&amp;rsquo;ve appropriately handled this part of the design from the start.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2&gt;Doing it&lt;/h2&gt;
+&lt;h2&gt;Setting up the CSS&lt;/h2&gt;
 
 &lt;p&gt;I created &lt;a href="http://codepen.io/austinnnnnnn/full/WwwmKP/"&gt;a codepen&lt;/a&gt; for our vertical rhythm example. Feel free to fork it and wipe out the CSS to see the examples for yourself - then add the CSS back in to see what we&amp;rsquo;ve accomplished.&lt;/p&gt;
 
