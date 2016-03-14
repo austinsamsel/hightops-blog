@@ -1,43 +1,6 @@
-// sassy-gridlover
-
-//To use in the `<body>`.
-//
-//Outputs `font-size` and `line-height`.
-//
-//@param {number} $font-size [$sgl-base-font-size] - Base font size
-//@param {string} $unit [$sgl-base-unit] - Unit to output
-//
-//@example scss
-
-
-body {
-  @include sassy-gridlover-body($sgl-base-font-size, "pxrem");
-}
-
-h1 {
-  @include sassy-gridlover-heading(3, "em");
-}
-
-h2 {
-  @include sassy-gridlover-heading(2, "px");
-}
-
-h3 {
-  @include sassy-gridlover-heading(1, "pxrem");
-}
-
-h4 {
-  @include sassy-gridlover-heading(0);
-}
-
-p, ul, ol, pre, table, blockquote {
-  @include sassy-gridlover-margins();
-}
-
 // bitters
 
 body {
-  @include font-feature-settings("kern", "liga", "pnum");
   -webkit-font-smoothing: antialiased;
   color: $base-font-color;
   font-family: $base-font-family;
@@ -119,4 +82,16 @@ pre {
   color: inherit;
   background-color: transparent;
   font-weight: bold;
+}
+
+// CSS typescale and spacing.
+
+h1 { font-size: 3.157rem; line-height:$heading-line-height; }
+h2 { font-size: 2.369rem; line-height:$heading-line-height; }
+h3 { font-size: 1.777rem; line-height:$heading-line-height; }
+h4 { font-size: 1.333rem; line-height:$heading-line-height; }
+
+h1, h2, h3, h4, p, ul, ol, pre, table, blockquote, pre {
+  margin-top:0px;
+  margin-bottom:$base-line-height;
 }

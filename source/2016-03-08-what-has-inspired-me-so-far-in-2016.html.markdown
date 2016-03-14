@@ -30,7 +30,7 @@ Another cool company. They created the super weird [hands.wtf](http://hands.wtf/
 ### [Susan Lin](http://bysusanlin.com/)
 Nice website with scrolling animation + highlights really great design/illustration work.
 
-### [Bad ass](http://science.slashdot.org/story/16/02/20/1823241/a-19-year-old-made-a-free-robot-lawyer-that-has-appealed-3m-in-parking-tickets?utm_source=feedly1.0mainlinkanon&utm_medium=feed)
+### [Bad ass use of technology](http://science.slashdot.org/story/16/02/20/1823241/a-19-year-old-made-a-free-robot-lawyer-that-has-appealed-3m-in-parking-tickets?utm_source=feedly1.0mainlinkanon&utm_medium=feed)
 Some kid made a "free robot lawyer" that has appealed over $3M in parking tickets.
 
 ### [Google Maps Streetview Player](http://www.brianfolts.com/driver/)
@@ -68,22 +68,22 @@ Important for UX, Design, thinking about your users.
 I tend to do a lot digitally, but I thought this was cool to help with sketches.
 
 ### [Name That Color](http://chir.ag/projects/name-that-color/#6195ED)
-For stylesheet color variables that are less rigid.
+For stylesheet color variables to be namespaced more flexibly.
 
 ### [Accessibility](http://a11yproject.com/)
-All inclusive internet.
+More all-inclusive internet.
 
 ### [continuous visual integration](https://percy.io/)
-The problem with CSS is changes you make to one page can have disastrous consequences to another without your realizing it. Percy is a service for continuous integration testing with CSS.
+The problem with CSS is changes you make to one page can have unintended effects to another without your realizing it. Percy is a service for continuous integration testing with CSS so you know what changes.
 
 ### [Not using JQuery when you don't need to](http://www.sitepoint.com/jquery-vs-raw-javascript-2-css3-animation/)
-Equivalents in vanilla javascript that you can use instead of JQuery. I definitely tend to think in JQuery rather than Javascript when I'm writing presentational JS for static websites... its a nice to do without JQuery when practical.
+Equivalents in vanilla javascript that you can use instead of JQuery. I tend to think in JQuery before Javascript when I'm writing presentational JS for static websites... its a nice to do without JQuery when its possible.
 
 ### [UI Examples](http://collectui.com/)
 When I need some quick inspiration for designing user interfaces.
 
 ### [Sketch App Sources](http://www.sketchappsources.com/)
-Great respository of resources for Sketch. If you need some starter kits for wireframes or graphs/charts, this is a good place to go.
+Great repository of resources for Sketch. If you need some starter kits for wireframes or graphs/charts, this is a good place to go.
 
 ### [icon animations with mo.js](http://tympanus.net/Development/Animocons/)
 Obligatory codrops article.
@@ -95,7 +95,7 @@ I hate to use stock photos. But sometimes you have no choice.
 For Fast CSS Animations. See the [article](http://blog.lunarlogic.io/2016/boost-your-css-animation-performance-with-repaintless-css/?utm_source=CSS-Weekly&utm_campaign=Issue-205&utm_medium=email).
 
 ### [CSS Scroll Snap Points](https://css-tricks.com/introducing-css-scroll-snap-points/?utm_source=CSS-Weekly&utm_campaign=Issue-205&utm_medium=email)
-Great example of a future, soon-to-be current CSS feature.
+Great example of a future/soon-to-be-current, CSS feature.
 
 ## Holistic Vibes
 
