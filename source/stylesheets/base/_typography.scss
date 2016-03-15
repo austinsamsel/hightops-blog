@@ -79,6 +79,9 @@ pre {
   word-break: inherit;
   word-wrap: inherit;
 }
+code span{
+  font-family:'inconsolata', courier, monospace;
+}
 .highlight .err {
   color: inherit;
   background-color: transparent;
