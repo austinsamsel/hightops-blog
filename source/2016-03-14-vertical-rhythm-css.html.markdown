@@ -145,6 +145,7 @@ In researching this, I came across some great articles, and I'd also like to sha
 
 * [Gutenberg - A meaningful web typography starter kit](http://matejlatin.github.io/Gutenberg/)
 * [Modularscale](http://www.modularscale.com)
+* [MegaType](http://megatype.studiothick.com/)
 * [CSS Baseline: The Good, The Bad And The Ugly](https://www.smashingmagazine.com/2012/12/css-baseline-the-good-the-bad-and-the-ugly/)
 * [Why is Vertical Rhythm an Important Typography Practice?](http://zellwk.com/blog/why-vertical-rhythms/)
 * [Understanding Baseline Rhythm in Typography](http://www.sitepoint.com/understanding-baseline-rhythm-in-typography/)
