@@ -16,14 +16,20 @@ ol {
   }
 }
 
+li{
+  line-height:$base-line-height;
+  margin-bottom:$base-line-height * 0.5rem;
+}
+
 article li{
   list-style-type:disc;
   margin-left: $base-spacing;
 }
 
 footer li{
-  list-style-type:none;
-  margin-left:0;
+  list-style-type:disc;
+  margin-left: $base-spacing;
+
 }
 
 dl {
